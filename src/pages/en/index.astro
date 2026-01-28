@@ -1,0 +1,12 @@
+---
+import Heading from "@components/Heading";
+import AboutMe from "@components/Sections/AboutMe/AboutMe";
+import HeroSection from "@components/Sections/Hero/HeroSection";
+import RootLayout from "@layouts/RootLayout.astro";
+console.log("This runs in your terminal, not the browser!");
+---
+
+<RootLayout title="Home Page" enableHeader>
+  <!-- <HeroSection lang="en" client:load /> -->
+  <AboutMe lang="en" client:load />
+</RootLayout>

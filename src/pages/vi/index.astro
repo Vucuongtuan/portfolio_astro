@@ -1,0 +1,10 @@
+---
+import Heading from "@components/Heading";
+import HeroSection from "@components/Sections/Hero/HeroSection";
+import RootLayout from "@layouts/RootLayout.astro";
+console.log("This runs in your terminal, not the browser!");
+---
+
+<RootLayout title="Trang chủ" enableHeader>
+  <HeroSection lang="vi" client:load />
+</RootLayout>
