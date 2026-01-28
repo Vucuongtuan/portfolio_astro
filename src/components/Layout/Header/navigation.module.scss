@@ -1,0 +1,28 @@
+
+
+
+.linkList {
+    @apply list-none m-0 p-0;
+}
+
+.linkListHorizontal {
+    @apply flex items-center;
+}
+
+.linkListVertical {
+    @apply flex flex-col items-end gap-4;
+}
+
+
+.link {
+    @apply text-lg;
+}
+
+.linkActive {
+    @apply flex items-center gap-2;
+}
+
+
+.label {
+    @apply  tracking-tighter uppercase;
+}

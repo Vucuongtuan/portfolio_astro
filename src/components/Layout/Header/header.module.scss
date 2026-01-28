@@ -1,0 +1,40 @@
+.header {
+    @apply fixed top-0 left-0 right-0 p-8 flex justify-between items-start z-50 pointer-events-none text-white mix-blend-difference;
+}
+
+.peripheral {
+    @apply pointer-events-auto;
+}
+
+.social {
+    @apply pointer-events-auto;
+}
+
+// List base styles
+.linkList {
+    @apply list-none m-0 p-0;
+}
+
+.linkListHorizontal {
+    @apply flex items-center;
+}
+
+.linkListVertical {
+    @apply flex flex-col items-end gap-4;
+}
+
+
+
+// Link base styles
+.link {
+    @apply text-lg;
+}
+
+.linkActive {
+    @apply flex items-center gap-2;
+}
+
+
+.label {
+    @apply  tracking-tighter uppercase;
+}
