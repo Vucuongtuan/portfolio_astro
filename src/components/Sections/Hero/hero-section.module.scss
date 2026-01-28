@@ -1,0 +1,12 @@
+
+
+
+.ctn{
+    @apply relative flex flex-col w-full min-h-screen overflow-hidden;
+}
+
+
+
+.box{
+    @apply w-full flex-grow  flex flex-col justify-center px-8 sm:px-16 lg:px-52  relative z-10;
+}
