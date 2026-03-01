@@ -62,7 +62,6 @@ export default function OverlayMenu({ lang, isOpen, onClose }: OverlayMenuProps)
             ref={container} 
             className="fixed inset-0 z-[100] bg-zinc-950 flex items-center justify-center invisible"
         >
-            {/* Close Button */}
             <button 
                 onClick={onClose}
                 className="absolute top-8 right-8 text-white p-4 hover:opacity-70 transition-opacity"
@@ -84,7 +83,6 @@ export default function OverlayMenu({ lang, isOpen, onClose }: OverlayMenuProps)
                 ))}
             </nav>
 
-            {/* Footer or Decor */}
             <div className="absolute bottom-12 text-white/30 text-sm uppercase tracking-widest">
                 Portfolio 2026
             </div>

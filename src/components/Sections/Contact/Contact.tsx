@@ -109,7 +109,6 @@ export default function Contact({ lang }: ContactProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
     const btn = sectionRef.current?.querySelector(`.${st.submitBtn}`);
     if (btn) {
       gsap.to(btn, {
@@ -119,11 +118,10 @@ export default function Contact({ lang }: ContactProps) {
         repeat: 1,
       });
     }
-    // In a real app, handle API call here
   };
 
   return (
-    <section className={st.section} ref={sectionRef} id="contact" data-section="Contact">
+    <section data-theme="dark" className={st.section} ref={sectionRef} id="contact" data-section="Contact">
       <div className={st.bgDeco}></div>
       <div className={st.container}>
         

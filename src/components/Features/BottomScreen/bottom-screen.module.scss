@@ -1,0 +1,39 @@
+.wrapper {
+    @apply fixed bottom-8 left-8 z-50;
+}
+
+.bottomScreen {
+    @apply flex items-center gap-2 font-mono text-sm font-semibold tracking-wide pointer-events-auto;
+}
+
+.layerLight {
+    @apply relative;
+    color: white;
+}
+
+.layerDark {
+    @apply absolute inset-0 flex items-center gap-2;
+    color: black;
+    pointer-events: none;
+    will-change: clip-path;
+    transition: clip-path 0.05s linear;
+}
+
+.langLink {
+    @apply no-underline transition-opacity duration-200;
+    color: inherit;
+    opacity: 0.4;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.active {
+    opacity: 1;
+}
+
+.sep {
+    @apply select-none;
+    opacity: 0.25;
+}

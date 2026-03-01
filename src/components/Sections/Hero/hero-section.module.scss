@@ -1,39 +1,48 @@
-.ctn {
-    @apply relative w-full flex flex-col min-h-screen h-[110vh] overflow-hidden;
+.section {
+    @apply relative w-full min-h-screen flex flex-col justify-between overflow-hidden;
+    padding-top: 120px; // space for header
 }
 
-.box {
-    @apply w-full h-screen flex-grow flex flex-col justify-center px-8 sm:px-16 lg:px-52 relative z-10;
+// ========== TOP: Info row ==========
+.infoRow {
+    @apply flex flex-wrap gap-8 md:gap-16 px-6 md:px-10;
 }
 
-.footerLayer {
-    @apply absolute bottom-0 left-0 flex items-end justify-center w-full h-[25vh] pointer-events-none z-20 pb-8;
-
-    &::before {
-        content: "";
-        @apply absolute inset-0 -z-10;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
-        mask-image: radial-gradient(circle 300px at 50% 100%, transparent 0%, black 100%);
-        -webkit-mask-image: radial-gradient(circle 300px at 50% 100%, transparent 0%, black 100%);
-    }
-
-    svg {
-        @apply text-accent-subtle/80 size-8;
-        animation: mouse-scroll 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
+.infoLabel {
+    @apply block text-xs font-mono uppercase tracking-widest mb-1;
+    opacity: 0.4;
 }
 
-@keyframes mouse-scroll {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(12px);
-        opacity: 0.5;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+.infoValue {
+    @apply block text-sm md:text-base font-medium;
+    opacity: 0.8;
+}
+
+// ========== MIDDLE: Description columns ==========
+.descRow {
+    @apply flex flex-col md:flex-row gap-6 md:gap-16 px-6 md:px-10 max-w-4xl;
+}
+
+.descCol {
+    @apply text-sm md:text-base leading-relaxed;
+    opacity: 0.6;
+}
+
+// ========== BOTTOM: Massive name ==========
+.nameWrapper {
+    @apply w-full px-6 md:px-10;
+}
+
+.nameOverflow {
+    @apply overflow-hidden;
+}
+
+.name {
+    @apply font-black uppercase select-none flex tracking-tighter leading-[0.85];
+    font-size: clamp(5rem, 22vw, 20rem);
+}
+
+.nameChar {
+    @apply inline-block;
+    will-change: transform, opacity;
 }

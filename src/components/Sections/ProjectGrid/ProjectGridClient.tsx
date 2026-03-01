@@ -84,7 +84,7 @@ export default function ProjectGridClient({ projects, sectionTitle, lang, allTex
     }, { scope: containerRef, dependencies: [activeTab] });
 
     return (
-        <section className={styles.section} ref={containerRef} data-section="Works">
+        <section data-theme="light" className={styles.section} ref={containerRef} data-section="Works">
             <div className={styles.ctn}>
                 <div className={styles.header} ref={headerRef}>
                     <h2 className={styles.sectionTitle}>{sectionTitle}</h2>

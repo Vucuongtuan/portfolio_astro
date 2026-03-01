@@ -1,40 +1,137 @@
+.headerWrapper {
+    @apply fixed top-0 left-0 right-0 z-50 pointer-events-none;
+}
+
 .header {
-    @apply fixed top-0 left-0 right-0 p-8 flex justify-between items-start z-50 pointer-events-none text-white mix-blend-difference;
+    @apply w-full px-6 md:px-10 pt-6 pb-4 flex flex-col gap-4;
 }
 
-.peripheral {
-    @apply pointer-events-auto;
+.layerLight {
+    @apply relative;
+    color: white;
+    pointer-events: auto;
 }
 
-.social {
-    @apply pointer-events-auto;
+.layerDark {
+    @apply absolute inset-0 px-6 md:px-10 pt-6 pb-4 flex flex-col gap-4;
+    color: black;
+    pointer-events: none;
+    will-change: clip-path;
+    transition: clip-path 0.05s linear;
 }
 
-// List base styles
-.linkList {
-    @apply list-none m-0 p-0;
+// ========== ROW 1 ==========
+.row {
+    @apply flex justify-between items-center w-full;
 }
 
-.linkListHorizontal {
-    @apply flex items-center;
+.leftGroup {
+    @apply flex items-center gap-3;
 }
 
-.linkListVertical {
-    @apply flex flex-col items-end gap-4;
+.logo {
+    @apply text-lg font-bold tracking-tighter uppercase no-underline flex items-center gap-2;
+    color: inherit;
 }
 
-
-
-// Link base styles
-.link {
-    @apply text-lg;
+.trail {
+    @apply inline-flex items-center text-xs font-mono tracking-wider uppercase;
+    opacity: 0.5;
+    margin-left: 4px;
 }
 
-.linkActive {
-    @apply flex items-center gap-2;
+.trailItem {
+    @apply inline-flex items-center;
 }
 
+.separator {
+    @apply inline-block mx-1;
+    opacity: 0.4;
+}
 
-.label {
-    @apply  tracking-tighter uppercase;
+.segment {
+    @apply inline-block no-underline;
+    color: inherit;
+    will-change: transform, opacity, filter;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 1 !important;
+    }
+}
+
+.rightGroup {
+    @apply flex items-center gap-6;
+}
+
+.nav {
+    @apply hidden md:flex items-center gap-0 text-sm uppercase tracking-widest;
+}
+
+.navItem {
+    @apply inline-flex items-center;
+}
+
+.navComma {
+    @apply mr-2;
+    opacity: 0.3;
+}
+
+.navLink {
+    @apply no-underline transition-opacity duration-200;
+    color: inherit;
+    opacity: 0.7;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.ctaBtn {
+    @apply md:hidden text-xs uppercase tracking-[0.2em] font-bold px-4 py-2 border border-current rounded-none transition-all duration-300 cursor-pointer;
+    color: inherit;
+    background: transparent;
+
+    &:hover {
+        background: currentColor;
+        // Text color needs inversion on hover — handled by the layer system
+    }
+}
+
+// ========== ROW 2 (Sub-header) ==========
+.subRow {
+    @apply flex items-center justify-between w-full text-xs font-mono uppercase tracking-widest;
+    opacity: 0.5;
+}
+
+.clock {
+    @apply tabular-nums;
+    min-width: 7ch;
+}
+
+.langSwitch {
+    @apply flex items-center gap-1;
+}
+
+.langLink {
+    @apply no-underline transition-opacity duration-200;
+    color: inherit;
+    opacity: 0.5;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.langActive {
+    opacity: 1;
+}
+
+.langSep {
+    opacity: 0.3;
+}
+
+.descCols {
+    @apply hidden lg:flex items-center gap-6;
 }

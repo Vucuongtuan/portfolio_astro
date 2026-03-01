@@ -51,7 +51,7 @@ export default function ExperienceSection({ lang, data }: ExperienceSectionProps
     if (!data) return null;
 
     return (
-        <div ref={container} className={st.experienceContainer} data-section="Experience">
+        <div ref={container} className={st.experienceContainer} data-section="Experience" data-theme="light">
             
          
 

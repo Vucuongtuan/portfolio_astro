@@ -1,0 +1,13 @@
+---
+import type { Locale } from "@i18n/ui";
+import { getLangFromUrl } from "@i18n/utils";
+import BottomScreenClient from "./BottomScreenClient";
+
+interface Props {
+  lang?: Locale;
+}
+
+const lang = (Astro.props.lang || getLangFromUrl(Astro.url)) as Locale;
+---
+
+<BottomScreenClient lang={lang} client:load />

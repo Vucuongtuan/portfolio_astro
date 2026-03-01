@@ -60,8 +60,7 @@ export const TechStackClient: React.FC<TechStackClientProps> = ({ lang, stackCat
   }, []);
 
   return (
-    <section ref={containerRef} className={styles.ctn} data-section="TechStack">
-      <header className={styles.label}>{t.sectionLabel}</header>
+    <section ref={containerRef} className={styles.ctn} data-section="TechStack" data-theme="dark">
       
       <div className={styles["horizontal-container"]}>
           

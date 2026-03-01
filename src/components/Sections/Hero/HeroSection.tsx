@@ -1,60 +1,108 @@
-
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useTranslations} from "../../../i18n/utils"
+import { useTranslations } from "../../../i18n/utils";
 import type { Locale } from "../../../i18n/ui";
 import st from "./hero-section.module.scss";
 
 interface HeroSectionProps {
-    lang: Locale;
+  lang: Locale;
 }
 
 export default function HeroSection({ lang }: HeroSectionProps) {
-    const t = useTranslations(lang);
-    const container = useRef(null);
+  const t = useTranslations(lang);
+  const container = useRef<HTMLElement>(null);
+  const nameRef = useRef<HTMLHeadingElement>(null);
 
-    useGSAP(() => {
-        gsap.from(".hero-anim-item", {
-            y: 30,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.15,
-            ease: "power3.out",
-            delay: 0.5 
+  useGSAP(
+    () => {
+      if (!nameRef.current) return;
+
+      const chars = nameRef.current.querySelectorAll(".hero-char");
+      const infoItems = container.current?.querySelectorAll(".hero-info");
+      const descItems = container.current?.querySelectorAll(".hero-desc");
+
+      gsap.set(chars, { yPercent: 120, opacity: 0 });
+      gsap.to(chars, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 1.4,
+        stagger: 0.04,
+        ease: "expo.out",
+        delay: 0.3,
+      });
+
+      if (infoItems) {
+        gsap.from(infoItems, {
+          y: 20,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+          delay: 0.8,
         });
-    }, { scope: container });
+      }
 
-    return (
-        <section className={st.ctn} ref={container} data-section="Hero">
+      // Description columns
+      if (descItems) {
+        gsap.from(descItems, {
+          y: 15,
+          opacity: 0,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: "power3.out",
+          delay: 1,
+        });
+      }
+    },
+    { scope: container }
+  );
 
-   
+  // Split name into chars
+  const name = t("landing.name") || "CUONG";
+  const nameChars = name.split("").map((char, i) => (
+    <span
+      key={i}
+      className={`hero-char ${st.nameChar}`}
+    >
+      {char === " " ? "\u00A0" : char}
+    </span>
+  ));
 
-               <div className={st.box}>
-                    <div className="space-y-12">
-                        <div className="hero-anim-item w-12 h-px bg-accent-subtle"></div>
-                        <div className="space-y-4">
-                            <h1 className="hero-anim-item text-3xl sm:text-5xl font-bold tracking-tight">
-                                {t('hero.greeting')}
-                            </h1>
-                            <p className="hero-anim-item text-lg sm:text-2xl opacity-60">
-                                {t('hero.role')}
-                            </p>
-                        </div>
-                        <div className="hero-anim-item max-w-md">
-                            <p className="text-base leading-relaxed opacity-80">
-                                {t('hero.desc')}
-                            </p>
-                        </div>
-                        <div className="hero-anim-item pt-4">
-                            <a className="group flex items-center gap-4 text-sm uppercase tracking-[0.3em] font-bold" href="mailto:contact">
-                                <span>{t('hero.contact')}</span>
-                                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <section className={st.section} ref={container} data-section="Hero" data-theme="light">
+      {/* Top info row */}
+      <div className={st.infoRow}>
+        <div className="hero-info">
+          <span className={st.infoLabel}>Role</span>
+          <span className={st.infoValue}>{t("hero.role")}</span>
+        </div>
+        <div className="hero-info">
+          <span className={st.infoLabel}>Location</span>
+          <span className={st.infoValue}>{t("landing.location")}</span>
+        </div>
+        <div className="hero-info">
+          <span className={st.infoLabel}>Status</span>
+          <span className={st.infoValue}>Available</span>
+        </div>
+      </div>
 
-        </section>
-    )
+      {/* Center: description columns */}
+      <div className={st.descRow}>
+        <p className={`hero-desc ${st.descCol}`}>
+          {t("hero.desc")}
+        </p>
+        <p className={`hero-desc ${st.descCol}`}>
+          {t("landing.role")}
+        </p>
+      </div>
+
+      {/* Bottom: Massive name */}
+      <div className={st.nameWrapper}>
+          <h1 ref={nameRef} className={st.name}>
+            {nameChars}
+          </h1>
+      </div>
+    </section>
+  );
 }

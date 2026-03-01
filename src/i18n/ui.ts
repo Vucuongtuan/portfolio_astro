@@ -35,9 +35,9 @@ export const ui = {
     'landing.role': 'là một software engineer với đam mê xây dựng những sản phẩm web chất lượng cao.',
     'landing.desc': 'Fullstack Developer — tạo ra những trải nghiệm kỹ thuật số từ frontend đến backend',
     'landing.featured': 'DỰ ÁN NỔI BẬT',
-    'landing.email': 'cuong@dev.com',
+    'landing.email': 'vucuongtuan00@gmail.com',
     'landing.location': 'Việt Nam',
-    'landing.year': '2025',
+    'landing.year': '2026',
     // Works
     'works.github': 'Nguồn',
     'works.demo': 'Truy cập',
@@ -61,8 +61,8 @@ export const ui = {
     'nav.projects': 'Projects',
     'nav.contact': 'Contact',
     'hero.greeting': "I'm Vu Tuan Cuong.",
-    'hero.role': "I'm a tech enthusiast.",
-    'hero.desc': 'Passionately creating innovative digital experiences, rooted in user needs.',
+    'hero.role': "I'm a software engineer.",
+    'hero.desc': 'Eager learner building user-centered web applications with modern technologies.',
     'hero.contact': 'Contact',
     'spacer.scroll': 'Scroll to explore',
     // AboutMe
@@ -80,7 +80,7 @@ export const ui = {
     'about.card3.cta': 'Start a Project',
     // LandingHero
     'landing.name': 'CUONG',
-    'landing.role': 'is a software engineer passionate about building high-quality web products.',
+    'landing.role': 'is a software engineer passionate about building high-quality web or app products.',
     'landing.desc': 'Fullstack Developer — crafting digital experiences from frontend to backend',
     'landing.featured': 'FEATURED WORKS',
     'landing.email': 'cuong@dev.com',
