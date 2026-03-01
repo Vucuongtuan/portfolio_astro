@@ -1,12 +1,29 @@
 ---
-import Heading from "@components/Heading";
-import AboutMe from "@components/Sections/AboutMe/AboutMe";
+import AboutMe from "@components/Sections/AboutMe/AboutMe.astro";
+import ExperienceSection from "@components/Sections/Experience/ExperienceSection.astro";
 import HeroSection from "@components/Sections/Hero/HeroSection";
+import LandingHero from "@components/Sections/LandingHero/LandingHero";
+import Spacer from "@components/Sections/Spacer/Spacer";
+import TechStack from "@components/Sections/TechStack/TechStack.astro";
+import ProjectGrid from "@components/Sections/ProjectGrid/ProjectGrid.astro";
+import Contact from "@components/Sections/Contact";
+import Footer from "@components/Layout/Footer/Footer.astro";
+import StickyCards from "@components/Features/StickyCards/StickyCards.astro";
 import RootLayout from "@layouts/RootLayout.astro";
+
 console.log("This runs in your terminal, not the browser!");
 ---
 
 <RootLayout title="Home Page" enableHeader>
-  <!-- <HeroSection lang="en" client:load /> -->
-  <AboutMe lang="en" client:load />
+  <HeroSection lang="en" client:load />
+  <Spacer lang="en" variant="absolute" enableScroll />
+  <AboutMe lang="en" />
+  <Spacer lang="en" variant="absolute" enableScroll />
+  <TechStack lang="en" />
+  <ExperienceSection lang="en" />
+  <StickyCards variant="scale-fade">
+    <ProjectGrid lang="en" />
+    <Contact lang="en" />
+  </StickyCards>
+  <Footer lang="en" client:visible />
 </RootLayout>

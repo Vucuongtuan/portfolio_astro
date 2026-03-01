@@ -1,0 +1,17 @@
+---
+import clsx from "clsx";
+import LayerBackgroundClient from "./LayerBackgroundClient";
+import styles from "./layer-background.module.scss";
+
+interface Props {
+  enableCircle?: boolean;
+}
+
+const { enableCircle = true } = Astro.props;
+---
+
+<div class={styles.ctn}>
+  <div class={clsx(styles["static-grid"], "line-pattern deco-line")}></div>
+
+  <LayerBackgroundClient client:visible enableCircle={enableCircle} />
+</div>

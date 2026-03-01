@@ -1,0 +1,16 @@
+---
+import type { Locale } from "@i18n/ui";
+import { useTranslations } from "@i18n/utils";
+import FooterClient from "./FooterClient";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const email = t("landing.email") || "cuong@dev.com";
+---
+
+<FooterClient email={email} client:load />

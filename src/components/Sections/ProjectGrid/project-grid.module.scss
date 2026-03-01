@@ -1,0 +1,79 @@
+.section {
+    @apply relative w-full text-[#1a1a1a] py-24 md:py-32 overflow-hidden dark:text-gray-100 transition-colors duration-500;
+}
+
+.ctn {
+    @apply max-w-screen-2xl px-6 mx-auto;
+}
+
+.header {
+    @apply flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16;
+}
+
+.sectionTitle {
+    @apply text-4xl md:text-5xl lg:text-7xl font-bold uppercase tracking-tighter;
+}
+
+.tabs {
+    @apply flex gap-3 mt-6 md:mt-0 overflow-x-auto pb-2 ;
+}
+
+.tabBtn {
+    @apply px-5 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-sm font-medium transition-colors whitespace-nowrap;
+    
+    &:hover {
+        @apply bg-gray-100 dark:bg-gray-800;
+    }
+    
+    &.active {
+        @apply bg-orange-600 text-white border-transparent dark:bg-orange-500;
+    }
+}
+
+.gridCtn {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
+}
+
+.card {
+    @apply flex flex-col  cursor-pointer relative ;
+}
+
+.imageWrapper {
+    @apply aspect-[4/3] w-full overflow-hidden rounded-2xl mb-6 relative bg-gray-100 dark:bg-gray-800;
+}
+
+.image {
+    @apply w-full h-full object-cover transition-transform duration-700 ;
+}
+
+.overlay {
+    @apply absolute inset-0 bg-black/40 opacity-0  transition-opacity duration-300 flex items-center justify-center;
+}
+
+.viewBtn {
+    @apply bg-white text-black px-6 py-3 rounded-full font-medium text-sm transform translate-y-4  transition-transform duration-300;
+}
+
+.cardContent {
+    @apply flex flex-col flex-1;
+}
+
+.meta {
+    @apply flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide;
+}
+
+.title {
+    @apply text-xl md:text-2xl font-bold mb-3;
+}
+
+.description {
+    @apply text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2;
+}
+
+.tags {
+    @apply flex flex-wrap gap-2 mt-auto;
+}
+
+.tag {
+    @apply text-[10px] uppercase px-3 py-1 rounded-full border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400;
+}

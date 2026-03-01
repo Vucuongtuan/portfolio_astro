@@ -1,0 +1,26 @@
+{
+  "title": "Experience",
+  "listHeader": {
+    "period": "Period",
+    "organization": "Organization",
+    "roleLocation": "Role & Location"
+  },
+  "items": [
+    {
+      "period": "OCT 2024 — PRESENT",
+      "company": "IDM Vietnam",
+      "role": "Fullstack Web Developer",
+      "location": "Ho Chi Minh City"
+    },
+    {
+      "period": "AUG 2022 — SEP 2022",
+      "company": "KASOFT TECHNOLOGY",
+      "role": "Frontend (Intern)",
+      "location": "HCMC (Remote)"
+    }
+  ],
+  "cta": {
+    "text": "Download CV",
+    "url": "#"
+  }
+}

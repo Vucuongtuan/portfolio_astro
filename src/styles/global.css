@@ -24,8 +24,6 @@
 
 
 body{
-    background-color: var(--bg-pure);
-    color: var(--text-stark);
     @apply font-mono antialiased selection:bg-black selection:text-white; 
 }
 
@@ -45,7 +43,7 @@ body{
             background: 
                 linear-gradient(90deg, var(--accent-subtle) 1px, transparent 1px) 0 0 / 120px 120px,
                 linear-gradient(0deg, var(--accent-subtle) 1px, transparent 1px) 0 0 / 120px 120px;
-            opacity: 0.4;
+            opacity: 0.1;
         }
         .geometric-accent {
             background: repeating-linear-gradient(

@@ -1,0 +1,33 @@
+// Spacer Component - SCSS Module
+
+.spacer {
+    @apply w-full relative;
+    
+    &Small {
+        @apply h-[50vh];
+    }
+    
+    &Medium {
+        @apply h-[75vh];
+    }
+    
+    &Large {
+        @apply h-screen;
+    }
+    
+    &Absolute {
+        @apply h-0;
+    }
+}
+
+.scrollIndicator {
+    @apply absolute bottom-12 right-12 flex gap-2 items-center;
+}
+
+.arrow {
+    @apply animate-bounce text-lg;
+}
+
+.label {
+    @apply font-mono text-xs font-bold tracking-widest uppercase opacity-70;
+}

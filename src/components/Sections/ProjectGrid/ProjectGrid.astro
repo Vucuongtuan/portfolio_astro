@@ -1,0 +1,35 @@
+---
+import { getEntry } from "astro:content";
+import ProjectGridClient from "./ProjectGridClient";
+import type { Locale } from "../../../i18n/ui";
+import { useTranslations } from "../../../i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const projectsData = await getEntry("projects", lang);
+
+const allText = t("works.all") || "All";
+const personalText = t("works.personal") || "Personal";
+const workText = t("works.work") || "Work";
+const viewText = t("works.view") || "View Project";
+---
+
+{
+  projectsData && projectsData.data && (
+    <ProjectGridClient
+      projects={projectsData.data.items as any}
+      sectionTitle={projectsData.data.sectionTitle}
+      lang={lang}
+      allText={allText as string}
+      personalText={personalText as string}
+      workText={workText as string}
+      viewText={viewText as string}
+      client:load
+    />
+  )
+}

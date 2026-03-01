@@ -1,0 +1,75 @@
+.section {
+  @apply relative w-full py-24 sm:py-32;
+}
+
+.container {
+  @apply max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24 relative z-10;
+}
+
+// ========== SPLIT LAYOUT ==========
+.split {
+  @apply flex flex-col lg:flex-row gap-12 lg:gap-0 items-start;
+}
+
+// ========== LEFT: HEADING ==========
+.left {
+  @apply lg:w-2/5 lg:sticky lg:top-32 flex flex-col gap-4;
+}
+
+.label {
+  @apply text-xs font-mono uppercase tracking-[0.3em] opacity-40 block;
+  color: var(--text-stark);
+}
+
+.headingWrapper {
+  @apply overflow-hidden;
+}
+
+.heading {
+  @apply font-black leading-[0.85] tracking-tighter uppercase select-none flex flex-wrap;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  color: var(--text-stark);
+}
+
+.char {
+  @apply inline-block;
+  will-change: transform, opacity;
+}
+
+// ========== DIVIDER ==========
+.divider {
+  @apply hidden lg:block w-[1px] self-stretch bg-current opacity-10 mx-12;
+}
+
+// ========== RIGHT: CONTENT ==========
+.right {
+  @apply lg:w-3/5 flex flex-col gap-12;
+}
+
+.text {
+  @apply text-lg sm:text-xl md:text-2xl font-medium leading-relaxed;
+  color: var(--text-stark);
+  opacity: 0.85;
+
+  :global(p) {
+    @apply mb-6 last:mb-0;
+  }
+
+  :global(strong) {
+    @apply font-bold;
+    opacity: 1;
+  }
+}
+
+// ========== QUOTE ==========
+.quoteWrapper {
+  @apply pt-8;
+  border-top: 1px solid currentColor;
+  border-top-color: rgba(128, 128, 128, 0.15);
+}
+
+.quote {
+  @apply text-sm font-mono uppercase tracking-[0.15em] leading-relaxed block;
+  color: var(--text-stark);
+  opacity: 0.4;
+}

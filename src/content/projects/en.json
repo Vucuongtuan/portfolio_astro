@@ -1,0 +1,264 @@
+{
+  "sectionTitle": "Selected Works",
+  "items": [
+    {
+      "id": "wowweekend",
+      "title": "WowWeekend",
+      "description": "Migration of a blog and e-commerce platform from legacy PHP/ASP to Next.js and Payload CMS, along with data crawling and Cloudflare S3 CDN optimization.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "work",
+      "tags": ["Next.js", "Payload CMS", "TypeScript", "TailwindCSS", "MongoDB", "ISR", "Docker"],
+      "role": "Full stack developer",
+      "duration": "6 months",
+      "teamSize": "3",
+      "goals": "Migrate legacy PHP/ASP system to Next.js and Payload CMS.\nDevelop a crawler tool to extract old articles and optimize fields for MongoDB, migrating AWS S3 images to the new system.",
+      "features": [
+        "Admin Dashboard Schema Management using Payload CMS",
+        "Management of products, categories, articles, and images",
+        "Full ISR architecture for optimized SEO",
+        "unstable_cache for API fetching with revalidateTag/revalidatePath on dashboard triggers",
+        "Highly reusable components with unit tests",
+        "Migrated AWS S3 storage to Cloudflare Storage and CDN"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "wowbuilder",
+      "title": "WowBuilder",
+      "description": "A drag-and-drop website builder designed for WowWeekend designers to create custom landing pages directly without IT intervention.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "work",
+      "tags": ["Next.js", "Express.js", "Craft.js", "TypeScript", "TailwindCSS"],
+      "role": "Full stack developer",
+      "duration": "6 months",
+      "teamSize": "2",
+      "goals": "WowWeekend has a LongForm category requiring custom landing page UI.\nCreate a drag-and-drop website builder so Designers can build UIs without IT intervention.\nReduce delivery time and export separate HTML/CSS/JS files for integration.",
+      "features": [
+        "Craft.js integration for the drag-and-drop canvas",
+        "Custom builder components: spacer, container, button, Hero, Text, Image, Column...",
+        "Local state management through React Context",
+        "JSON state persistence via LocalStorage and IndexedDB (Browser Storage)",
+        "Documentation for builder components and features"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "jewellery-wowweekend",
+      "title": "Jewellery WowWeekend",
+      "description": "A beautiful, SEO-optimized content site specifically focused on reading articles and featuring jewelry products, extended from WowWeekend.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "work",
+      "tags": ["Next.js", "Payload CMS", "MongoDB", "ISR", "TailwindCSS"],
+      "role": "Full stack developer",
+      "duration": "3 months",
+      "teamSize": "3",
+      "goals": "Create a visually appealing, highly SEO-optimized website dedicated to jewelry information.\nMigrate jewelry-related articles from the main WowWeekend site.",
+      "features": [
+        "Admin Dashboard Schema Management using Payload CMS",
+        "Multiple templates for rendering articles",
+        "Full ISR architecture for optimized SEO",
+        "unstable_cache for caching API fetch functions",
+        "Unit tests for functions and components"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "idm-app",
+      "title": "IDM Website & Mobile App",
+      "description": "Revamped the UI/UX for an enterprise website and mobile app, including an integrated RAG-based AI Chatbot to support customer inquiries.",
+      "thumbnail": "/images/ecommerce_mockup.png",
+      "images": ["/images/ecommerce_mockup.png"],
+      "category": "work",
+      "tags": ["Next.js", "React Native", "Expo", "TanStack Query", "OpenAI API"],
+      "teamSize": "3",
+      "goals": "Update the UI and tech stack of the legacy website to an attractive design to draw in customers.\nIntegrate an AI Chatbot using RAG (OpenAI/Gemini) trained on IDM brand data to assist customers.",
+      "features": [
+        "Highly reusable article templates and components",
+        "Optimized page load speed and SEO",
+        "Integration of RAG AI chatbot for content consultation"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "laptop-tc-store",
+      "title": "Laptop TC Store",
+      "description": "An e-commerce website for laptops with a high-performance SSR/SSG architecture, a CMS admin dashboard, and full SEO support.",
+      "thumbnail": "/images/ecommerce_mockup.png",
+      "images": ["/images/ecommerce_mockup.png"],
+      "category": "personal",
+      "tags": ["Next.js", "Express.js", "MongoDB", "Redis", "shadcn/ui", "Firebase"],
+      "role": "Full stack developer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Build an e-commerce website for laptops with excellent SEO and fast page load speeds.",
+      "features": [
+        "Admin dashboard for managing products, categories, and banners",
+        "SSR and SSG architecture for SEO optimization",
+        "Highly reusable UI components",
+        "Page load speed and overall SEO optimization"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "tc-phim",
+      "title": "TC Phim",
+      "description": "A movie streaming frontend exploring Next.js 16+ Partial Prerendering (PPR), React Compiler, and custom hls.js video controls.",
+      "thumbnail": "/images/ai_chat_mockup.png",
+      "images": ["/images/ai_chat_mockup.png"],
+      "category": "personal",
+      "tags": ["Next.js 16", "React Compiler", "hls.js", "TailwindCSS"],
+      "role": "Frontend developer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Explore Next.js 16 new Partial Prerendering (PPR) component cache structure and optimize frontend movie streaming performance.",
+      "features": [
+        "React Compiler utilization for automatic performance optimization in the page tree",
+        "New Next.js 16 caching functions like `use cache`, cacheLife, and cacheTags",
+        "Custom UI controls for video player using hls.js"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "auth-module",
+      "title": "Auth Module (ASP.NET)",
+      "description": "A reusable monolithic auth module for personal projects managing users, roles, and company profiles using ASP.NET Razor Pages.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "personal",
+      "tags": ["ASP.NET Web API", "Entity Framework", "PostgreSQL", "JWT", "Docker"],
+      "role": "Full stack developer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Build a centralized, reusable Auth module to handle logins, roles, and company management across all personal side-projects.",
+      "features": [
+        "Login/Register UI using ASP.NET Razor Pages",
+        "Backend built with ASP.NET Web API and JWT",
+        "Entity Framework for database management and authorization",
+        "Module packaged via Docker and deployed to Docker Hub"
+      ],
+      "links": {},
+      "year": "2023"
+    },
+    {
+      "id": "image-sharing",
+      "title": "Image Sharing Platform",
+      "description": "A real-time social image sharing website supporting nested comments, automatic WebP optimization, and WebSocket notifications.",
+      "thumbnail": "/images/ecommerce_mockup.png",
+      "images": ["/images/ecommerce_mockup.png"],
+      "category": "personal",
+      "tags": ["Nuxt.js", "Vue", "Go (Gin)", "MongoDB", "WebSocket", "Firebase", "Docker"],
+      "role": "Full stack developer",
+      "duration": "3 months",
+      "teamSize": "1",
+      "goals": "Create a real-time image sharing platform with excellent SEO and fast page load speeds.",
+      "features": [
+        "Image management: Firebase Storage upload with automatic WebP optimization",
+        "Social interaction: Likes, nested comments, follows, and real-time WebSocket notifications",
+        "SEO & Performance optimization: SSR, Dynamic meta tags",
+        "Admin Panel for content moderation"
+      ],
+      "links": {},
+      "year": "2023"
+    },
+    {
+      "id": "football-predict",
+      "title": "Football Player Value Predictor",
+      "description": "A Machine Learning learning project that crawls Transfermarkt API data, performs EDA, and trains a Decision Tree model to predict player market values.",
+      "thumbnail": "/images/ai_chat_mockup.png",
+      "images": ["/images/ai_chat_mockup.png"],
+      "category": "personal",
+      "tags": ["Python", "Pandas", "Scikit-Learn", "Jupyter", "Machine Learning"],
+      "role": "Data Analyst / Machine Learning Learner",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Learn data crawling using Python via Transfermarkt API.\nPractice data cleaning, EDA, and build a Decision Tree model to predict football player market values.",
+      "features": [
+        "Automated API data crawling scripts saving to CSV",
+        "Jupyter Notebook workflow: Processing, cleaning, and charting (Matplotlib, Seaborn)",
+        "Decision Tree model training and evaluation with Scikit-learn"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/football_dec_tree"
+      },
+      "year": "2024"
+    },
+    {
+      "id": "moon-app",
+      "title": "Moon App",
+      "description": "A cross-platform React Native mobile application built on Expo SDK 54, showcasing offline persistence via TanStack Query + Async Storage.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "personal",
+      "tags": ["React Native", "Expo Router", "Zustand", "NativeWind", "TanStack Query", "Zod"],
+      "role": "Mobile Developer Learner",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Build a cross-platform mobile app using React Native and Expo SDK 54.\nPractice server state management combined with Async Storage Persister for offline support.",
+      "features": [
+        "File-based Routing using expo-router",
+        "API fetching and caching optimization with TanStack Query for offline capabilities",
+        "Complex form validation using react-hook-form and zod",
+        "Modular architecture and strict Type-Safe TypeScript"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/moon-app"
+      },
+      "year": "2024"
+    },
+    {
+      "id": "eco-app",
+      "title": "Eco App (Payload v3)",
+      "description": "An E-commerce boilerplate running Payload CMS v3 smoothly side-by-side on Next.js 15 App Router, supporting Stripe and Next-Intl multi-language.",
+      "thumbnail": "/images/ecommerce_mockup.png",
+      "images": ["/images/ecommerce_mockup.png"],
+      "category": "personal",
+      "tags": ["Next.js 15", "Payload CMS v3", "Stripe", "Radix UI", "Framer Motion", "Tailwind V4"],
+      "role": "Full stack developer",
+      "teamSize": "1",
+      "goals": "Build a complete e-commerce boilerplate with the new generation Payload CMS (v3) running directly on Next.js 15+.\nIntegrate Stripe for payment processing.",
+      "features": [
+        "Content and product management via Payload CMS v3 Dashboard",
+        "Checkout processing through Stripe webhooks",
+        "UI/UX optimization with Radix UI Primitives and Framer Motion animations",
+        "Multi-language (i18n) support using Next-Intl"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/eco_app"
+      },
+      "year": "2025"
+    },
+    {
+      "id": "portfolio-astro",
+      "title": "Portfolio Website",
+      "description": "This very personal portfolio built with Astro and React. Features an 'Islands Architecture' for extreme performance, View Transitions, and Awwwards-worthy GSAP scroll animations.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "personal",
+      "tags": ["Astro", "React", "TypeScript", "SCSS", "GSAP ScrollTrigger"],
+      "role": "Frontend Developer / Designer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Build an ultra-modern portfolio website to showcase skills with Awwwards-worthy GSAP animations.\nApply Astro's Islands Architecture philosophy for maximum performance.",
+      "features": [
+        "SPA-like smooth routing using Astro View Transitions",
+        "Type-safe project management with Astro Content Collections",
+        "Mixed React components for complex filter state management",
+        "GSAP ScrollTrigger animations and @gsap/react hook integration",
+        "System UI Dark/Light mode and CSS Modules styling"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/portfolio_astro"
+      },
+      "year": "2026"
+    }
+  ]
+}

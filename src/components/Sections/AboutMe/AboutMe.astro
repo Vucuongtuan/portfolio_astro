@@ -1,0 +1,60 @@
+---
+import { getEntry } from "astro:content";
+import type { Locale } from "@i18n/ui";
+import AboutMeAnimation from "./AboutMeAnimation";
+import st from "./about-me.module.scss";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const aboutPost = await getEntry("about", lang);
+
+if (!aboutPost) {
+  throw new Error(`About content not found for lang: ${lang}`);
+}
+
+const { Content } = await aboutPost.render();
+const { title, quote } = aboutPost.data;
+
+// Split heading into chars for animation
+const titleChars = title.split("");
+---
+
+<section class={st.section} id="about-section" data-section="About">
+  <div class={st.container}>
+    <div class={st.split}>
+      <!-- Left: Heading -->
+      <div class={st.left}>
+        <span class={st.label} data-about-label>// ABOUT</span>
+        <div class={st.headingWrapper} data-about-heading>
+          <h2 class={st.heading}>
+            {
+              titleChars.map((char: string, i: number) => (
+                <span class={`char ${st.char}`}>
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))
+            }
+          </h2>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class={st.divider} data-about-divider></div>
+
+      <!-- Right: Text + Quote -->
+      <div class={st.right}>
+        <div class={st.text} data-about-text>
+          <Content />
+        </div>
+        <div class={st.quoteWrapper} data-about-quote>
+          <span class={st.quote}>"{quote}"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<AboutMeAnimation containerId="about-section" client:load />

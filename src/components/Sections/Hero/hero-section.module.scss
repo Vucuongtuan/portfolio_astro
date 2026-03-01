@@ -1,12 +1,39 @@
-
-
-
-.ctn{
-    @apply relative flex flex-col w-full min-h-screen overflow-hidden;
+.ctn {
+    @apply relative w-full flex flex-col min-h-screen h-[110vh] overflow-hidden;
 }
 
+.box {
+    @apply w-full h-screen flex-grow flex flex-col justify-center px-8 sm:px-16 lg:px-52 relative z-10;
+}
 
+.footerLayer {
+    @apply absolute bottom-0 left-0 flex items-end justify-center w-full h-[25vh] pointer-events-none z-20 pb-8;
 
-.box{
-    @apply w-full flex-grow  flex flex-col justify-center px-8 sm:px-16 lg:px-52  relative z-10;
+    &::before {
+        content: "";
+        @apply absolute inset-0 -z-10;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+        mask-image: radial-gradient(circle 300px at 50% 100%, transparent 0%, black 100%);
+        -webkit-mask-image: radial-gradient(circle 300px at 50% 100%, transparent 0%, black 100%);
+    }
+
+    svg {
+        @apply text-accent-subtle/80 size-8;
+        animation: mouse-scroll 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+}
+
+@keyframes mouse-scroll {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(12px);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

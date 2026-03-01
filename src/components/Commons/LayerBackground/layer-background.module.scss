@@ -1,0 +1,25 @@
+.ctn {
+  @apply fixed inset-0 -z-50 pointer-events-none overflow-hidden bg-transparent;
+}
+
+.static-grid {
+  @apply  absolute inset-0 ;
+
+}
+
+.dynamic-layer {
+  @apply absolute inset-0 w-full h-full;
+}
+
+.deco-circle {
+  @apply absolute rounded-full border border-dashed opacity-[0.15] dark:opacity-[0.1];
+  border-color: var(--accent-subtle);
+  
+  &-1 {
+    @apply -top-[10%] -left-[10%] w-[45vw] h-[45vw];
+  }
+  
+  &-2 {
+    @apply top-[20%] -right-[10%] w-[35vw] h-[35vw] border-solid;
+  }
+}

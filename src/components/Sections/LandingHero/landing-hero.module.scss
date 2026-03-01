@@ -1,0 +1,251 @@
+// ========== SECTION WRAPPER ==========
+.section {
+  @apply relative w-full;
+  min-height: 100vh;
+  background-color: #f5f0eb;
+  color: #1a1a1a;
+  overflow: hidden;
+}
+
+// ========== MAIN GRID LAYOUT ==========
+.container {
+  @apply relative w-full h-full;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  align-items: center; // Center vertically like design
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+}
+
+// ========== BIG NAME / LOGO ==========
+.bigName {
+  grid-column: 1 / 4; // Span all columns to allow huge text
+  grid-row: 1;
+  padding: 40px 0 0 40px;
+  font-family: 'Inter', sans-serif; // The design uses a bold sans-serif, not serif
+  font-weight: 700;
+  font-size: clamp(8rem, 20vw, 15rem); // Even larger font size
+  line-height: 0.8;
+  letter-spacing: 0.05em; // More spacing between letters
+  color: #ff5a36; // Brighter neon orange/coral color
+  user-select: none;
+  z-index: 2;
+  text-transform: lowercase; // Forced lowercase for 'kin style
+
+  @media (max-width: 1024px) {
+    grid-column: 1;
+    font-size: clamp(5rem, 16vw, 9rem);
+    padding: 24px;
+    letter-spacing: 0.02em;
+  }
+}
+
+// ========== SIDEBAR - FEATURED WORKS ==========
+.sidebar {
+  grid-column: 1;
+  grid-row: 2;
+  @apply flex flex-col;
+  padding: 0 0 0 40px;
+  z-index: 2;
+
+  @media (max-width: 1024px) {
+    grid-column: 1;
+    grid-row: 3;
+    padding: 24px;
+    @apply flex-row flex-wrap gap-4;
+  }
+}
+
+.sidebarLabel {
+  @apply uppercase tracking-[0.2em] text-xs mb-8;
+  font-family: 'Space Mono', monospace;
+  color: #666;
+
+  @media (max-width: 1024px) {
+    @apply w-full mb-4;
+  }
+}
+
+.thumbList {
+  @apply flex flex-col gap-6;
+
+  @media (max-width: 1024px) {
+    @apply flex-row gap-4;
+  }
+}
+
+.thumbItem {
+  @apply flex items-start gap-3 cursor-pointer;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    transform: translateX(4px);
+  }
+
+  &:hover .thumbImage {
+    box-shadow: 4px 4px 0 rgba(192, 69, 42, 0.3);
+  }
+}
+
+.thumbImage {
+  @apply w-20 h-14 object-cover rounded-sm;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-out;
+
+  @media (max-width: 1024px) {
+    @apply w-16 h-12;
+  }
+}
+
+.thumbNumber {
+  @apply text-xs font-bold mt-1;
+  font-family: 'Space Mono', monospace;
+  color: #999;
+}
+
+// ========== MIDDLE CONTENT ==========
+.middleContent {
+  grid-column: 2;
+  grid-row: 2;
+  @apply flex flex-col justify-start; // Align top with the sidebar
+  padding: 0 40px;
+  margin-top: -2rem; // Adjust slightly up
+  z-index: 2;
+
+  @media (max-width: 1024px) {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 24px;
+  }
+}
+
+.description {
+  @apply text-xl sm:text-2xl lg:text-3xl;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500; // Semi-bold for the whole text
+  line-height: 1.35;
+  color: #1a1a1a;
+  max-width: 450px;
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+// ========== ILLUSTRATION (RIGHT SIDE) ==========
+.illustrationWrap {
+  grid-column: 3;
+  grid-row: 2 / 4; // Start from row 2 so it doesn't overlap the huge top title
+  @apply flex items-end justify-end; // Align to bottom right like 'kin
+  padding-right: 20px;
+  overflow: hidden;
+  z-index: 1;
+
+  @media (max-width: 1024px) {
+    grid-column: 1;
+    grid-row: 4;
+    @apply justify-center;
+    max-height: 400px;
+  }
+}
+
+.illustration {
+  @apply h-auto;
+  width: auto;
+  max-width: 100%;
+  max-height: 75vh; // Slightly smaller to fit under the title
+  object-fit: contain;
+  object-position: bottom right;
+  mix-blend-mode: multiply; // Blend the white background of the image with the cream background
+  filter: grayscale(10%) contrast(1.1);
+}
+
+// ========== FOOTER INFO ==========
+.footer {
+  grid-column: 1 / 3;
+  grid-row: 3;
+  @apply flex flex-wrap items-end gap-8;
+  padding: 0 0 40px 40px;
+  z-index: 2;
+
+  @media (max-width: 1024px) {
+    @apply hidden;
+  }
+}
+
+.footerBlock {
+  @apply flex flex-col gap-1;
+}
+
+.footerLabel {
+  @apply uppercase tracking-[0.2em] text-xs;
+  font-family: 'Space Mono', monospace;
+  color: #999;
+}
+
+.footerText {
+  @apply text-xs uppercase tracking-wider;
+  font-family: 'Space Mono', monospace;
+  color: #333;
+  line-height: 1.6;
+}
+
+.footerLink {
+  @apply text-xs uppercase tracking-wider underline;
+  font-family: 'Space Mono', monospace;
+  color: #333;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #c0452a;
+  }
+}
+
+// ========== LAYOUT TOGGLE (decorative) ==========
+.layoutToggle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @apply flex items-center gap-3;
+  z-index: 3;
+
+  @media (max-width: 1024px) {
+    @apply hidden;
+  }
+}
+
+.layoutLabel {
+  @apply uppercase tracking-[0.2em] text-xs;
+  font-family: 'Space Mono', monospace;
+  color: #999;
+}
+
+.layoutBtn {
+  @apply w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer;
+  font-family: 'Space Mono', monospace;
+  border: 1.5px solid #ccc;
+  background: transparent;
+  color: #666;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #1a1a1a;
+    color: #1a1a1a;
+  }
+}
+
+.layoutBtnActive {
+  @apply w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer;
+  font-family: 'Space Mono', monospace;
+  border: 1.5px solid #1a1a1a;
+  background: #1a1a1a;
+  color: #f5f0eb;
+}

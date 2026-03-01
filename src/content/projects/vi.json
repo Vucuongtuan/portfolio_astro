@@ -1,0 +1,264 @@
+{
+  "sectionTitle": "Dự Án Nổi Bật",
+  "items": [
+    {
+      "id": "wowweekend",
+      "title": "WowWeekend",
+      "description": "Migration website từ hệ thống cũ sang hệ thống mới sử dụng Next.js và Payload CMS, cùng với việc viết tool cào dữ liệu bài viết và tối ưu hóa hệ thống lưu trữ qua Cloudflare CDN.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "work",
+      "tags": ["Next.js", "Payload CMS", "TypeScript", "TailwindCSS", "MongoDB", "ISR", "Docker"],
+      "role": "Full stack developer",
+      "duration": "6 months",
+      "teamSize": "3",
+      "goals": "Migration website từ hệ thống cũ sử dụng php(fe) và asp(backend) sang hệ thống mới sử dụng Nextjs và payloadcms.\nViết tool crawl api bài viết để lấy data từ hệ thông cũ và optimize field qua hệ thông mới sử dụng mongodb và hình ảnh từ lưu trực tiếp trên hệ thống cũ qua aws s3.",
+      "features": [
+        "Admin Dashboard Schema Management sử dụng PayloadCms",
+        "Quản lý sản phẩm, danh mục, bài viết, hình ảnh",
+        "Sử dụng full cấu trúc ISR để tối ưu SEO",
+        "Sử dụng unstable_cache đẻ cache các function fetch api và revalidate dữ liệu",
+        "Tạo các component có độ tái sử dụng cao, viết unit test",
+        "Tối ưu hóa storage cũ sử dụng AWS S3 chuyển qua Cloudflare Storage và cdn"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "wowbuilder",
+      "title": "WowBuilder",
+      "description": "Website builder giao diện kéo thả cho phép Designer tạo ngay các Landing Page chuyên biệt cho mục LongForm trực tiếp trên trình duyệt mà không cần IT code lại.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "work",
+      "tags": ["Next.js", "Express.js", "Craft.js", "TypeScript", "TailwindCSS"],
+      "role": "Full stack developer",
+      "duration": "6 months",
+      "teamSize": "2",
+      "goals": "Website Wowweekend có category LongForm chuyên về các bài viết dài và có ui dạng landing page được custom riêng.\nTạo ra 1 web site có thể kéo thả để Designer có thể tạo ui trực tiếp mà không cần IT code.\nGiảm thiểu thời gian bàn giao, export các file html/css/js riêng biệt.",
+      "features": [
+        "Sử dụng Craftjs để tạo khung ui kéo thả",
+        "Tạo các component phục vụ cho builder web: spacer, container, button, Hero, Text, Image, Column...",
+        "Xử lý các event và state cục bộ thông qua context react",
+        "Các State data json được lưu vào localstorage và indexDB chuyển quá trình lưu trữ dữ liệu sang Browser Storage",
+        "Viết Docs cho các component và tính năng của builder"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "jewellery-wowweekend",
+      "title": "Jewellery WowWeekend",
+      "description": "Trang web đọc bài viết chuyên sâu về trang sức được thiết kế với UI bắt mắt, tối ưu SEO siêu tốt, tách ra từ hệ thống WowWeekend gốc.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "work",
+      "tags": ["Next.js", "Payload CMS", "MongoDB", "ISR", "TailwindCSS"],
+      "role": "Full stack developer",
+      "duration": "3 months",
+      "teamSize": "3",
+      "goals": "Tạo ra 1 website có UI đẹp và truyền tải tốt các thông tin của trang sức, SEO tốt, tốc độ tải trang nhanh.\nMigration các article từ website wowweekend sang website jewellry wowweekend.",
+      "features": [
+        "Admin Dashboard Schema Management sử dụng PayloadCms",
+        "Nhiều template cho cách render bài viết",
+        "Sử dụng full cấu trúc ISR để tối ưu SEO",
+        "Sử dụng unstable_cache để cache các function fetch api",
+        "Viết các unit test cho các function và component"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "idm-app",
+      "title": "IDM Website & Mobile App",
+      "description": "Cập nhật định dạng UI/UX cho toàn bộ hệ thống cũ, kèm theo tích hợp AI Chatbot RAG tư vấn khách hàng cho doanh nghiệp.",
+      "thumbnail": "/images/ecommerce_mockup.png",
+      "images": ["/images/ecommerce_mockup.png"],
+      "category": "work",
+      "tags": ["Next.js", "React Native", "Expo", "TanStack Query", "OpenAI API"],
+      "teamSize": "3",
+      "goals": "Cập nhật UI và công nghệ cho website cũ sang UI đẹp mắt, lôi kéo khách hàng.\nCó AI Chat bot để hỗ trợ khách hàng sử dụng RAG để huấn luyện model (OpenAI / Gemini) cho các câu hỏi liên quan đến brand IDM.",
+      "features": [
+        "Tạo các template cho các bài viết và component có thể tái sử dụng cao",
+        "Tối ưu hóa tốc độ tải trang và SEO",
+        "Tích hợp RAG AI chatbot tư vấn nội dung"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "laptop-tc-store",
+      "title": "Laptop TC Store",
+      "description": "Website thương mại điện tử chuyên bán Laptop với kiến trúc Render SSR/SSG cho tốc độ cực nhanh và SEO chuẩn chỉ.",
+      "thumbnail": "/images/ecommerce_mockup.png",
+      "images": ["/images/ecommerce_mockup.png"],
+      "category": "personal",
+      "tags": ["Next.js", "Express.js", "MongoDB", "Redis", "shadcn/ui", "Firebase"],
+      "role": "Full stack developer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Tạo ra 1 website thương mại điện tử về laptop đạt SEO tốt và có tốc độ tải trang nhanh.",
+      "features": [
+        "Admin dashboard quản lý sản phẩm, danh mục, banner,...",
+        "Sử dụng cấu trúc SSR và SSG để tối ưu SEO",
+        "Tạo các component có độ tái sử dụng cao",
+        "Tối ưu hóa tốc độ tải trang và SEO"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "tc-phim",
+      "title": "TC Phim",
+      "description": "Kênh xem phim trực tuyến ứng dụng công nghệ Next.js 16 Canary với Partial Prerendering (PPR) và React Compiler.",
+      "thumbnail": "/images/ai_chat_mockup.png",
+      "images": ["/images/ai_chat_mockup.png"],
+      "category": "personal",
+      "tags": ["Next.js 16", "React Compiler", "hls.js", "TailwindCSS"],
+      "role": "Frontend developer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Tìm hiểu cấu trúc PPR cache component mới của Next.js 16 và tối ưu hóa hiệu năng frontend trải nghiệm stream phim.",
+      "features": [
+        "Sử dụng React Compiler và tự động tối ưu hóa hiệu năng trong cấu trúc page tree component",
+        "Sử dụng các function và cách cache mới trong Next.js 16 bằng `use cache` (cacheLife, cacheTags)",
+        "Custom ui control video player bằng hls.js"
+      ],
+      "links": {},
+      "year": "2024"
+    },
+    {
+      "id": "auth-module",
+      "title": "Auth Module (ASP.NET)",
+      "description": "Module xác thực tập trung, tái sử dụng cho nhiều dự án cá nhân để xử lý Login, quản lý phân quyền người dùng và công ty.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "personal",
+      "tags": ["ASP.NET Web API", "Entity Framework", "PostgreSQL", "JWT", "Docker"],
+      "role": "Full stack developer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Tạo ra 1 module Auth tập trung quản lý người dùng, vai trò, quyền hạn, công ty để tái sử dụng toàn bộ cho các side projects cá nhân.",
+      "features": [
+        "UI đăng nhập/đăng ký sử dụng Razor Page",
+        "Backend sử dụng ASP.NET Web API và JWT",
+        "Sử dụng Entity Framework quản lý database phân quyền",
+        "Đóng gói module qua Docker deploy lên Docker Hub"
+      ],
+      "links": {},
+      "year": "2023"
+    },
+    {
+      "id": "image-sharing",
+      "title": "Nền tảng Chia sẻ Hình Ảnh",
+      "description": "Mạng xã hội chia sẻ hình ảnh thời gian thực, có bình luận đa cấp, tự động tối ưu hóa ảnh và thông báo Socket.",
+      "thumbnail": "/images/ecommerce_mockup.png",
+      "images": ["/images/ecommerce_mockup.png"],
+      "category": "personal",
+      "tags": ["Nuxt.js", "Vue", "Go (Gin)", "MongoDB", "WebSocket", "Firebase", "Docker"],
+      "role": "Full stack developer",
+      "duration": "3 months",
+      "teamSize": "1",
+      "goals": "Tạo ra một nền tảng chia sẻ hình ảnh với khả năng SEO tốt, tốc độ tải trang nhanh và xây dựng hệ thống tương tác thời gian thực.",
+      "features": [
+        "Quản lý hình ảnh: Upload Firebase Storage, tự động nén tối ưu ảnh WebP",
+        "Tương tác Social: Like, Comment (nested), Follow và thông báo Realtime qua WebSocket",
+        "Tối ưu SEO & Performance: SSR, Dynamic meta tags",
+        "Admin Panel kiểm duyệt nội dung"
+      ],
+      "links": {},
+      "year": "2023"
+    },
+    {
+      "id": "football-predict",
+      "title": "Dự Đoán Giá Trị Cầu Thủ Bóng Đá",
+      "description": "Dự án học tập Machine Learning: cào dữ liệu từ Transfermarkt, làm sạch, phân tích và huấn luyện một mô hình Cây Quyết Định (Decision Tree) để dự đoán giá trị thị trường.",
+      "thumbnail": "/images/ai_chat_mockup.png",
+      "images": ["/images/ai_chat_mockup.png"],
+      "category": "personal",
+      "tags": ["Python", "Pandas", "Scikit-Learn", "Jupyter", "Machine Learning"],
+      "role": "Data Analyst / Machine Learning Learner",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Học cách thu thập dữ liệu (crawl data) bằng Python thông qua API của Transfermarkt.\nThực hành làm sạch dữ liệu, EDA và xây dựng mô hình Cây Quyết Định (Decision Tree) dự đoán phân khúc giá trị thị trường của các cầu thủ bóng đá.",
+      "features": [
+        "Script tự động cào dữ liệu API lưu vào file csv",
+        "Jupyter Notebook chứa toàn bộ quá trình: Xử lý, Làm sạch, Biểu đồ (Matplotlib, Seaborn)",
+        "Train mô hình Decision Tree với Scikit-learn và đánh giá tối ưu mô hình"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/football_dec_tree"
+      },
+      "year": "2024"
+    },
+    {
+      "id": "moon-app",
+      "title": "Moon App",
+      "description": "Ứng dụng di động đa nền tảng React Native (Expo 54) áp dụng mô hình File-based Routing, quản lý state cục bộ kết hợp bộ nhớ đệm ngoại tuyến bằng TanStack Query.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "personal",
+      "tags": ["React Native", "Expo Router", "Zustand", "NativeWind", "TanStack Query", "Zod"],
+      "role": "Mobile Developer Learner",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Xây dựng ứng dụng di động đa nền tảng bằng hệ sinh thái React Native và Expo (SDK 54).\nThực hành quản lý server state kết hợp Async Storage Persister để hỗ trợ Offline.",
+      "features": [
+        "Sử dụng mô hình File-based Routing của expo-router",
+        "Tối ưu hóa việc gọi API và lưu bộ nhớ đệm với TanStack Query giúp ứng dụng offline",
+        "Validation form phức tạp với react-hook-form và zod",
+        "Cấu trúc ứng dụng module hóa, strict Type-Safe với TypeScript"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/moon-app"
+      },
+      "year": "2024"
+    },
+    {
+      "id": "eco-app",
+      "title": "Eco App (Payload v3)",
+      "description": "Website mẫu thương mại điện tử mượt mà tích hợp trực tiếp Payload CMS v3 trên nền Next.js 15 App Router, thanh toán Stripe và tính năng đa ngôn ngữ.",
+      "thumbnail": "/images/ecommerce_mockup.png",
+      "images": ["/images/ecommerce_mockup.png"],
+      "category": "personal",
+      "tags": ["Next.js 15", "Payload CMS v3", "Stripe", "Radix UI", "Framer Motion", "Tailwind V4"],
+      "role": "Full stack developer",
+      "teamSize": "1",
+      "goals": "Xây dựng một boilerplate thương mại điện tử hoàn chỉnh với phiên bản Payload CMS thế hệ mới (v3) chạy trực tiếp trên Next.js 15+.\nTích hợp hệ thống Stripe xử lý thanh toán.",
+      "features": [
+        "Quản trị nội dung và sản phẩm trực tiếp bằng Dashboard của Payload CMS v3",
+        "Xử lý Checkout thông qua webhook Stripe",
+        "Tối ưu UI/UX với Radix UI Primitives và hiệu ứng mượt mà từ Framer Motion",
+        "Cấu trúc hỗ trợ đa ngôn ngữ (i18n) bằng Next-Intl"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/eco_app"
+      },
+      "year": "2025"
+    },
+    {
+      "id": "portfolio-astro",
+      "title": "Website Portfolio Của Tôi",
+      "description": "Đúng vậy, chính là trang web hiện tại! Trang portfolio được xây dựng siêu tối ưu với Astro Islands Architecture kết hợp GSAP Animations cuốn hút.",
+      "thumbnail": "/images/oauth_server_mockup.png",
+      "images": ["/images/oauth_server_mockup.png"],
+      "category": "personal",
+      "tags": ["Astro", "React", "TypeScript", "SCSS", "GSAP ScrollTrigger"],
+      "role": "Frontend Developer / Designer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Xây dựng trang thiết kế portfolio hiện đại giới thiệu kỹ năng đạt chuẩn Awwwards thông qua GSAP.\nÁp dụng triết lý Islands Architecture của Astro tối ưu hiệu năng tối đa.",
+      "features": [
+        "Routing kết hợp View Transitions mượt mà như SPA",
+        "Quản lý dự án type-safe bằng Astro Content Collections",
+        "Mix React component quản lý filter state phức tạp",
+        "Hiệu ứng GSAP ScrollTrigger và hook @gsap/react",
+        "System UI Dark/Light mode, CSS Modules styling"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/portfolio_astro"
+      },
+      "year": "2026"
+    }
+  ]
+}

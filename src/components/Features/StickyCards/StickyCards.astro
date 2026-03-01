@@ -1,0 +1,21 @@
+---
+import StickyCardsClient from "./StickyCardsClient";
+import type { VariantName } from "./StickyCardsClient";
+
+interface Props {
+  variant?: VariantName;
+  class?: string;
+}
+
+const { variant = "scale-fade", class: className = "" } = Astro.props;
+const id = `sticky-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div
+  id={id}
+  class:list={["sticky-cards-ctn", className]}
+  style="position: relative;"
+>
+  <slot />
+</div>
+<StickyCardsClient variant={variant} containerId={id} client:load />

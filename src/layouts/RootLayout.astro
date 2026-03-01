@@ -1,11 +1,10 @@
 ---
-import { ClientRouter } from "astro:transitions";
 import { Header } from "@components/Layout";
 import HeadMeta from "@components/Commons/HeadMeta.astro";
 import "../styles/global.css";
 import { getLangFromUrl } from "../i18n/utils";
 import FooterLayer from "@components/Layout/Footer/FooterLayer";
-import GlobalBackground from "@components/Commons/GlobalBackground";
+import LayerBackground from "@components/Commons/LayerBackground";
 
 const lang = getLangFromUrl(Astro.url);
 // props
@@ -28,12 +27,12 @@ const {
     <HeadMeta title={title} />
   </head>
   <body>
-    <GlobalBackground client:load />
     {enableHeader && <Header lang={lang} client:load />}
-    <main class="h-[1000px] w-full">
+    <main>
+      <LayerBackground />
       {title && <h1 class="sr-only">{title}</h1>}
       <slot />
-      <FooterLayer lang={lang} />
+      {enableFooter && <FooterLayer lang={lang} />}
     </main>
     <!-- your content is injected here -->
   </body>

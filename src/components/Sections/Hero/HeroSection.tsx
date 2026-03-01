@@ -2,9 +2,9 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import st from "./hero-section.module.scss"
 import { useTranslations} from "../../../i18n/utils"
 import type { Locale } from "../../../i18n/ui";
+import st from "./hero-section.module.scss";
 
 interface HeroSectionProps {
     lang: Locale;
@@ -21,12 +21,15 @@ export default function HeroSection({ lang }: HeroSectionProps) {
             duration: 1,
             stagger: 0.15,
             ease: "power3.out",
-            delay: 0.5 // Chờ background load xíu rồi mới hiện chữ
+            delay: 0.5 
         });
     }, { scope: container });
 
     return (
-        <section className={st.ctn} ref={container}>
+        <section className={st.ctn} ref={container} data-section="Hero">
+
+   
+
                <div className={st.box}>
                     <div className="space-y-12">
                         <div className="hero-anim-item w-12 h-px bg-accent-subtle"></div>
@@ -51,6 +54,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
                         </div>
                     </div>
                 </div>
+
         </section>
     )
 }

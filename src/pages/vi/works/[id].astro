@@ -1,0 +1,270 @@
+---
+import { getEntry } from "astro:content";
+import RootLayout from "../../../layouts/RootLayout.astro";
+
+export async function getStaticPaths() {
+  const viProjects = await getEntry("projects", "vi");
+  return viProjects.data.items.map((project: any) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<RootLayout title={`${project.title} | Cuong Vu`} enableHeader>
+  <div
+    class="flex flex-col md:flex-row min-h-screen w-full text-[#1a1a1a] dark:text-gray-100 bg-white dark:bg-black pt-20 md:h-screen md:overflow-hidden"
+  >
+    <!-- Left Column: Gallery (1/3 width on desktop) -->
+    <div
+      class="gallery-container w-full md:w-1/3 h-auto md:h-full md:overflow-y-auto overflow-x-hidden p-6 md:p-8 space-y-8 md:space-y-12 flex-shrink-0 scrollbar-hide border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-800"
+    >
+      <a
+        href="/vi/"
+        class="inline-flex items-center text-sm font-medium hover:text-orange-600 mb-8 transition-colors md:hidden"
+      >
+        &larr; Quay lại trang chủ
+      </a>
+      {
+        project.images &&
+          project.images.map((img: string, i: number) => (
+            <div class="w-full relative rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 project-image-wrapper shadow-sm">
+              <img
+                src={img}
+                alt={`${project.title} Hình ${i + 1}`}
+                class="w-full h-auto object-cover transform scale-110 project-image"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+            </div>
+          ))
+      }
+    </div>
+
+    <!-- Right Column: Content (2/3 width on desktop) -->
+    <div
+      class="w-full md:w-2/3 h-auto md:h-full md:overflow-y-auto p-6 md:p-16 lg:p-24 flex flex-col pt-12 md:pt-32"
+    >
+      <a
+        href="/vi/"
+        class="hidden md:inline-flex items-center text-sm font-medium hover:text-orange-600 mb-12 transition-colors self-start"
+      >
+        &larr; Quay lại trang chủ
+      </a>
+
+      <header class="project-header max-w-4xl">
+        <div
+          class="flex items-center gap-4 text-sm text-gray-500 mb-6 uppercase tracking-wider"
+        >
+          <span>{project.category}</span>
+          <span>&bull;</span>
+          <span>{project.year}</span>
+        </div>
+        <h1
+          class="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight"
+        >
+          {project.title}
+        </h1>
+
+        {
+          project.tags && project.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-8">
+              {project.tags.map((tag: string) => (
+                <span class="px-3 py-1 bg-gray-100 dark:bg-gray-900 rounded-full text-xs font-medium text-gray-600 dark:text-gray-400">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )
+        }
+
+        {
+          (project.role || project.teamSize || project.duration) && (
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-12 py-8 border-y border-gray-100 dark:border-gray-800">
+              {project.role && (
+                <div>
+                  <h3 class="text-xs font-semibold text-black dark:text-white uppercase tracking-wider mb-2">
+                    Vai trò
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                    {project.role}
+                  </p>
+                </div>
+              )}
+              {project.teamSize && (
+                <div>
+                  <h3 class="text-xs font-semibold text-black dark:text-white uppercase tracking-wider mb-2">
+                    Đội ngũ
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                    {project.teamSize}
+                  </p>
+                </div>
+              )}
+              {project.duration && (
+                <div>
+                  <h3 class="text-xs font-semibold text-black dark:text-white uppercase tracking-wider mb-2">
+                    Thời gian
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                    {project.duration}
+                  </p>
+                </div>
+              )}
+            </div>
+          )
+        }
+
+        <div
+          class="anim-item prose prose-lg dark:prose-invert max-w-none mb-12 text-gray-600 dark:text-gray-400"
+        >
+          {
+            project.goals ? (
+              <div class="mb-10">
+                <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
+                  Tổng quan / Mục tiêu
+                </h2>
+                <p class="text-xl md:text-2xl leading-relaxed whitespace-pre-line mb-6">
+                  {project.description}
+                </p>
+                <p class="text-lg leading-relaxed whitespace-pre-line text-gray-500 dark:text-gray-400">
+                  {project.goals}
+                </p>
+              </div>
+            ) : (
+              <p class="text-xl md:text-2xl leading-relaxed whitespace-pre-line">
+                {project.description}
+              </p>
+            )
+          }
+
+          {
+            project.features && project.features.length > 0 && (
+              <div>
+                <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
+                  Tính năng nổi bật
+                </h2>
+                <ul class="list-disc pl-5 space-y-2 text-lg text-gray-600 dark:text-gray-400">
+                  {project.features.map((feature: string) => (
+                    <li>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+        </div>
+
+        {
+          project.links && (project.links.github || project.links.demo) && (
+            <div class="anim-item flex flex-wrap gap-4 mt-8">
+              {project.links.github && (
+                <a
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-8 py-4 bg-black text-white dark:bg-white dark:text-black rounded-full font-medium hover:scale-105 transition-transform shadow-lg"
+                >
+                  Mã nguồn
+                </a>
+              )}
+              {project.links.demo && (
+                <a
+                  href={project.links.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-8 py-4 border-2 border-black dark:border-white rounded-full font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all"
+                >
+                  Xem trang web
+                </a>
+              )}
+            </div>
+          )
+        }
+      </header>
+    </div>
+  </div>
+</RootLayout>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Awwwards-style title entrance
+  gsap.fromTo(
+    ".anim-title span",
+    { y: "110%", opacity: 0 },
+    { y: "0%", opacity: 1, duration: 1.2, ease: "expo.out", delay: 0.1 }
+  );
+
+  // Content fade-up stagger
+  gsap.fromTo(
+    ".anim-item",
+    { y: 30, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power3.out",
+      delay: 0.3,
+    }
+  );
+
+  let mm = gsap.matchMedia();
+
+  const setupImageAnimations = (scrollerSelector: string | null) => {
+    const images = document.querySelectorAll(".project-image-wrapper");
+    images.forEach((wrapper) => {
+      const img = wrapper.querySelector(".project-image");
+
+      const scrollConfig: any = {
+        trigger: wrapper,
+        start: "top 90%",
+        toggleActions: "play none none reverse",
+      };
+
+      if (scrollerSelector) {
+        scrollConfig.scroller = scrollerSelector;
+      }
+
+      // Image Wrapper Entrance: Fade + Slide Up
+      gsap.fromTo(
+        wrapper,
+        { opacity: 0, y: 100 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.6,
+          ease: "expo.out",
+          scrollTrigger: scrollConfig,
+        }
+      );
+
+      // Inner Image Scale: Zoom out for Awwwards flair
+      if (img) {
+        gsap.fromTo(
+          img,
+          { scale: 1.3 },
+          {
+            scale: 1,
+            duration: 1.6,
+            ease: "expo.out",
+            scrollTrigger: scrollConfig,
+          }
+        );
+      }
+    });
+  };
+
+  // Setup animations per breakpoint
+  mm.add("(min-width: 768px)", () => {
+    setupImageAnimations(".gallery-container");
+  });
+
+  mm.add("(max-width: 767px)", () => {
+    setupImageAnimations(null);
+  });
+</script>

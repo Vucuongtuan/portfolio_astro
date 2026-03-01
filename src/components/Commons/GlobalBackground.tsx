@@ -2,10 +2,11 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-export default function GlobalBackground() {
+export default function GlobalBackground({enableCircle = true}: {enableCircle?: boolean}) {
     const container = useRef(null);
 
     useGSAP(() => {
+        if(!enableCircle) return;
         // Intro animation
         const tl = gsap.timeline();
 
@@ -47,11 +48,15 @@ export default function GlobalBackground() {
     }, { scope: container });
 
     return (
-        <div ref={container} className="fixed inset-0 -z-50 pointer-events-none overflow-hidden">
+        <div ref={container} className="absolute inset-0 -z-50 pointer-events-none overflow-hidden">
             <div className="deco-line absolute inset-0 line-pattern"></div>
             {/* ------ */}
-            <div className="deco-circle deco-circle-1 absolute -top-[10%] -left-[10%] w-[40%] h-[40%] border rounded-full" style={{borderColor: 'var(--accent-subtle)'}}></div>
-            <div className="deco-circle deco-circle-2 absolute top-[20%] -right-[5%] w-[30%] h-[30%] border rounded-full" style={{borderColor: 'var(--accent-subtle)'}}></div>
+            {enableCircle && (
+                <>
+                    <div className="deco-circle deco-circle-1 absolute -top-[10%] -left-[10%] w-[40%] h-[40%] border rounded-full opacity-[0.1]" style={{borderColor: 'var(--accent-subtle)'}}></div>
+                    <div className="deco-circle deco-circle-2 absolute top-[20%] -right-[5%] w-[30%] h-[30%] border rounded-full opacity-[0.1]" style={{borderColor: 'var(--accent-subtle)'}}></div>
+                </>
+            )}
         </div>
     )
 }

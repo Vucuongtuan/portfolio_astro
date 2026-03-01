@@ -1,10 +1,26 @@
 ---
-import Heading from "@components/Heading";
+import AboutMe from "@components/Sections/AboutMe/AboutMe.astro";
 import HeroSection from "@components/Sections/Hero/HeroSection";
+import ExperienceSection from "@components/Sections/Experience/ExperienceSection.astro";
+import Spacer from "@components/Sections/Spacer/Spacer";
+import ProjectGrid from "@components/Sections/ProjectGrid/ProjectGrid.astro";
+import Contact from "@components/Sections/Contact";
+import Footer from "@components/Layout/Footer/Footer.astro";
+import StickyCards from "@components/Features/StickyCards/StickyCards.astro";
 import RootLayout from "@layouts/RootLayout.astro";
+
 console.log("This runs in your terminal, not the browser!");
 ---
 
 <RootLayout title="Trang chủ" enableHeader>
   <HeroSection lang="vi" client:load />
+  <Spacer lang="vi" variant="absolute" enableScroll />
+  <AboutMe lang="vi" />
+  <ProjectGrid lang="vi" />
+  <ExperienceSection lang="vi" />
+  <StickyCards variant="scale-fade">
+    <Spacer lang="vi" variant="large" enableScroll />
+    <Contact lang="vi" client:visible />
+    <Footer lang="vi" />
+  </StickyCards>
 </RootLayout>
