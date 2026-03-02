@@ -12,7 +12,7 @@ import RootLayout from "@layouts/RootLayout.astro";
 console.log("This runs in your terminal, not the browser!");
 ---
 
-<RootLayout title="Trang chủ" enableHeader>
+<RootLayout title="Trang chủ" enableHeader enableFooter>
   <HeroSection lang="vi" client:load />
   <Spacer lang="vi" variant="absolute" enableScroll />
   <AboutMe lang="vi" />
@@ -21,6 +21,5 @@ console.log("This runs in your terminal, not the browser!");
   <StickyCards variant="scale-fade">
     <Spacer lang="vi" variant="large" enableScroll />
     <Contact lang="vi" client:visible />
-    <Footer lang="vi" />
   </StickyCards>
 </RootLayout>

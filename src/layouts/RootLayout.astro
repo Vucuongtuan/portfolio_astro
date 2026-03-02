@@ -37,7 +37,7 @@ const {
       {enableFooter && <FooterLayer lang={lang} />}
     </main>
     <BottomScreen lang={lang} />
-    <Footer lang={lang} client:visible />
+    {enableFooter && <Footer lang={lang} client:visible />}
 
     <!-- your content is injected here -->
   </body>
