@@ -1,0 +1,6 @@
+.clock {
+    @apply text-xs font-mono uppercase tracking-widest tabular-nums;
+    min-width: 7ch;
+    opacity: 0.5;
+    color: inherit;
+}

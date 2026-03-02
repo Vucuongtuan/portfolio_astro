@@ -197,11 +197,11 @@ export default function FooterClient({ email }: FooterClientProps) {
   return (
     <footer
       ref={containerRef}
-      className="relative w-full min-h-[80vh] flex flex-col justify-between py-16 px-6 md:px-16 bg-black text-white overflow-hidden"
+      className="relative w-full min-h-[80vh] flex flex-col justify-between py-16 px-6 md:px-16  overflow-hidden"
     >
       <div
         ref={lineRef}
-        className="absolute top-0 left-6 md:left-16 right-6 md:right-16 h-[1px] bg-white/20"
+        className="absolute top-0 left-6 md:left-16 right-6 md:right-16 h-[1px]"
       />
 
       <div className="flex-1 flex flex-col items-center justify-center w-full relative gap-6">
@@ -232,7 +232,7 @@ export default function FooterClient({ email }: FooterClientProps) {
 
         <div className="flex flex-wrap items-center justify-center gap-8">
           <a
-            href="https://github.com/cuongvutuan"
+            href="https://github.com/Vucuongtuan"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors duration-300 block"
@@ -240,20 +240,12 @@ export default function FooterClient({ email }: FooterClientProps) {
             GitHub
           </a>
           <a
-            href="https://linkedin.com/in/cuongvutuan"
+            href="https://www.linkedin.com/in/vtc-b450b9313"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors duration-300 block"
           >
             LinkedIn
-          </a>
-          <a
-            href="https://twitter.com/cuongvutuan"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-300 block"
-          >
-            Twitter
           </a>
           <a
             href={`mailto:${email}`}

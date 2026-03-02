@@ -1,22 +1,15 @@
-.wrapper {
-    @apply fixed bottom-8 left-8 z-50;
-}
-
+// ========== BOTTOM SCREEN (mix-blend-mode: difference) ==========
 .bottomScreen {
-    @apply flex items-center gap-2 font-mono text-sm font-semibold tracking-wide pointer-events-auto;
-}
-
-.layerLight {
-    @apply relative;
+    @apply fixed bottom-8 left-8 right-8 flex items-center justify-between;
+    @apply font-mono text-sm font-semibold tracking-wide;
     color: white;
+    mix-blend-mode: difference;
+    pointer-events: auto;
 }
 
-.layerDark {
-    @apply absolute inset-0 flex items-center gap-2;
-    color: black;
-    pointer-events: none;
-    will-change: clip-path;
-    transition: clip-path 0.05s linear;
+// ========== LEFT: Language Switcher ==========
+.leftSide {
+    @apply flex items-center gap-2;
 }
 
 .langLink {
@@ -36,4 +29,9 @@
 .sep {
     @apply select-none;
     opacity: 0.25;
+}
+
+// ========== RIGHT: Clock ==========
+.rightSide {
+    @apply flex items-center;
 }

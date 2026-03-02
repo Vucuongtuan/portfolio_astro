@@ -17,7 +17,6 @@ const variants: Record<VariantName, VariantConfig> = {
     pinned: { scale: 0.92, opacity: 0.4, borderRadius: "24px" },
     overlay: {
       borderRadius: "24px 24px 0 0",
-      boxShadow: "0 -20px 60px rgba(0,0,0,0.4)",
     },
   },
   "slide-over": {

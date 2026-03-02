@@ -23,9 +23,22 @@
 }
 
 
-body{
-    @apply font-mono antialiased selection:bg-black selection:text-white; 
+html {
+    background-color: var(--bg-pure);
 }
+
+body{
+    @apply font-mono antialiased selection:bg-black selection:text-white;
+    background-color: var(--bg-pure);
+    color: var(--text-stark);
+}
+
+/* 
+  NOTE: Do NOT add isolation: isolate to main/#root/#__astro.
+  It creates a separate stacking context that breaks mix-blend-mode: difference 
+  on fixed elements (Header, BottomScreen, FooterLayer) that sit OUTSIDE <main>.
+  Those elements need to blend with the content INSIDE <main>.
+*/
 
  .peripheral-link {
             @apply opacity-40 hover:opacity-100 transition-opacity duration-300;

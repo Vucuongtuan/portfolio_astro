@@ -138,7 +138,7 @@ export default function Contact({ lang }: ContactProps) {
             <div className={st.infoBlock}>
               <span className={st.infoLabel}>{t("contact.info")}</span>
               <div className={st.infoContent}>
-                <a href="mailto:cuong@dev.com">{t("landing.email")}</a>
+                <a href="mailto:vucuongtuan00@gmail.com">{t("landing.email")}</a>
                 <span>{t("landing.location")}</span>
               </div>
             </div>
@@ -146,14 +146,11 @@ export default function Contact({ lang }: ContactProps) {
             <div className={st.infoBlock}>
               <span className={st.infoLabel}>{t("contact.socials")}</span>
               <div className={st.infoContent}>
-                <a href="https://github.com/cuongvutuan" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/Vucuongtuan" target="_blank" rel="noopener noreferrer">
                   GitHub
                 </a>
-                <a href="https://linkedin.com/in/cuongvutuan" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/vtc-b450b9313" target="_blank" rel="noopener noreferrer">
                   LinkedIn
-                </a>
-                <a href="https://twitter.com/cuongvutuan" target="_blank" rel="noopener noreferrer">
-                  Twitter
                 </a>
               </div>
             </div>

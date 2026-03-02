@@ -73,15 +73,15 @@ export default function HeroSection({ lang }: HeroSectionProps) {
     <section className={st.section} ref={container} data-section="Hero" data-theme="light">
       {/* Top info row */}
       <div className={st.infoRow}>
-        <div className="hero-info">
+        <div className={`hero-info ${st.infoItem}`}>
           <span className={st.infoLabel}>Role</span>
           <span className={st.infoValue}>{t("hero.role")}</span>
         </div>
-        <div className="hero-info">
+        <div className={`hero-info ${st.infoItem}`}>
           <span className={st.infoLabel}>Location</span>
           <span className={st.infoValue}>{t("landing.location")}</span>
         </div>
-        <div className="hero-info">
+        <div className={`hero-info ${st.infoItem}`}>
           <span className={st.infoLabel}>Status</span>
           <span className={st.infoValue}>Available</span>
         </div>
