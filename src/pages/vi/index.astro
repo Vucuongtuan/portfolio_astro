@@ -8,6 +8,7 @@ import Contact from "@components/Sections/Contact";
 import Footer from "@components/Layout/Footer/Footer.astro";
 import StickyCards from "@components/Features/StickyCards/StickyCards.astro";
 import RootLayout from "@layouts/RootLayout.astro";
+import TechStack from "@components/Sections/TechStack";
 
 console.log("This runs in your terminal, not the browser!");
 ---
@@ -16,10 +17,12 @@ console.log("This runs in your terminal, not the browser!");
   <HeroSection lang="vi" client:load />
   <Spacer lang="vi" variant="absolute" enableScroll />
   <AboutMe lang="vi" />
+  <Spacer lang="vi" variant="absolute" enableScroll />
+  <TechStack lang="vi" />
   <ProjectGrid lang="vi" />
   <ExperienceSection lang="vi" />
   <StickyCards variant="scale-fade">
-    <Spacer lang="vi" variant="large" enableScroll />
-    <Contact lang="vi" client:visible />
+    <ProjectGrid lang="vi" />
+    <Contact lang="vi" client:load />
   </StickyCards>
 </RootLayout>
