@@ -11,7 +11,7 @@ items:
     level: "advanced"
   - name: "Node.js / Express / NestJS"
     level: "advanced"
-  - name: "Asp.net Core Web API / Entity Framework"
+  - name: "Asp.net Core Web API / Entity Framework / WinForms Application"
     level: "intermediate"
   - name: "GO / Gin-Gonic / GORM "
     level: "intermediate"
