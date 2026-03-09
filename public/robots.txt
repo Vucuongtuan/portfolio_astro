@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vucuongtuan.id.vn/sitemap-index.xml
+Sitemap: https://vutuancuong.vercel.app/sitemap-index.xml
