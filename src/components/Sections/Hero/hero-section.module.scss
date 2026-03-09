@@ -29,6 +29,8 @@
             grid-column: 1 / -1; // Role spans full width
         }
     }
+    // Ẩn mặc định để GSAP animate sau khi Preloader xong
+    opacity: 0;
 }
 
 .infoLabel {
@@ -61,7 +63,8 @@
 
 .descCol {
     @apply text-sm md:text-base leading-relaxed;
-    opacity: 0.6;
+    // Ẩn mặc định để GSAP animate sau khi Preloader xong
+    opacity: 0;
 
     @media (max-width: 768px) {
         @apply text-xs leading-relaxed;
@@ -94,5 +97,8 @@
 
 .nameChar {
     @apply inline-block;
+    // Ẩn mặc định và di chuyển xuống dưới để Reveal sau khi Preloader xong
+    opacity: 0;
+    transform: translateY(120%);
     will-change: transform, opacity;
 }

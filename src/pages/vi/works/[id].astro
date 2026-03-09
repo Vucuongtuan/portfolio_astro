@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 import RootLayout from "../../../layouts/RootLayout.astro";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const viProjects = await getEntry("projects", "vi");
@@ -11,65 +12,81 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+const hasImages = project.images && project.images.length > 0;
 ---
 
-<RootLayout title={`${project.title} | Cuong Vu`} enableHeader>
+<RootLayout title={`${project.title} | Cuong Vu`}>
   <div
-    class="flex flex-col md:flex-row min-h-screen w-full text-gray-100 bg-[#0a0a0a] pt-20 md:h-screen md:overflow-hidden"
+    class="flex flex-col md:flex-row min-h-screen w-full text-gray-100 bg-[#0a0a0a] md:h-screen md:overflow-hidden"
   >
-    <!-- Left Column: Gallery (1/3 width on desktop) -->
-    <div
-      class="gallery-container w-full md:w-1/3 h-auto md:h-full md:overflow-y-auto overflow-x-hidden p-6 md:p-8 space-y-8 md:space-y-12 flex-shrink-0 scrollbar-hide border-b md:border-b-0 md:border-r border-gray-800"
-    >
-      <a
-        href="/vi/"
-        class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white mb-8 transition-colors md:hidden"
+    <!-- Left Column: Gallery -->
+    {hasImages && (
+      <div
+        class="gallery-container w-full md:w-1/3 h-auto md:h-full md:overflow-y-auto overflow-x-hidden p-6 md:p-8 space-y-8 md:space-y-12 flex-shrink-0 scrollbar-hide border-b md:border-b-0 md:border-r border-gray-800"
       >
-        &larr; Quay lại trang chủ
-      </a>
-      {
-        project.images &&
-          project.images.map((img: string, i: number) => (
+        <a
+          href="/vi/"
+          class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white mb-8 transition-colors md:hidden"
+        >
+          &larr; Quay lại trang chủ
+        </a>
+        {
+          project.images.map((img: any, i: number) => (
             <div class="w-full relative rounded-2xl overflow-hidden bg-gray-900 project-image-wrapper shadow-sm">
-              <img
+              <Image
                 src={img}
-                alt={`${project.title} Hình ${i + 1}`}
+                alt={`${project.title} Image ${i + 1}`}
                 class="w-full h-auto object-cover transform scale-110 project-image"
                 loading={i === 0 ? "eager" : "lazy"}
               />
             </div>
           ))
-      }
-    </div>
+        }
+      </div>
+    )}
 
-    <!-- Right Column: Content (2/3 width on desktop) -->
+    <!-- Right Column: Content -->
     <div
-      class="w-full md:w-2/3 h-auto md:h-full md:overflow-y-auto p-6 md:p-16 lg:p-24 flex flex-col pt-12 md:pt-32"
+      class:list={[
+        "h-auto md:h-full md:overflow-y-auto p-6 md:p-16 lg:p-24 flex flex-col pt-12 md:pt-32",
+        hasImages ? "w-full md:w-2/3" : "w-full max-w-5xl mx-auto"
+      ]}
     >
       <a
         href="/vi/"
-        class="hidden md:inline-flex items-center text-sm font-medium text-gray-400 hover:text-white mb-12 transition-colors self-start"
+        class="anim-item-detail hidden md:inline-flex items-center text-sm font-medium text-gray-400 hover:text-white mb-12 transition-colors self-start"
       >
         &larr; Quay lại trang chủ
       </a>
 
+      {!hasImages && (
+         <a
+          href="/vi/"
+          class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white mb-8 transition-colors md:hidden"
+        >
+          &larr; Quay lại trang chủ
+        </a>
+      )}
+
       <header class="project-header max-w-4xl">
         <div
-          class="flex items-center gap-4 text-sm text-gray-500 mb-6 uppercase tracking-wider"
+          class="anim-item-detail flex items-center gap-4 text-sm text-gray-500 mb-6 uppercase tracking-wider"
         >
           <span>{project.category}</span>
           <span>&bull;</span>
           <span>{project.year}</span>
         </div>
+        
         <h1
-          class="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-white"
+          class="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight pb-4 text-white"
+          transition:name={`project-title-${project.id}`}
         >
           {project.title}
         </h1>
 
         {
           project.tags && project.tags.length > 0 && (
-            <div class="flex flex-wrap gap-2 mb-8">
+            <div class="anim-item-detail flex flex-wrap gap-2 mb-8">
               {project.tags.map((tag: string) => (
                 <span class="px-3 py-1 bg-gray-900 rounded-full text-xs font-medium text-gray-400">
                   {tag}
@@ -81,7 +98,7 @@ const { project } = Astro.props;
 
         {
           (project.role || project.teamSize || project.duration) && (
-            <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-12 py-8 border-y border-gray-800">
+            <div class="anim-item-detail grid grid-cols-2 lg:grid-cols-3 gap-6 mb-12 py-8 border-y border-gray-800">
               {project.role && (
                 <div>
                   <h3 class="text-xs font-semibold text-white uppercase tracking-wider mb-2">
@@ -95,7 +112,7 @@ const { project } = Astro.props;
               {project.teamSize && (
                 <div>
                   <h3 class="text-xs font-semibold text-white uppercase tracking-wider mb-2">
-                    Đội ngũ
+                    Quy mô đội ngũ
                   </h3>
                   <p class="text-gray-400 text-sm md:text-base">
                     {project.teamSize}
@@ -117,7 +134,7 @@ const { project } = Astro.props;
         }
 
         <div
-          class="anim-item prose prose-lg prose-invert max-w-none mb-12 text-gray-400"
+          class="anim-item-detail prose prose-lg prose-invert max-w-none mb-12 text-gray-400"
         >
           {
             project.goals ? (
@@ -142,9 +159,7 @@ const { project } = Astro.props;
           {
             project.features && project.features.length > 0 && (
               <div>
-                <h2 class="text-2xl font-bold text-white mb-4">
-                  Tính năng nổi bật
-                </h2>
+                <h2 class="text-2xl font-bold text-white mb-4">Tính năng chính</h2>
                 <ul class="list-disc pl-5 space-y-2 text-lg text-gray-400">
                   {project.features.map((feature: string) => (
                     <li>{feature}</li>
@@ -157,7 +172,7 @@ const { project } = Astro.props;
 
         {
           project.links && (project.links.github || project.links.demo) && (
-            <div class="anim-item flex flex-wrap gap-4 mt-8">
+            <div class="anim-item-detail flex flex-wrap gap-4 mt-8">
               {project.links.github && (
                 <a
                   href={project.links.github}
@@ -165,7 +180,7 @@ const { project } = Astro.props;
                   rel="noopener noreferrer"
                   class="px-8 py-4 bg-white text-black rounded-full font-medium hover:scale-105 transition-transform shadow-lg"
                 >
-                  Mã nguồn
+                  Xem mã nguồn
                 </a>
               )}
               {project.links.demo && (
@@ -175,7 +190,7 @@ const { project } = Astro.props;
                   rel="noopener noreferrer"
                   class="px-8 py-4 border-2 border-white rounded-full font-medium hover:bg-white hover:text-black transition-all"
                 >
-                  Xem trang web
+                  Ghé thăm trang web
                 </a>
               )}
             </div>
@@ -192,79 +207,78 @@ const { project } = Astro.props;
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Awwwards-style title entrance
-  gsap.fromTo(
-    ".anim-title span",
-    { y: "110%", opacity: 0 },
-    { y: "0%", opacity: 1, duration: 1.2, ease: "expo.out", delay: 0.1 }
-  );
-
-  // Content fade-up stagger
-  gsap.fromTo(
-    ".anim-item",
-    { y: 30, opacity: 0 },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      stagger: 0.1,
-      ease: "power3.out",
-      delay: 0.3,
-    }
-  );
-
-  let mm = gsap.matchMedia();
-
-  const setupImageAnimations = (scrollerSelector: string | null) => {
-    const images = document.querySelectorAll(".project-image-wrapper");
-    images.forEach((wrapper) => {
-      const img = wrapper.querySelector(".project-image");
-
-      const scrollConfig: any = {
-        trigger: wrapper,
-        start: "top 90%",
-        toggleActions: "play none none reverse",
-      };
-
-      if (scrollerSelector) {
-        scrollConfig.scroller = scrollerSelector;
+  function initDetailAnimations() {
+    gsap.fromTo(
+      ".anim-item-detail",
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        delay: 0.2,
       }
+    );
 
-      // Image Wrapper Entrance: Fade + Slide Up
-      gsap.fromTo(
-        wrapper,
-        { opacity: 0, y: 100 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.6,
-          ease: "expo.out",
-          scrollTrigger: scrollConfig,
+    let mm = gsap.matchMedia();
+
+    const setupImageAnimations = (scrollerSelector: string | null) => {
+      const images = document.querySelectorAll(".project-image-wrapper");
+      images.forEach((wrapper) => {
+        const img = wrapper.querySelector(".project-image");
+
+        const scrollConfig: any = {
+          trigger: wrapper,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        };
+
+        if (scrollerSelector) {
+          scrollConfig.scroller = scrollerSelector;
         }
-      );
 
-      // Inner Image Scale: Zoom out for Awwwards flair
-      if (img) {
         gsap.fromTo(
-          img,
-          { scale: 1.3 },
+          wrapper,
+          { opacity: 0, y: 100 },
           {
-            scale: 1,
+            opacity: 1,
+            y: 0,
             duration: 1.6,
             ease: "expo.out",
             scrollTrigger: scrollConfig,
           }
         );
+
+        if (img) {
+          gsap.fromTo(
+            img,
+            { scale: 1.3 },
+            {
+              scale: 1,
+              duration: 1.6,
+              ease: "expo.out",
+              scrollTrigger: scrollConfig,
+            }
+          );
+        }
+      });
+    };
+
+    mm.add("(min-width: 768px)", () => {
+      const hasGallery = !!document.querySelector(".gallery-container");
+      if (hasGallery) {
+        setupImageAnimations(".gallery-container");
+      } else {
+        setupImageAnimations(null);
       }
     });
-  };
 
-  // Setup animations per breakpoint
-  mm.add("(min-width: 768px)", () => {
-    setupImageAnimations(".gallery-container");
-  });
+    mm.add("(max-width: 767px)", () => {
+      setupImageAnimations(null);
+    });
+  }
 
-  mm.add("(max-width: 767px)", () => {
-    setupImageAnimations(null);
-  });
+  document.addEventListener("astro:page-load", initDetailAnimations);
+  initDetailAnimations();
 </script>

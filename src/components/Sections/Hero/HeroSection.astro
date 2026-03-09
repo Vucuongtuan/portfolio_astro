@@ -1,0 +1,103 @@
+---
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import st from "./hero-section.module.scss";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const name = t("landing.name") || "CUONG";
+const nameChars = name.split("");
+---
+
+<section class={st.section} id="hero-section" data-section="Hero" data-theme="light">
+  <!-- Top info row -->
+  <div class={st.infoRow}>
+    <div class={`${st.infoItem} hero-info`}>
+      <span class={st.infoLabel}>Role</span>
+      <span class={st.infoValue}>{t("hero.role")}</span>
+    </div>
+    <div class={`${st.infoItem} hero-info`}>
+      <span class={st.infoLabel}>Location</span>
+      <span class={st.infoValue}>{t("landing.location")}</span>
+    </div>
+    <div class={`${st.infoItem} hero-info`}>
+      <span class={st.infoLabel}>Status</span>
+      <span class={st.infoValue}>Available</span>
+    </div>
+  </div>
+
+  <!-- Center: description columns -->
+  <div class={st.descRow}>
+    <p class={`${st.descCol} hero-desc`}>
+      {t("hero.desc")}
+    </p>
+    <p class={`${st.descCol} hero-desc`}>
+      {t("landing.role")}
+    </p>
+  </div>
+
+  <!-- Bottom: Massive name with Clip-path/Overflow Hidden -->
+  <div class={st.nameWrapper}>
+      <h1 class={st.name} id="hero-name">
+        {
+          nameChars.map((char) => (
+            <span class="hero-char-wrapper inline-block overflow-hidden">
+              <span class={`${st.nameChar} hero-char inline-block`}>
+                {char === " " ? "\u00A0" : char}
+              </span>
+            </span>
+          ))
+        }
+      </h1>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initHeroAnimation() {
+    const section = document.getElementById("hero-section");
+    if (!section) return;
+
+    const chars = section.querySelectorAll(".hero-char");
+    const infoItems = section.querySelectorAll(".hero-info");
+    const descItems = section.querySelectorAll(".hero-desc");
+
+    const tl = gsap.timeline();
+
+    // Animation chạy ngay lập tức khi trang load
+    tl.to(chars, {
+      y: 0,
+      opacity: 1,
+      duration: 1.4,
+      stagger: 0.04,
+      ease: "expo.out",
+    }, 0.2);
+
+    tl.to(infoItems, {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power3.out",
+    }, 0.6);
+
+    tl.to(descItems, {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power3.out",
+    }, 0.8);
+  }
+
+  document.addEventListener("astro:page-load", initHeroAnimation);
+  initHeroAnimation();
+</script>
+
+<style>
+  .hero-info, .hero-desc {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+</style>

@@ -13,13 +13,7 @@ export function useTranslations(lang: keyof typeof ui) {
 }
 
 export function getRoute(lang: string, path: string) {
-  if (lang === defaultLang || path === '/') {
-    // Handle home page specifically if needed, but usually /en/ is handled by folder structure
-    // If path is '/', return '/' for default, '/en/' for en.
-    if (path === '/') return lang === defaultLang ? '/' : `/${lang}/`;
-  }
-  // Remove trailing slash if present to avoid double slashes
+  if (path === '/') return lang === defaultLang ? '/' : `/${lang}/`;
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  if (lang === defaultLang) return cleanPath;
   return `/${lang}${cleanPath}`;
 }

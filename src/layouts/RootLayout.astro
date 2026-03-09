@@ -7,6 +7,9 @@ import FooterLayer from "@components/Layout/Footer/FooterLayer";
 import LayerBackground from "@components/Commons/LayerBackground";
 import BottomScreen from "@components/Features/BottomScreen/BottomScreen.astro";
 import Footer from "@components/Layout/Footer/Footer.astro";
+import { ClientRouter } from "astro:transitions";
+import CustomCursor from "@components/Commons/CustomCursor.astro";
+import BackgroundAura from "@components/Commons/BackgroundAura.astro";
 
 const lang = getLangFromUrl(Astro.url);
 // props
@@ -27,19 +30,53 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <HeadMeta title={title} />
+    <ClientRouter />
   </head>
   <body>
+    <BackgroundAura />
+    <CustomCursor />
     {enableHeader && <Header lang={lang} client:load />}
     <main>
-      <LayerBackground />
       {title && <h1 class="sr-only">{title}</h1>}
       <slot />
-      {enableFooter && <FooterLayer lang={lang} />}
     </main>
     <BottomScreen lang={lang} />
     {enableFooter && <Footer lang={lang} client:visible />}
 
-    <!-- your content is injected here -->
+    <script>
+      import Lenis from "lenis";
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const initLenis = () => {
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+        });
+
+        lenis.on("scroll", ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+
+        document.addEventListener(
+          "astro:before-preparation",
+          () => {
+            lenis.destroy();
+          },
+          { once: true }
+        );
+      };
+
+      initLenis();
+      document.addEventListener("astro:page-load", initLenis);
+    </script>
   </body>
 </html>
 <style is:global>

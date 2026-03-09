@@ -1,79 +1,137 @@
-.section {
-    @apply relative w-full text-gray-100 py-24 md:py-32 overflow-hidden transition-colors duration-500;
+.directorySection {
+    position: relative;
+    width: 100%;
+    padding: 15vh 0;
+    // BỎ NỀN, SỬ DỤNG TRONG SUỐT ĐỂ HIỆN BACKGROUND CHUNG
+    background-color: transparent;
 }
 
-.ctn {
-    @apply max-w-screen-2xl px-6 mx-auto;
+.container {
+    @apply max-w-screen-2xl;
+    margin: 0 auto;
+    padding: 0 4vw;
 }
 
 .header {
-    @apply flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16;
+    margin-bottom: 0; 
 }
 
-.sectionTitle {
-    @apply text-4xl md:text-5xl lg:text-7xl font-bold uppercase tracking-tighter;
+.directoryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 2 cột nén diện tích
+    border-top: none;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+    }
 }
 
-.tabs {
-    @apply flex gap-3 mt-6 md:mt-0 overflow-x-auto pb-2 ;
-}
+.projectCard {
+    position: relative;
+    padding: 4rem 3rem;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 
-.tabBtn {
-    @apply px-5 py-2 rounded-full border border-gray-700 text-sm font-medium transition-colors whitespace-nowrap;
-    
+  
+
     &:hover {
-        @apply bg-gray-800;
-    }
-    
-    &.active {
-        @apply bg-orange-500 text-white border-transparent;
+        background-color: rgba(255, 255, 255, 0.03);
     }
 }
 
-.gridCtn {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
+.cardInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.card {
-    @apply flex flex-col cursor-pointer relative ;
+.itemNumber {
+    font-size: 0.75rem;
+    font-family: monospace;
+    opacity: 0.3;
 }
 
-.imageWrapper {
-    @apply aspect-[4/3] w-full overflow-hidden rounded-2xl mb-6 relative bg-gray-800;
+.itemYear {
+    font-size: 0.8rem;
+    font-family: monospace;
+    opacity: 0.4;
 }
 
-.image {
-    @apply w-full h-full object-cover transition-transform duration-700 ;
+.itemTitle {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    transition: transform 0.4s ease;
 }
 
-.overlay {
-    @apply absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 flex items-center justify-center;
+.projectCard:hover .itemTitle {
+    transform: translateX(10px);
+    color: #fff;
 }
 
-.viewBtn {
-    @apply bg-white text-black px-6 py-3 rounded-full font-medium text-sm transform translate-y-4 transition-transform duration-300;
+.itemDescription {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.5;
+    max-width: 85%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; // Giới hạn 2 dòng để tiết kiệm diện tích
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.cardContent {
-    @apply flex flex-col flex-1;
+.techTag {
+    font-size: 0.65rem;
+    font-family: monospace;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: #fff;
+        opacity: 1;
+    }
 }
 
-.meta {
-    @apply flex items-center justify-between text-xs text-gray-400 mb-2 uppercase tracking-wide;
+// Floating Preview
+.floatingPreview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height: 220px;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    transform: scale(0.9);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+
+    @media (max-width: 1024px) {
+        display: none;
+    }
 }
 
-.title {
-    @apply text-xl md:text-2xl font-bold mb-3;
+.previewInner {
+    width: 100%;
+    height: 100%;
+    background: #111;
 }
 
-.description {
-    @apply text-gray-400 text-sm mb-4 line-clamp-2;
-}
-
-.tags {
-    @apply flex flex-wrap gap-2 mt-auto;
-}
-
-.tag {
-    @apply text-[10px] uppercase px-3 py-1 rounded-full border border-gray-800 text-gray-400;
+.previewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

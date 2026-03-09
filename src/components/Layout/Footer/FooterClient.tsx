@@ -15,6 +15,7 @@ export default function FooterClient({ email }: FooterClientProps) {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const cvBtnRef = useRef<HTMLAnchorElement>(null);
 
   const title = "CUONG VU";
   const titleChars = useMemo(() => {
@@ -38,11 +39,13 @@ export default function FooterClient({ email }: FooterClientProps) {
       const copyright = linksRef.current.querySelector(".copyright");
       const line = lineRef.current;
       const subtitle = subtitleRef.current;
+      const cvBtn = cvBtnRef.current;
 
       gsap.set(chars, { yPercent: 130, rotationZ: 8, opacity: 0 });
       gsap.set([copyright, ...links], { y: 30, opacity: 0 });
       if (line) gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
       if (subtitle) gsap.set(subtitle, { y: 20, opacity: 0, filter: "blur(8px)" });
+      if (cvBtn) gsap.set(cvBtn, { y: 30, opacity: 0 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -73,22 +76,27 @@ export default function FooterClient({ email }: FooterClientProps) {
         "-=0.6"
       );
 
-      // Subtitle blur-in
       if (subtitle) {
-        tl.to(
-          subtitle,
-          {
+        tl.to(subtitle, {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
             duration: 1,
             ease: "power3.out",
-          },
-          "-=1"
+          }, "-=1"
         );
       }
 
-      // Links stagger
+      if (cvBtn) {
+        tl.to(cvBtn, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
+          }, "-=0.8"
+        );
+      }
+
       tl.to(
         [copyright, ...links],
         {
@@ -101,7 +109,7 @@ export default function FooterClient({ email }: FooterClientProps) {
         "-=0.6"
       );
 
-      // Parallax scrub cho text
+      // Parallax text
       gsap.to(textRef.current, {
         yPercent: 12,
         ease: "none",
@@ -116,8 +124,6 @@ export default function FooterClient({ email }: FooterClientProps) {
       const totalChars = chars.length;
       chars.forEach((char, i) => {
         const el = char as HTMLElement;
-        el.style.cursor = "default";
-
         const hue = (i / totalChars) * 360;
 
         el.addEventListener("mouseenter", () => {
@@ -129,7 +135,6 @@ export default function FooterClient({ email }: FooterClientProps) {
             ease: "power3.out",
             overwrite: "auto",
           });
-          // Ripple nhẹ sang 2 kí tự kế bên
           [-1, 1].forEach((offset) => {
             const neighbor = chars[i + offset] as HTMLElement | undefined;
             if (neighbor) {
@@ -170,26 +175,6 @@ export default function FooterClient({ email }: FooterClientProps) {
           });
         });
       });
-
-      links.forEach((link) => {
-        const el = link as HTMLElement;
-        el.addEventListener("mouseenter", () => {
-          gsap.to(el, {
-            scale: 1.1,
-            color: "#fff",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-        el.addEventListener("mouseleave", () => {
-          gsap.to(el, {
-            scale: 1,
-            color: "rgba(255,255,255,0.5)",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-      });
     },
     { scope: containerRef }
   );
@@ -197,14 +182,35 @@ export default function FooterClient({ email }: FooterClientProps) {
   return (
     <footer
       ref={containerRef}
-      className="relative w-full min-h-[80vh] flex flex-col justify-between py-16 px-6 md:px-16  overflow-hidden"
+      className="relative w-full min-h-[90vh] flex flex-col justify-between py-16 px-6 md:px-16 overflow-hidden"
     >
       <div
         ref={lineRef}
-        className="absolute top-0 left-6 md:left-16 right-6 md:right-16 h-[1px]"
+        className="absolute top-0 left-6 md:left-16 right-6 md:right-16 h-[1px] bg-white/10"
       />
 
-      <div className="flex-1 flex flex-col items-center justify-center w-full relative gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center w-full relative gap-10">
+        <div className="text-center">
+          <p
+            ref={subtitleRef}
+            className="text-white/40 text-sm md:text-base tracking-widest uppercase font-mono mb-4"
+          >
+            Software Engineer · Nam định, Vietnam
+          </p>
+          
+          {/* DOWNLOAD CV CTA WITH AURA TRIGGER */}
+          <a 
+            ref={cvBtnRef}
+            href="/resume.pdf" 
+            target="_blank"
+            data-aura="bright"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold uppercase tracking-widest text-xs hover:scale-105 transition-transform duration-300 relative z-10"
+          >
+            <span className="material-icons text-sm">download</span>
+            Download Curriculum Vitae
+          </a>
+        </div>
+
         <div className="py-4">
           <h2
             ref={textRef}
@@ -213,12 +219,6 @@ export default function FooterClient({ email }: FooterClientProps) {
             {titleChars}
           </h2>
         </div>
-        <p
-          ref={subtitleRef}
-          className="text-white/40 text-sm md:text-base tracking-widest uppercase font-mono"
-        >
-          Software Engineer · Vietnam
-        </p>
       </div>
 
       <div

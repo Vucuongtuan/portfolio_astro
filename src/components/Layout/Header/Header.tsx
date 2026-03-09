@@ -10,9 +10,9 @@ const SECTION_ORDER = ["Hero", "About", "TechStack", "Experience", "Works", "Con
 
 const NAV_LINKS = [
   { key: "nav.home" as const, href: "/" },
-  { key: "nav.about" as const, href: "/about" },
-  { key: "nav.projects" as const, href: "/projects" },
-  { key: "nav.contact" as const, href: "/contact" },
+  { key: "nav.about" as const, href: "#about" },
+  { key: "nav.projects" as const, href: "#works" },
+  { key: "nav.contact" as const, href: "#contact" },
 ];
 
 interface HeaderProps {

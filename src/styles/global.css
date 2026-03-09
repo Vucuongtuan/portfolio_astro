@@ -8,8 +8,6 @@
     --accent-subtle: #ffffff;
 }
 
-
-
 @media (prefers-color-scheme: dark) {
     :root:not(.light) {
         --bg-pure: #0a0a0a;
@@ -18,49 +16,65 @@
     }
 }
 
-
 html {
     background-color: var(--bg-pure);
 }
 
-body{
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
     @apply font-mono antialiased selection:bg-black selection:text-white;
     background-color: var(--bg-pure);
     color: var(--text-stark);
 }
 
-/* 
-  NOTE: Do NOT add isolation: isolate to main/#root/#__astro.
-  It creates a separate stacking context that breaks mix-blend-mode: difference 
-  on fixed elements (Header, BottomScreen, FooterLayer) that sit OUTSIDE <main>.
-  Those elements need to blend with the content INSIDE <main>.
-*/
+/* Base Classes */
+.peripheral-link {
+    @apply opacity-40 hover:opacity-100 transition-opacity duration-300;
+}
 
- .peripheral-link {
-            @apply opacity-40 hover:opacity-100 transition-opacity duration-300;
-        }
-        .dot {
-            @apply w-1.5 h-1.5 bg-current rounded-full inline-block;
-        }
+.dot {
+    @apply w-1.5 h-1.5 bg-current rounded-full inline-block;
+}
 
-        .bg-pattern {
-            background-image: radial-gradient(circle at 2px 2px, var(--accent-subtle) 1px, transparent 0);
-            background-size: 80px 80px;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.4));
-        }
-        .line-pattern {
-            background: 
-                linear-gradient(90deg, var(--accent-subtle) 1px, transparent 1px) 0 0 / 120px 120px,
-                linear-gradient(0deg, var(--accent-subtle) 1px, transparent 1px) 0 0 / 120px 120px;
-            opacity: 0.1;
-        }
-        .geometric-accent {
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 100px,
-                var(--accent-subtle) 101px,
-                var(--accent-subtle) 102px
-            );
-            opacity: 0.15;
-        }
+.bg-pattern {
+    background-image: radial-gradient(circle at 2px 2px, var(--accent-subtle) 1px, transparent 0);
+    background-size: 80px 80px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.4));
+}
+
+.line-pattern {
+    background: 
+        linear-gradient(90deg, var(--accent-subtle) 1px, transparent 1px) 0 0 / 120px 120px,
+        linear-gradient(0deg, var(--accent-subtle) 1px, transparent 1px) 0 0 / 120px 120px;
+    opacity: 0.1;
+}
+
+.geometric-accent {
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 100px,
+        var(--accent-subtle) 101px,
+        var(--accent-subtle) 102px
+    );
+    opacity: 0.15;
+}

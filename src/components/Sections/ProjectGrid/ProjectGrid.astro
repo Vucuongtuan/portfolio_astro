@@ -1,8 +1,8 @@
 ---
 import { getEntry } from "astro:content";
-import ProjectGridClient from "./ProjectGridClient";
 import type { Locale } from "../../../i18n/ui";
-import { useTranslations } from "../../../i18n/utils";
+import { useTranslations, getRoute } from "../../../i18n/utils";
+import st from './project-grid.module.scss';
 
 interface Props {
   lang: Locale;
@@ -10,26 +10,167 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
 const projectsData = await getEntry("projects", lang);
 
-const allText = t("works.all") || "All";
-const personalText = t("works.personal") || "Personal";
-const workText = t("works.work") || "Work";
-const viewText = t("works.view") || "View Project";
+if (!projectsData || !projectsData.data) return null;
+
+const { items: projects, sectionTitle } = projectsData.data;
 ---
 
-{
-  projectsData && projectsData.data && (
-    <ProjectGridClient
-      projects={projectsData.data.items as any}
-      sectionTitle={projectsData.data.sectionTitle}
-      lang={lang}
-      allText={allText as string}
-      personalText={personalText as string}
-      workText={workText as string}
-      viewText={viewText as string}
-      client:load
-    />
-  )
-}
+<section id="works" class={st.directorySection} data-section="Works">
+  <div class={st.container}>
+    <!-- Section Header -->
+    <header class={st.header}>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/10 pb-10">
+            <div class="max-w-2xl">
+                <span class="text-xs font-mono opacity-40 uppercase tracking-widest mb-3 block">// WORK DIRECTORY</span>
+                <h2 class="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none anim-title">
+                  {sectionTitle}
+                </h2>
+            </div>
+            <div class="mt-6 md:mt-0 text-left md:text-right font-mono text-[10px] opacity-30 uppercase leading-relaxed">
+                <p>Curated Selection</p>
+                <p>Total Projects: {projects.length}</p>
+                <p>Built with Precision</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Table-Grid -->
+    <div class={st.directoryGrid} id="project-list">
+      {projects.map((project: any, index: number) => (
+        <a 
+          href={getRoute(lang, `works/${project.id}`)} 
+          class={`${st.projectCard} project-item group`}
+          data-img={project.thumbnail?.src || ""}
+        >
+          <div class={st.cardInner}>
+             <!-- Meta row -->
+             <div class="flex justify-between items-center mb-6">
+                <span class={st.itemNumber}>{(index + 1).toString().padStart(2, '0')}</span>
+                <span class={st.itemYear}>{project.year}</span>
+             </div>
+
+             <!-- Main Info -->
+             <div class="mb-6">
+                <h3 class={st.itemTitle} transition:name={`project-title-${project.id}`}>{project.title}</h3>
+                <p class={st.itemDescription}>{project.description}</p>
+             </div>
+
+             <!-- Tech Stack & Category -->
+             <div class="flex flex-wrap gap-2 mt-auto">
+                {project.tags?.map((tag: string) => (
+                    <span class={st.techTag}>{tag}</span>
+                ))}
+             </div>
+             
+             <div class="mt-4 flex justify-between items-center opacity-30 group-hover:opacity-100 transition-opacity duration-300">
+                <span class="text-[10px] font-mono uppercase tracking-widest">{project.category}</span>
+                <span class="material-icons text-sm">arrow_outward</span>
+             </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Floating Preview -->
+    <div id="project-preview" class={st.floatingPreview}>
+      <div class={st.previewInner}>
+        <img id="preview-image" src="" alt="Preview" class={st.previewImg} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initProjectDirectory() {
+    const preview = document.getElementById("project-preview");
+    const previewImg = document.getElementById("preview-image") as HTMLImageElement;
+    const items = document.querySelectorAll(".project-item");
+
+    if (preview && previewImg) {
+      const xTo = gsap.quickTo(preview, "x", { duration: 0.5, ease: "power3" });
+      const yTo = gsap.quickTo(preview, "y", { duration: 0.5, ease: "power3" });
+
+      window.addEventListener("mousemove", (e) => {
+        xTo(e.clientX + 30);
+        yTo(e.clientY - 100);
+      });
+
+      items.forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+          const imgUrl = item.getAttribute("data-img");
+          if (imgUrl && imgUrl.trim() !== "") {
+            previewImg.src = imgUrl;
+            gsap.to(preview, { 
+              opacity: 1, 
+              scale: 1, 
+              duration: 0.4, 
+              ease: "power3.out" 
+            });
+          } else {
+            gsap.to(preview, { opacity: 0, duration: 0.2 });
+          }
+        });
+
+        item.addEventListener("mouseleave", () => {
+          gsap.to(preview, { 
+            opacity: 0, 
+            scale: 0.9, 
+            duration: 0.3, 
+            ease: "power3.in" 
+          });
+        });
+      });
+    }
+
+    ScrollTrigger.batch(".project-item", {
+        start: "top 90%",
+        onEnter: (elements) => {
+            gsap.fromTo(elements, 
+                { opacity: 0, y: 50 },
+                { 
+                    opacity: 1, 
+                    y: 0, 
+                    stagger: 0.1, 
+                    duration: 1, 
+                    ease: "power3.out",
+                    overwrite: true 
+                }
+            );
+        },
+        once: true
+    });
+
+    gsap.fromTo(".anim-title", 
+        { opacity: 0, y: 30 },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".anim-title",
+                start: "top 90%",
+            }
+        }
+    );
+
+    ScrollTrigger.refresh();
+  }
+
+  document.addEventListener("astro:page-load", initProjectDirectory);
+  initProjectDirectory();
+</script>
+
+<style is:global>
+    .project-item {
+        opacity: 0;
+        will-change: transform, opacity;
+    }
+</style>

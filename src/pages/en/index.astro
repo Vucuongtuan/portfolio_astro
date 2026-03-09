@@ -1,8 +1,6 @@
 ---
 import AboutMe from "@components/Sections/AboutMe/AboutMe.astro";
-import ExperienceSection from "@components/Sections/Experience/ExperienceSection.astro";
-import HeroSection from "@components/Sections/Hero/HeroSection";
-import LandingHero from "@components/Sections/LandingHero/LandingHero";
+import HeroSection from "@components/Sections/Hero/HeroSection.astro";
 import Spacer from "@components/Sections/Spacer/Spacer";
 import TechStack from "@components/Sections/TechStack/TechStack.astro";
 import ProjectGrid from "@components/Sections/ProjectGrid/ProjectGrid.astro";
@@ -10,19 +8,18 @@ import Contact from "@components/Sections/Contact";
 import Footer from "@components/Layout/Footer/Footer.astro";
 import StickyCards from "@components/Features/StickyCards/StickyCards.astro";
 import RootLayout from "@layouts/RootLayout.astro";
+import ExperienceSection from "@components/Sections/Experience/ExperienceSection.astro";
 
 console.log("This runs in your terminal, not the browser!");
 ---
 
 <RootLayout title="Home Page" enableHeader enableFooter>
-  <HeroSection lang="en" client:load />
+  <HeroSection lang="en" />
   <Spacer lang="en" variant="absolute" enableScroll />
   <AboutMe lang="en" />
   <Spacer lang="en" variant="absolute" enableScroll />
   <TechStack lang="en" />
   <ExperienceSection lang="en" />
-  <StickyCards variant="scale-fade">
-    <ProjectGrid lang="en" />
-    <Contact lang="en" client:load />
-  </StickyCards>
+  <ProjectGrid lang="en" />
+  <Contact lang="en" client:load />
 </RootLayout>

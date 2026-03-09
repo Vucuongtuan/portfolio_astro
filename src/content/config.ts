@@ -24,15 +24,15 @@ const techStackCollection = defineCollection({
 // Schema cho Project Collection
 const projectsCollection = defineCollection({
   type: 'data', // JSON/YAML files
-  schema: z.object({
+  schema: ({ image }) => z.object({
     sectionTitle: z.string(),
     items: z.array(
       z.object({
         id: z.string(),
         title: z.string(),
         description: z.string(),
-        thumbnail: z.string().optional(),
-        images: z.array(z.string()).optional(),
+        thumbnail: image().optional(),
+        images: z.array(image()).optional(),
         category: z.enum(['personal', 'work', 'all']).default('personal'),
         tags: z.array(z.string()).optional(),
         role: z.string().optional(),

@@ -5,16 +5,12 @@ import { useTranslations, getRoute } from "../../../i18n/utils"
 import OverlayMenu from "./OverlayMenu";
 import type { Locale } from "../../../i18n/ui";
 
-const LINKS = [{
-    key: 'nav.home',
-    href: '/',
-},{
-    key:'nav.about',
-    href:'/about',
-},{
-    key:'nav.projects',
-    href:'/projects',
-}] as const;
+const LINKS = [
+    { key: 'nav.home', href: '/' },
+    { key: 'nav.about', href: '#about' },
+    { key: 'nav.projects', href: '#works' },
+    { key: 'nav.contact', href: '#contact' },
+] as const;
 
 interface NavigationHeaderProps {
     lang: Locale;
@@ -28,7 +24,6 @@ export default function NavigationHeader({ lang }: NavigationHeaderProps){
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
-            // Ngưỡng scroll để kích hoạt hamburger (50px)
             setIsScrolled(scrollY > 50);
         };
 
@@ -36,20 +31,33 @@ export default function NavigationHeader({ lang }: NavigationHeaderProps){
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const getSmartLink = (href: string) => {
+        if (href === '/') return getRoute(lang, '/');
+        if (href.startsWith('#')) {
+            const isHomePage = window.location.pathname === '/' || 
+                               window.location.pathname === `/${lang}` || 
+                               window.location.pathname === `/${lang}/`;
+            
+            if (isHomePage) return href;
+            return `${getRoute(lang, '/')}${href}`;
+        }
+        return getRoute(lang, href);
+    };
+
     return (
         <>
             <div className="flex items-center justify-end min-h-[40px]">
-                {/* Horizontal Menu (Visible when at top) */}
+                {/* Horizontal Menu */}
                 <ul className={clsx(
                     st.linkList, 
                     st.linkListHorizontal, 
                     "transition-all duration-500 ease-in-out origin-right",
                     isScrolled ? "opacity-0 scale-x-50 pointer-events-none absolute right-0" : "opacity-100 scale-100 relative"
                 )}>
-                    {LINKS.map((link,idx) => (
-                        <li key={link.href+'-'+idx} className="ml-8 first:ml-0">
+                    {LINKS.map((link, idx) => (
+                        <li key={link.href + '-' + idx} className="ml-8 first:ml-0">
                             <a
-                                href={getRoute(lang, link.href)}
+                                href={getSmartLink(link.href)}
                                 className={clsx(
                                     st.link, 
                                     'peripheral-link text-sm uppercase tracking-widest hover:text-accent-default transition-colors'
@@ -61,7 +69,7 @@ export default function NavigationHeader({ lang }: NavigationHeaderProps){
                     ))}
                 </ul>
 
-                {/* Hamburger Button (Visible when scrolled) */}
+                {/* Hamburger Button */}
                 <button 
                     onClick={() => setIsMenuOpen(true)}
                     className={clsx(
@@ -76,7 +84,6 @@ export default function NavigationHeader({ lang }: NavigationHeaderProps){
                 </button>
             </div>
 
-            {/* Fullscreen Overlay Menu */}
             <OverlayMenu 
                 lang={lang} 
                 isOpen={isMenuOpen} 

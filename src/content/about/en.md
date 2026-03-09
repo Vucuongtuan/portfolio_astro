@@ -1,6 +1,8 @@
 ---
 title: "ABOUT ME"
-quote: "Rejecting the polished lie of modern web design in favor of raw, authentic interaction layers."
+quote: "Ready to face new challenges."
 ---
 
-I’m a software engineer focused on building reliable, scalable systems.
+I am a web developer with 2 years of experience. With a passion for technology and exploring the latest in the tech industry, I am always looking for new ways to improve user experience and create quality products.
+
+In addition, I always focus on optimizing performance and maintainability of source code. I believe that continuous learning and a progressive mindset are the keys to success in the ever-changing technology landscape.
