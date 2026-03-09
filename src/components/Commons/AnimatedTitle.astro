@@ -7,12 +7,12 @@ interface Props {
   animationType?: "reveal" | "stagger" | "parallax";
 }
 
-const { 
-  text, 
-  tag: Tag = "h2", 
-  className = "", 
+const {
+  text,
+  tag: Tag = "h2",
+  className = "",
   charClassName = "",
-  animationType = "reveal" 
+  animationType = "reveal",
 } = Astro.props;
 
 // Tách chuỗi thành mảng các ký tự, giữ nguyên khoảng trắng
@@ -22,7 +22,10 @@ const chars = text.split("");
 <Tag class:list={["animated-title", className]} data-animation={animationType}>
   {
     chars.map((char) => (
-      <span class:list={["char inline-block", charClassName]}>
+      <span
+        class:list={["char inline-block", charClassName]}
+        data-cursor="chars"
+      >
         {char === " " ? "\u00A0" : char}
       </span>
     ))
@@ -45,15 +48,15 @@ const chars = text.split("");
       if (chars.length === 0) return;
 
       // Xóa các trigger cũ nếu có để tránh lỗi View Transitions
-      ScrollTrigger.getAll().forEach(st => {
+      ScrollTrigger.getAll().forEach((st) => {
         if (st.vars.trigger === title) st.kill();
       });
 
       if (animationType === "reveal") {
-        gsap.set(chars, { 
-          yPercent: 130, 
+        gsap.set(chars, {
+          yPercent: 130,
           opacity: 0,
-          rotateZ: 10
+          rotateZ: 10,
         });
 
         gsap.to(chars, {
@@ -67,7 +70,7 @@ const chars = text.split("");
             trigger: title,
             start: "top 85%",
             toggleActions: "play none none reverse",
-          }
+          },
         });
       } else if (animationType === "parallax") {
         gsap.to(title, {
@@ -78,7 +81,7 @@ const chars = text.split("");
             start: "top bottom",
             end: "bottom top",
             scrub: true,
-          }
+          },
         });
       }
     });
@@ -93,7 +96,7 @@ const chars = text.split("");
     overflow: hidden;
     display: block;
   }
-  
+
   .char {
     display: inline-block;
     will-change: transform, opacity;

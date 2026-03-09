@@ -66,10 +66,14 @@ export const TechStackClient: React.FC<TechStackClientProps> = ({ lang, stackCat
           
           <article className={`${styles["horizontal-item"]} ${styles["intro-card"]}`}>
               <h2>
-                {t.title.split(' ').map((word, i) => (
+                {t.title.split(' ').map((word, i, arr) => (
                   <React.Fragment key={i}>
-                    {word}
-                    {i < t.title.split(' ').length - 1 && <br />}
+                    {word.split('').map((c, j) => (
+                      <span key={j} className="char inline-block" data-cursor="chars">
+                        {c}
+                      </span>
+                    ))}
+                    {i < arr.length - 1 && <br />}
                   </React.Fragment>
                 ))}
               </h2>

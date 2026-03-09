@@ -27,11 +27,11 @@
 }
 
 .infoLabel {
-    @apply block text-base md:text-lg font-mono uppercase tracking-[0.2em] mb-1 opacity-40;
+    @apply block text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] mb-1 opacity-40;
 }
 
 .infoValue {
-    @apply block text-base md:text-lg font-medium opacity-80;
+    @apply block text-xs md:text-base font-medium opacity-80;
 }
 
 // ========== MIDDLE: Description columns ==========
@@ -44,9 +44,11 @@
 }
 
 .descCol {
-    @apply text-base md:text-lg leading-relaxed opacity-80;
+    @apply text-sm md:text-lg leading-relaxed opacity-80;
 
-
+    @media (max-width: 768px) {
+        @apply text-xs leading-relaxed;
+    }
 }
 
 // ========== BOTTOM: Massive Title ==========
@@ -59,14 +61,17 @@
 }
 
 .name {
-    @apply font-black text-5xl md:text-9xl uppercase select-none flex flex-wrap tracking-tighter leading-[0.8];
+    @apply font-black uppercase select-none flex flex-wrap tracking-tighter leading-[0.85];
+    // GIẢM KÍCH THƯỚC: Từ tối đa 15vw xuống 10vw để phù hợp với text dài
+    font-size: clamp(3rem, 10vw, 10rem);
 
     @media (max-width: 768px) {
         @apply leading-[0.9] tracking-tight;
+        font-size: clamp(2rem, 12vw, 4rem);
     }
 }
 
 .nameChar {
-    @apply inline-block max-md:mb-8;
+    @apply inline-block;
     will-change: transform, opacity;
 }

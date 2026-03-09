@@ -83,6 +83,7 @@ export default function HeroSection({
     <span
       key={i}
       className={clsx(st.nameChar, "inline-block")}
+      data-cursor="chars"
     >
       {char === " " ? "\u00A0" : char}
     </span>

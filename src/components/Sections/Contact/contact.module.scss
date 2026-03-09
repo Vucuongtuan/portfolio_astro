@@ -14,11 +14,11 @@
 
 // ========== HEADER ==========
 .header {
-  @apply mb-16 lg:mb-24 relative;
+  @apply mb-16 md:py-8 lg:mb-24 relative;
 }
 
 .title {
-  @apply text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-4 overflow-hidden;
+  @apply text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-4 ;
   
   .char {
     @apply inline-block;

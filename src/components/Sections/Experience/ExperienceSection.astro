@@ -13,6 +13,7 @@ const experienceData = await getEntry("experience", lang);
 const t = useTranslations(lang);
 
 const data = experienceData?.data;
+const titleChars = data?.title ? data.title.split("") : [];
 ---
 
 {data && (
@@ -27,7 +28,9 @@ const data = experienceData?.data;
                     PROFESSIONAL HISTORY / 02
                 </span>
                 <h2 class={`${st.mainTitle} anim-title`}>
-                    {data.title}
+                    {titleChars.map((char: string) => (
+                      <span class="inline-block" data-cursor="chars">{char === " " ? "\u00A0" : char}</span>
+                    ))}
                 </h2>
             </div>
         </header>

@@ -1,7 +1,9 @@
-import React, { useRef, useMemo } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useSplitText } from "@hooks/useSplitText";
+import { useCharsHoverWave } from "@hooks/useCharsHoverWave";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,30 +13,20 @@ interface FooterClientProps {
 
 export default function FooterClient({ email }: FooterClientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLHeadingElement>(null);
+
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const cvBtnRef = useRef<HTMLAnchorElement>(null);
 
-  const title = "CUONG VU";
-  const titleChars = useMemo(() => {
-    return title.split("").map((char, i) => (
-      <span
-        key={i}
-        className="char inline-block"
-        style={{ willChange: "transform, opacity" }}
-      >
-        {char === " " ? "\u00A0" : char}
-      </span>
-    ));
-  }, []);
+  const { chars: titleChars, ref: titleTextRef } = useSplitText("CUONG VU");
+  useCharsHoverWave(titleTextRef);
 
   useGSAP(
     () => {
-      if (!containerRef.current || !textRef.current || !linksRef.current) return;
+      if (!containerRef.current || !linksRef.current) return;
 
-      const chars = textRef.current.querySelectorAll(".char");
+      const chars = titleTextRef.current?.querySelectorAll(".char") || [];
       const links = linksRef.current.querySelectorAll("a");
       const copyright = linksRef.current.querySelector(".copyright");
       const line = lineRef.current;
@@ -110,71 +102,20 @@ export default function FooterClient({ email }: FooterClientProps) {
       );
 
       // Parallax text
-      gsap.to(textRef.current, {
-        yPercent: 12,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom bottom",
-          scrub: true,
-        },
-      });
-
-      const totalChars = chars.length;
-      chars.forEach((char, i) => {
-        const el = char as HTMLElement;
-        const hue = (i / totalChars) * 360;
-
-        el.addEventListener("mouseenter", () => {
-          gsap.to(el, {
-            y: -18,
-            scale: 1.12,
-            color: `hsl(${hue}, 90%, 65%)`,
-            duration: 0.4,
-            ease: "power3.out",
-            overwrite: "auto",
-          });
-          [-1, 1].forEach((offset) => {
-            const neighbor = chars[i + offset] as HTMLElement | undefined;
-            if (neighbor) {
-              const neighborHue = ((i + offset) / totalChars) * 360;
-              gsap.to(neighbor, {
-                y: -8,
-                scale: 1.04,
-                color: `hsl(${neighborHue}, 80%, 70%)`,
-                duration: 0.35,
-                ease: "power2.out",
-                overwrite: "auto",
-              });
-            }
-          });
+      if (titleTextRef.current) {
+        gsap.to(titleTextRef.current, {
+          yPercent: 12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: true,
+          },
         });
+      }
 
-        el.addEventListener("mouseleave", () => {
-          gsap.to(el, {
-            y: 0,
-            scale: 1,
-            color: "#fff",
-            duration: 0.6,
-            ease: "elastic.out(1, 0.5)",
-            overwrite: "auto",
-          });
-          [-1, 1].forEach((offset) => {
-            const neighbor = chars[i + offset] as HTMLElement | undefined;
-            if (neighbor) {
-              gsap.to(neighbor, {
-                y: 0,
-                scale: 1,
-                color: "#fff",
-                duration: 0.5,
-                ease: "power3.out",
-                overwrite: "auto",
-              });
-            }
-          });
-        });
-      });
+
     },
     { scope: containerRef }
   );
@@ -213,7 +154,7 @@ export default function FooterClient({ email }: FooterClientProps) {
 
         <div className="py-4">
           <h2
-            ref={textRef}
+            ref={titleTextRef as React.RefObject<HTMLHeadingElement>}
             className="text-[18vw] md:text-[15vw] leading-[0.85] font-black tracking-tighter uppercase select-none flex"
           >
             {titleChars}

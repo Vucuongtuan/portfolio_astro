@@ -83,7 +83,7 @@ const mainTextChars = mainText.split("");
     <h2 class={clsx(st.name, "select-none")} id="hero-main-title">
       {
         mainTextChars.map((char) => (
-          <span class={clsx(st.nameChar, "hero-char inline-block")}>
+          <span class={clsx(st.nameChar, "inline-block")} data-cursor="chars">
             {char === " " ? "\u00A0" : char}
           </span>
         ))

@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import st from './experience-section.module.scss';
 import type { Locale } from "../../../i18n/ui";
 import { useTranslations } from "../../../i18n/utils";
+import clsx from 'clsx';
+import { useSplitText } from '@hooks/useSplitText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +22,9 @@ interface ExperienceSectionProps {
 
 export default function ExperienceSection({ lang, data }: ExperienceSectionProps) {
     const t = useTranslations(lang);
+    const timelineLineRef = useRef<HTMLDivElement>(null);
     const container = useRef(null);
+    const { chars: titleChars, ref: titleRef } = useSplitText(data.title);
     
     useGSAP(() => {
         gsap.from(".anim-title", {
@@ -61,8 +65,8 @@ export default function ExperienceSection({ lang, data }: ExperienceSectionProps
                         <span className={st.sectionTag}>
                             PROFESSIONAL HISTORY / 02
                         </span>
-                        <h2 className={`${st.mainTitle} anim-title`}>
-                            {data.title}
+                        <h2 className={`${st.mainTitle} anim-title`} ref={titleRef as React.RefObject<HTMLHeadingElement>}>
+                            {titleChars}
                         </h2>
                     </div>
                 </header>

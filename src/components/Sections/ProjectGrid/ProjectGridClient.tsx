@@ -1,4 +1,7 @@
+
 import React, { useState, useRef } from 'react';
+import type { Locale } from '@i18n/ui';
+import { useSplitText } from '@hooks/useSplitText';
 import styles from './project-grid.module.scss';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -36,6 +39,8 @@ export default function ProjectGridClient({ projects, sectionTitle, lang, allTex
     const containerRef = useRef<HTMLElement>(null);
     const gridRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
+
+    const { chars: titleChars, ref: titleTextRef } = useSplitText(sectionTitle);
 
     const filteredProjects = projects.filter(project => 
         activeTab === 'all' || (project.category && project.category === activeTab)
@@ -87,7 +92,9 @@ export default function ProjectGridClient({ projects, sectionTitle, lang, allTex
         <section data-theme="light" className={styles.section} ref={containerRef} data-section="Works">
             <div className={styles.ctn}>
                 <div className={styles.header} ref={headerRef}>
-                    <h2 className={styles.sectionTitle}>{sectionTitle}</h2>
+                    <h2 className={styles.sectionTitle} ref={titleTextRef as React.RefObject<HTMLHeadingElement>}>
+                        {titleChars}
+                    </h2>
                     
                     <div className={`${styles.tabs} scrollbar-hide`}>
                         <button 

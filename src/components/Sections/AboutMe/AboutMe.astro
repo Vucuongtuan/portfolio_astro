@@ -37,7 +37,10 @@ const titleChars = title.split("");
           <h2 class={clsx(st.heading, "w-full")}>
             {
               titleChars.map((char: string, i: number) => (
-                <span class={clsx("char", st.char)}>
+                <span
+                  class={clsx(st.nameChar, "inline-block")}
+                  data-cursor="chars"
+                >
                   {char === " " ? "\u00A0" : char}
                 </span>
               ))

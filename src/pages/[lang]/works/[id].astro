@@ -34,7 +34,7 @@ const translations = {
     features: "Features",
     source: "Source Code",
     visit: "Live Demo",
-    scroll: "Scroll to explore"
+    scroll: "Scroll to explore",
   },
   vi: {
     back: "Quay lại",
@@ -44,153 +44,212 @@ const translations = {
     features: "Tính năng",
     source: "Mã nguồn",
     visit: "Xem Demo",
-    scroll: "Cuộn để khám phá"
-  }
+    scroll: "Cuộn để khám phá",
+  },
 };
 
 const t = translations[lang as keyof typeof translations] || translations.en;
 ---
 
 <RootLayout title={`${project.title} | Cuong Vu`}>
-  <div class="relative bg-[#0a0a0a] text-white selection:bg-white selection:text-black min-h-screen overflow-x-hidden">
-    
-    <!-- Progress Bar -->
+  <div
+    class="relative bg-[#0a0a0a] text-white selection:bg-white selection:text-black min-h-screen overflow-x-hidden"
+  >
     <div class="fixed top-0 left-0 w-full h-[2px] bg-white/10 z-[100]">
-        <div id="progress-bar" class="h-full bg-white w-0 shadow-[0_0_10px_#fff]"></div>
+      <div id="progress-bar" class="h-full bg-white w-0 shadow-[0_0_10px_#fff]">
+      </div>
     </div>
 
-    <!-- Floating Magnetic Back -->
     <div class="fixed top-8 left-8 z-[90] hidden md:block">
-        <a
-          href={`/${lang}/`}
-          class="magnetic-btn group flex items-center justify-center w-14 h-14 rounded-full border border-white/20 hover:border-white transition-all duration-500 overflow-hidden"
+      <a
+        href={`/${lang}/`}
+        class="magnetic-btn group flex items-center justify-center w-14 h-14 rounded-full border border-white/20 hover:border-white transition-all duration-500 overflow-hidden"
+      >
+        <span class="relative z-10">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M19 12H5M5 12L12 19M5 12L12 5"></path>
+          </svg>
+        </span>
+        <div
+          class="absolute inset-0 bg-white rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 ease-out -z-10"
         >
-          <span class="relative z-10">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M5 12L12 19M5 12L12 5" />
-            </svg>
-          </span>
-          <div class="absolute inset-0 bg-white rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 ease-out -z-10"></div>
-        </a>
+        </div>
+      </a>
     </div>
 
     <!-- Hero Header (Full Screen Title) -->
-    <header class="relative h-[80vh] flex flex-col justify-end px-6 md:px-12 lg:px-24 pb-12 overflow-hidden">
-        <div class="reveal-item flex items-center gap-4 text-[10px] font-mono text-white/40 mb-10 uppercase tracking-[0.3em]">
-            <span>{project.category}</span>
-            <span class="w-12 h-[1px] bg-white/20"></span>
-            <span>{project.year}</span>
+    <header
+      class="relative h-[80vh] flex flex-col justify-end px-6 md:px-12 lg:px-24 pb-12 overflow-hidden"
+    >
+      <div
+        class="reveal-item flex items-center gap-4 text-[10px] font-mono text-white/40 mb-10 uppercase tracking-[0.3em]"
+      >
+        <span>{project.category}</span>
+        <span class="w-12 h-[1px] bg-white/20"></span>
+        <span>{project.year}</span>
+      </div>
+      <div class="overflow-hidden">
+        <h1
+          id="project-title"
+          class="text-[12vw] font-black uppercase tracking-tighter leading-[0.8] mb-4"
+          transition:name={`project-title-${project.id}`}
+        >
+          {project.title}
+        </h1>
+      </div>
+      <div
+        class="reveal-item mt-12 flex justify-between items-end border-t border-white/10 pt-8 font-mono text-[10px] uppercase tracking-widest text-white/40"
+      >
+        <div class="flex gap-12">
+          <div>
+            <p class="mb-2">{t.role}</p>
+            <p class="text-white">{project.role}</p>
+          </div>
+          <div>
+            <p class="mb-2">{t.duration}</p>
+            <p class="text-white">{project.duration}</p>
+          </div>
         </div>
-        <div class="overflow-hidden">
-            <h1 
-                id="project-title"
-                class="text-[12vw] font-black uppercase tracking-tighter leading-[0.8] mb-4"
-                transition:name={`project-title-${project.id}`}
-            >
-                {project.title}
-            </h1>
+        <div class="hidden md:block animate-bounce">
+          {t.scroll} ↓
         </div>
-        <div class="reveal-item mt-12 flex justify-between items-end border-t border-white/10 pt-8 font-mono text-[10px] uppercase tracking-widest text-white/40">
-            <div class="flex gap-12">
-                <div>
-                    <p class="mb-2">{t.role}</p>
-                    <p class="text-white">{project.role}</p>
-                </div>
-                <div>
-                    <p class="mb-2">{t.duration}</p>
-                    <p class="text-white">{project.duration}</p>
-                </div>
-            </div>
-            <div class="hidden md:block animate-bounce">
-                {t.scroll} ↓
-            </div>
-        </div>
+      </div>
     </header>
 
     <!-- Main Content Area -->
     <div id="main-content" class="flex flex-col md:flex-row w-full relative">
-        
-        <!-- Left Column: Gallery (Scrolling) -->
-        <div class="w-full md:w-[60%] lg:w-[65%] px-6 md:px-12 lg:pl-24 lg:pr-12 space-y-[10vh] md:space-y-[20vh] py-[10vh]">
-            {images.map((img: any, i: number) => (
-                <div class="project-image-wrapper relative w-full aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-sm group">
-                    <Image
-                        src={img}
-                        alt={`${project.title} Visual ${i + 1}`}
-                        class="project-image w-full h-full object-cover scale-110"
-                        loading={i === 0 ? "eager" : "lazy"}
-                    />
-                    <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700"></div>
-                    <div class="absolute top-6 right-6 font-mono text-[10px] opacity-20 uppercase">
-                        Ref_{i.toString().padStart(2, '0')}
-                    </div>
-                </div>
-            ))}
-        </div>
-
-        <!-- Right Column: Content (Sticky on Desktop) -->
-        <div class="w-full md:w-[40%] lg:w-[35%] relative">
-            <div id="sticky-content" class="md:sticky md:top-0 md:h-screen p-6 md:p-12 lg:pr-24 lg:pl-12 flex flex-col justify-center">
-                
-                <div class="space-y-16 max-w-xl">
-                    <!-- Overview -->
-                    <section class="reveal-content">
-                        <h2 class="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] mb-8">// {t.overview}</h2>
-                        <p class="text-xl lg:text-2xl leading-[1.4] font-medium text-white/90">
-                            {project.description}
-                        </p>
-                        {project.goals && (
-                            <p class="mt-8 text-sm lg:text-base text-white/40 leading-relaxed font-light italic border-l border-white/10 pl-6">
-                                {project.goals}
-                            </p>
-                        )}
-                    </section>
-
-                    <!-- Features -->
-                    {project.features && project.features.length > 0 && (
-                        <section class="reveal-content">
-                            <h2 class="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] mb-8">// {t.features}</h2>
-                            <ul class="space-y-4">
-                                {project.features.map((feature: string, idx: number) => (
-                                    <li class="flex items-start gap-3 group">
-                                        <span class="text-[9px] font-mono opacity-20 group-hover:opacity-100 transition-opacity mt-1.5">{(idx + 1).toString().padStart(2, '0')}</span>
-                                        <span class="text-base lg:text-lg text-white/60 group-hover:text-white transition-colors">{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </section>
-                    )}
-
-                    <!-- Action Links -->
-                    <div class="reveal-content flex flex-wrap gap-4 pt-12">
-                        {project.links && project.links.demo && (
-                            <a href={project.links.demo} target="_blank" class="px-8 py-4 bg-white text-black rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all">
-                                {t.visit}
-                            </a>
-                        )}
-                        {project.links && project.links.github && (
-                            <a href={project.links.github} target="_blank" class="px-8 py-4 border border-white/20 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">
-                                {t.source}
-                            </a>
-                        )}
-                    </div>
-                </div>
-
-                <div class="mt-24 pt-8 border-t border-white/5 font-mono text-[9px] opacity-20 uppercase tracking-[0.2em]">
-                    Project Case Study © {project.year}
-                </div>
+      <!-- Left Column: Gallery (Scrolling) -->
+      <div
+        class="w-full md:w-[60%] lg:w-[65%] px-6 md:px-12 lg:pl-24 lg:pr-12 space-y-[10vh] md:space-y-[20vh] py-[10vh]"
+      >
+        {
+          images.map((img: any, i: number) => (
+            <div class="project-image-wrapper relative w-full aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-sm group">
+              <Image
+                src={img}
+                alt={`${project.title} Visual ${i + 1}`}
+                class="project-image w-full h-full object-cover scale-110"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+              <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
+              <div class="absolute top-6 right-6 font-mono text-[10px] opacity-20 uppercase">
+                Ref_{i.toString().padStart(2, "0")}
+              </div>
             </div>
+          ))
+        }
+      </div>
+
+      <!-- Right Column: Content (Sticky on Desktop) -->
+      <div class="w-full md:w-[40%] lg:w-[35%] relative">
+        <div
+          id="sticky-content"
+          class="md:sticky md:top-0 md:h-screen p-6 md:p-12 lg:pr-24 lg:pl-12 flex flex-col justify-center"
+        >
+          <div class="space-y-16 max-w-xl">
+            <!-- Overview -->
+            <section class="reveal-content">
+              <h2
+                class="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] mb-8"
+              >
+                // {t.overview}
+              </h2>
+              <p
+                class="text-xl lg:text-2xl leading-[1.4] font-medium text-white/90"
+              >
+                {project.description}
+              </p>
+              {
+                project.goals && (
+                  <p class="mt-8 text-sm lg:text-base text-white/40 leading-relaxed font-light italic border-l border-white/10 pl-6">
+                    {project.goals}
+                  </p>
+                )
+              }
+            </section>
+
+            <!-- Features -->
+            {
+              project.features && project.features.length > 0 && (
+                <section class="reveal-content">
+                  <h2 class="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] mb-8">
+                    // {t.features}
+                  </h2>
+                  <ul class="space-y-4">
+                    {project.features.map((feature: string, idx: number) => (
+                      <li class="flex items-start gap-3 group">
+                        <span class="text-[9px] font-mono opacity-20 group-hover:opacity-100 transition-opacity mt-1.5">
+                          {(idx + 1).toString().padStart(2, "0")}
+                        </span>
+                        <span class="text-base lg:text-lg text-white/60 group-hover:text-white transition-colors">
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )
+            }
+
+            <!-- Action Links -->
+            <div class="reveal-content flex flex-wrap gap-4 pt-12">
+              {
+                project.links && project.links.demo && (
+                  <a
+                    href={project.links.demo}
+                    target="_blank"
+                    class="px-8 py-4 bg-white text-black rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
+                  >
+                    {t.visit}
+                  </a>
+                )
+              }
+              {
+                project.links && project.links.github && (
+                  <a
+                    href={project.links.github}
+                    target="_blank"
+                    class="px-8 py-4 border border-white/20 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all"
+                  >
+                    {t.source}
+                  </a>
+                )
+              }
+            </div>
+          </div>
+
+          <div
+            class="mt-24 pt-8 border-t border-white/5 font-mono text-[9px] opacity-20 uppercase tracking-[0.2em]"
+          >
+            Project Case Study © {project.year}
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Next Project Section (Placeholder or Link) -->
-    <footer class="h-[50vh] flex items-center justify-center border-t border-white/5 bg-[#0d0d0d]">
-        <a href={`/${lang}/`} class="group text-center">
-            <span class="block text-[10px] font-mono opacity-40 uppercase tracking-[0.5em] mb-4">Back to home</span>
-            <h3 class="text-4xl md:text-7xl font-black uppercase tracking-tighter group-hover:scale-110 transition-transform duration-700">Explore More</h3>
-        </a>
+    <footer
+      class="h-[50vh] flex items-center justify-center border-t border-white/5 bg-[#0d0d0d]"
+    >
+      <a href={`/${lang}/#works`} class="group text-center">
+        <span
+          class="block text-[10px] font-mono opacity-40 uppercase tracking-[0.5em] mb-4"
+          >Back to home</span
+        >
+        <h3
+          class="text-4xl md:text-7xl font-black uppercase tracking-tighter group-hover:scale-110 transition-transform duration-700"
+        >
+          Explore More
+        </h3>
+      </a>
     </footer>
-
   </div>
 </RootLayout>
 
@@ -204,72 +263,88 @@ const t = translations[lang as keyof typeof translations] || translations.en;
     // 1. Title Split Reveal
     const title = document.getElementById("project-title");
     if (title) {
-        const text = title.textContent?.trim() || "";
-        title.innerHTML = text.split('').map(char => `<span class="inline-block translate-y-[110%]">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
-        
-        gsap.to(title.querySelectorAll('span'), {
-            y: 0,
-            duration: 1.5,
-            stagger: 0.02,
-            ease: "expo.out",
-        });
+      const text = title.textContent?.trim() || "";
+      title.innerHTML = text
+        .split("")
+        .map(
+          (char) =>
+            `<span class="inline-block translate-y-[110%]">${char === " " ? "&nbsp;" : char}</span>`
+        )
+        .join("");
+
+      gsap.to(title.querySelectorAll("span"), {
+        y: 0,
+        duration: 1.5,
+        stagger: 0.02,
+        ease: "expo.out",
+      });
     }
 
     // 2. Initial Reveal Items
-    gsap.fromTo(".reveal-item", 
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out", delay: 0.5 }
+    gsap.fromTo(
+      ".reveal-item",
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        delay: 0.5,
+      }
     );
 
     // 3. Image Parallax & Reveal
     const imageWrappers = document.querySelectorAll(".project-image-wrapper");
     imageWrappers.forEach((wrapper) => {
-        const img = wrapper.querySelector(".project-image");
-        
-        // Reveal mask
-        gsap.fromTo(wrapper, 
-            { clipPath: "inset(10% 10% 10% 10%)", opacity: 0 },
-            { 
-                clipPath: "inset(0% 0% 0% 0%)", 
-                opacity: 1,
-                duration: 1.5, 
-                ease: "expo.inOut",
-                scrollTrigger: {
-                    trigger: wrapper,
-                    start: "top 90%",
-                }
-            }
-        );
+      const img = wrapper.querySelector(".project-image");
 
-        // Parallax image
-        if (img) {
-            gsap.to(img, {
-                yPercent: 15,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: wrapper,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
+      // Reveal mask
+      gsap.fromTo(
+        wrapper,
+        { clipPath: "inset(10% 10% 10% 10%)", opacity: 0 },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          opacity: 1,
+          duration: 1.5,
+          ease: "expo.inOut",
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top 90%",
+          },
         }
+      );
+
+      // Parallax image
+      if (img) {
+        gsap.to(img, {
+          yPercent: 15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
     });
 
     // 4. Content Reveal
-    gsap.fromTo(".reveal-content", 
-        { y: 40, opacity: 0 },
-        { 
-            y: 0, 
-            opacity: 1, 
-            duration: 1, 
-            stagger: 0.2, 
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: "#sticky-content",
-                start: "top 80%"
-            }
-        }
+    gsap.fromTo(
+      ".reveal-content",
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#sticky-content",
+          start: "top 80%",
+        },
+      }
     );
 
     // 5. Progress Bar
@@ -284,17 +359,33 @@ const t = translations[lang as keyof typeof translations] || translations.en;
     // 6. Magnetic Button
     const magneticBtn = document.querySelector(".magnetic-btn");
     if (magneticBtn) {
-        magneticBtn.addEventListener("mousemove", (e: any) => {
-            const rect = magneticBtn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            gsap.to(magneticBtn, { x: x * 0.4, y: y * 0.4, duration: 0.5, ease: "power2.out" });
-            const icon = magneticBtn.querySelector("span");
-            if (icon) gsap.to(icon, { x: x * 0.2, y: y * 0.2, duration: 0.5, ease: "power2.out" });
+      magneticBtn.addEventListener("mousemove", (e: any) => {
+        const rect = magneticBtn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(magneticBtn, {
+          x: x * 0.4,
+          y: y * 0.4,
+          duration: 0.5,
+          ease: "power2.out",
         });
-        magneticBtn.addEventListener("mouseleave", () => {
-            gsap.to([magneticBtn, magneticBtn.querySelector("span")], { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+        const icon = magneticBtn.querySelector("span");
+        if (icon)
+          gsap.to(icon, {
+            x: x * 0.2,
+            y: y * 0.2,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+      });
+      magneticBtn.addEventListener("mouseleave", () => {
+        gsap.to([magneticBtn, magneticBtn.querySelector("span")], {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)",
         });
+      });
     }
   }
 
@@ -303,11 +394,16 @@ const t = translations[lang as keyof typeof translations] || translations.en;
 </script>
 
 <style is:global>
-    @keyframes bounce-x {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+  @keyframes bounce-x {
+    0%,
+    100% {
+      transform: translateY(0);
     }
-    .animate-bounce {
-        animation: bounce-x 2s infinite;
+    50% {
+      transform: translateY(-10px);
     }
+  }
+  .animate-bounce {
+    animation: bounce-x 2s infinite;
+  }
 </style>

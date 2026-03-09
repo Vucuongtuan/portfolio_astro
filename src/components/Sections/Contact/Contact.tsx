@@ -21,7 +21,7 @@ export default function Contact({ lang }: ContactProps) {
   // Split text for animation
   const titleText = t("contact.title");
   const titleChars = titleText.split("").map((char, index) => (
-    <span key={index} className={`char ${st.char}`}>
+    <span key={index} className={`char ${st.char}`} data-cursor="chars">
       {char === " " ? "\u00A0" : char}
     </span>
   ));

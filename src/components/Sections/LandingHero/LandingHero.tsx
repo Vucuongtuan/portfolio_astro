@@ -7,6 +7,8 @@ import st from "./landing-hero.module.scss";
 
 // Import illustration
 import heroIllustration from "../../../assets/hero-illustration.png";
+import clsx from 'clsx';
+import { useSplitText } from '@hooks/useSplitText';
 
 interface LandingHeroProps {
     lang: Locale;
@@ -21,7 +23,9 @@ const FEATURED_PROJECTS = [
 
 export default function LandingHero({ lang }: LandingHeroProps) {
     const t = useTranslations(lang);
-    const sectionRef = useRef<HTMLElement>(null);
+    const heroCtnRef = useRef<HTMLDivElement>(null);
+
+    const { chars: nameChars, ref: nameRef } = useSplitText(`'${t("landing.name").toLowerCase()}'`);
 
     useGSAP(() => {
         // Big name entrance - slide up + fade
@@ -86,14 +90,14 @@ export default function LandingHero({ lang }: LandingHeroProps) {
             ease: "power2.out",
             delay: 1.4,
         });
-    }, { scope: sectionRef });
+    }, { scope: heroCtnRef });
 
     return (
-        <section className={st.section} ref={sectionRef}>
+        <section className={st.section} ref={heroCtnRef}>
             <div className={st.container}>
                 {/* Big Name / Logo */}
-                <h1 className={st.bigName}>
-                    {`'${t("landing.name").toLowerCase()}`}
+                <h1 className={st.bigName} ref={nameRef as React.RefObject<HTMLHeadingElement>}>
+                    {nameChars}
                 </h1>
 
                 {/* Layout Toggle (decorative) */}
