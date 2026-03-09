@@ -16,7 +16,7 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Locale };
 const t = useTranslations(lang);
-const title = t("nav.home");
+const title = "Vũ Tuấn Cường | Web Developer";
 ---
 
 <RootLayout title={title} enableHeader enableFooter>

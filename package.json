@@ -14,6 +14,7 @@
   "packageManager": "pnpm@10.26.0",
   "dependencies": {
     "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.0",
     "@astrojs/tailwind": "^6.0.2",
     "@gsap/react": "^2.1.2",
     "@types/react": "^19.2.9",
