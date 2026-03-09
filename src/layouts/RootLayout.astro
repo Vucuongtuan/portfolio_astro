@@ -50,8 +50,14 @@ const {
 
       gsap.registerPlugin(ScrollTrigger);
 
+      let lenis: Lenis | null = null;
+
       const initLenis = () => {
-        const lenis = new Lenis({
+        if (lenis) {
+          lenis.destroy();
+        }
+
+        lenis = new Lenis({
           duration: 1.2,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           smoothWheel: true,
@@ -60,22 +66,26 @@ const {
         lenis.on("scroll", ScrollTrigger.update);
 
         gsap.ticker.add((time) => {
-          lenis.raf(time * 1000);
+          lenis?.raf(time * 1000);
         });
 
         gsap.ticker.lagSmoothing(0);
-
-        document.addEventListener(
-          "astro:before-preparation",
-          () => {
-            lenis.destroy();
-          },
-          { once: true }
-        );
       };
 
+      // Khởi tạo lần đầu
       initLenis();
-      document.addEventListener("astro:page-load", initLenis);
+
+      // Xử lý sau khi chuyển trang
+      document.addEventListener("astro:after-swap", () => {
+        window.scrollTo(0, 0);
+        initLenis();
+        ScrollTrigger.refresh();
+      });
+
+      // Đảm bảo hoạt động với View Transitions
+      document.addEventListener("astro:page-load", () => {
+        ScrollTrigger.refresh();
+      });
     </script>
   </body>
 </html>

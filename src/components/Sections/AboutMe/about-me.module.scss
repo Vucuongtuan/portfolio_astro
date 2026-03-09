@@ -1,17 +1,20 @@
+// ========== SECTION/WRAPPER ==========
 .section {
-  @apply relative w-full min-h-screen flex flex-col justify-center py-24 sm:py-32;
+  @apply relative w-full min-h-screen flex flex-col justify-center py-24 sm:py-32 overflow-hidden;
 }
 
+// ========== CONTAINER ==========
 .container {
   @apply max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24 relative z-10;
 }
 
 .split {
-  @apply flex flex-col lg:flex-row gap-12 lg:gap-0 items-center;
+  @apply flex flex-col lg:flex-row gap-12 lg:gap-0 items-start;
 }
 
+// ========== LEFT: HEADING ==========
 .left {
-  @apply lg:w-2/5 lg:sticky lg:top-32 flex flex-col gap-4;
+  @apply lg:w-2/5 lg:sticky lg:top-32 flex flex-col;
 }
 
 .label {
@@ -44,27 +47,22 @@
 }
 
 .text {
-  @apply text-lg sm:text-xl md:text-2xl font-medium leading-relaxed;
-  opacity: 0.85;
+  @apply text-lg sm:text-xl md:text-2xl font-medium leading-relaxed opacity-[0.85];
 
   :global(p) {
     @apply mb-6 last:mb-0;
   }
 
   :global(strong) {
-    @apply font-bold;
-    opacity: 1;
+    @apply font-bold opacity-100;
   }
 }
 
 // ========== QUOTE ==========
 .quoteWrapper {
-  @apply pt-8;
-  border-top: 1px solid currentColor;
-  border-top-color: rgba(128, 128, 128, 0.15);
+  @apply pt-8 border-t ;
 }
 
 .quote {
-  @apply text-sm font-mono uppercase tracking-[0.15em] leading-relaxed block;
-  opacity: 0.4;
+  @apply text-sm font-mono uppercase tracking-[0.15em] leading-relaxed block opacity-40;
 }

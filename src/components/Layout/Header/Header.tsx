@@ -81,7 +81,7 @@ export default function Header({ lang }: HeaderProps) {
         <div className={st.row}>
           <div className={st.leftGroup}>
             <a
-              href={lang === "vi" ? "/" : `/${lang}/`}
+              href={getRoute(lang, "/")}
               className={st.logo}
             >
               <span className="dot" />

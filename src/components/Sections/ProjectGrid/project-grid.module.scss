@@ -1,137 +1,80 @@
+// ========== SECTION/WRAPPER ==========
 .directorySection {
-    position: relative;
-    width: 100%;
-    padding: 15vh 0;
-    // BỎ NỀN, SỬ DỤNG TRONG SUỐT ĐỂ HIỆN BACKGROUND CHUNG
-    background-color: transparent;
+    @apply relative w-full py-[15vh] bg-transparent;
 }
 
+// ========== CONTAINER ==========
 .container {
-    @apply max-w-screen-2xl;
-    margin: 0 auto;
-    padding: 0 4vw;
+    @apply max-w-screen-2xl mx-auto px-[4vw];
 }
 
 .header {
-    margin-bottom: 0; 
+    @apply mb-0;
 }
 
+// ========== GRID ==========
 .directoryGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); // 2 cột nén diện tích
-    border-top: none;
-
-    @media (max-width: 1024px) {
-        grid-template-columns: 1fr;
-    }
+    @apply grid grid-cols-1 lg:grid-cols-3 border-t-0;
 }
 
+// ========== CARD ==========
 .projectCard {
-    position: relative;
-    padding: 4rem 3rem;
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-
-  
+    @apply relative p-16 md:p-12 block no-underline text-inherit border-b border-white/10 transition-all duration-500 ease-out;
 
     &:hover {
-        background-color: rgba(255, 255, 255, 0.03);
+        @apply bg-white/[0.03];
     }
 }
 
 .cardInner {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    @apply flex flex-col h-full;
 }
 
 .itemNumber {
-    font-size: 0.75rem;
-    font-family: monospace;
-    opacity: 0.3;
+    @apply text-[0.75rem] font-mono opacity-30;
 }
 
 .itemYear {
-    font-size: 0.8rem;
-    font-family: monospace;
-    opacity: 0.4;
+    @apply text-[0.8rem] font-mono opacity-40;
 }
 
 .itemTitle {
+    @apply font-black uppercase leading-none mb-6 tracking-tighter transition-transform duration-500 ease-out;
     font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-    transition: transform 0.4s ease;
-}
 
-.projectCard:hover .itemTitle {
-    transform: translateX(10px);
-    color: #fff;
-}
-
-.itemDescription {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    opacity: 0.5;
-    max-width: 85%;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; // Giới hạn 2 dòng để tiết kiệm diện tích
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.techTag {
-    font-size: 0.65rem;
-    font-family: monospace;
-    padding: 0.4rem 0.8rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 100px;
-    opacity: 0.6;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: all 0.3s ease;
-
-    &:hover {
-        border-color: #fff;
-        opacity: 1;
+    .projectCard:hover & {
+        @apply translate-x-[10px] text-white;
     }
 }
 
-// Floating Preview
+.itemDescription {
+    @apply text-[0.9rem] leading-relaxed opacity-50 max-w-[85%] overflow-hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.techTag {
+    @apply text-[0.65rem] font-mono px-3 py-1.5 border border-white/15 rounded-full opacity-60 uppercase tracking-widest transition-all duration-300;
+
+    &:hover {
+        @apply border-white opacity-100;
+    }
+}
+
+// ========== FLOATING PREVIEW ==========
 .floatingPreview {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 350px;
-    height: 220px;
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0;
-    transform: scale(0.9);
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.1);
+    @apply fixed top-0 left-0 w-[350px] h-[220px] pointer-events-none z-[1000] opacity-0 scale-[0.9] rounded overflow-hidden shadow-2xl border border-white/10;
 
     @media (max-width: 1024px) {
-        display: none;
+        @apply hidden;
     }
 }
 
 .previewInner {
-    width: 100%;
-    height: 100%;
-    background: #111;
+    @apply w-full h-full bg-[#111];
 }
 
 .previewImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    @apply w-full h-full object-cover;
 }

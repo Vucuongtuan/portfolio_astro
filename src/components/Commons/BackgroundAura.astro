@@ -1,15 +1,16 @@
 ---
+
 ---
+
 <div id="mouse-aura" class="mouse-aura"></div>
 
 <script>
-  import { gsap } from 'gsap';
+  import { gsap } from "gsap";
 
   function initAura() {
-    const aura = document.getElementById('mouse-aura');
+    const aura = document.getElementById("mouse-aura");
     if (!aura) return;
 
-    // Follow mouse with smoothness
     const xTo = gsap.quickTo(aura, "x", { duration: 0.8, ease: "power3" });
     const yTo = gsap.quickTo(aura, "y", { duration: 0.8, ease: "power3" });
 
@@ -18,39 +19,40 @@
       yTo(e.clientY);
     });
 
-    // Handle CTA Hover from Footer (or anywhere with data-aura="bright")
-    document.addEventListener('mouseover', (e) => {
+    document.addEventListener("mouseover", (e) => {
       const target = e.target as HTMLElement;
       const cta = target.closest('[data-aura="bright"]');
-      
+
       if (cta) {
         gsap.to(aura, {
           scale: 4,
           opacity: 0.15,
           duration: 1,
           ease: "power2.out",
-          background: "radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)"
+          background:
+            "radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)",
         });
       }
     });
 
-    document.addEventListener('mouseout', (e) => {
+    document.addEventListener("mouseout", (e) => {
       const target = e.target as HTMLElement;
       const cta = target.closest('[data-aura="bright"]');
-      
+
       if (cta) {
         gsap.to(aura, {
           scale: 1,
           opacity: 0.05,
           duration: 1,
           ease: "power2.inOut",
-          background: "radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%)"
+          background:
+            "radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%)",
         });
       }
     });
   }
 
-  document.addEventListener('astro:page-load', initAura);
+  document.addEventListener("astro:page-load", initAura);
   initAura();
 </script>
 
@@ -61,7 +63,11 @@
     left: 0;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0) 70%
+    );
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;

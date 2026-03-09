@@ -13,7 +13,7 @@ export function useTranslations(lang: keyof typeof ui) {
 }
 
 export function getRoute(lang: string, path: string) {
-  if (path === '/') return lang === defaultLang ? '/' : `/${lang}/`;
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  if (cleanPath === '/') return `/${lang}/`;
   return `/${lang}${cleanPath}`;
 }

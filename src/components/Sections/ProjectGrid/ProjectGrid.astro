@@ -3,6 +3,7 @@ import { getEntry } from "astro:content";
 import type { Locale } from "../../../i18n/ui";
 import { useTranslations, getRoute } from "../../../i18n/utils";
 import st from './project-grid.module.scss';
+import clsx from 'clsx';
 
 interface Props {
   lang: Locale;
@@ -17,8 +18,8 @@ if (!projectsData || !projectsData.data) return null;
 const { items: projects, sectionTitle } = projectsData.data;
 ---
 
-<section id="works" class={st.directorySection} data-section="Works">
-  <div class={st.container}>
+<section id="works" class={clsx(st.directorySection, "bg-transparent")} data-section="Works">
+  <div class={clsx(st.container, "w-full mx-auto px-[4vw]")}>
     <!-- Section Header -->
     <header class={st.header}>
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/10 pb-10">
@@ -37,18 +38,18 @@ const { items: projects, sectionTitle } = projectsData.data;
     </header>
 
     <!-- Project Table-Grid -->
-    <div class={st.directoryGrid} id="project-list">
+    <div class={clsx(st.directoryGrid, "w-full")} id="project-list">
       {projects.map((project: any, index: number) => (
         <a 
           href={getRoute(lang, `works/${project.id}`)} 
-          class={`${st.projectCard} project-item group`}
+          class={clsx(st.projectCard, "project-item group")}
           data-img={project.thumbnail?.src || ""}
         >
-          <div class={st.cardInner}>
+          <div class={clsx(st.cardInner, "w-full h-full flex flex-col")}>
              <!-- Meta row -->
              <div class="flex justify-between items-center mb-6">
-                <span class={st.itemNumber}>{(index + 1).toString().padStart(2, '0')}</span>
-                <span class={st.itemYear}>{project.year}</span>
+                <span class={clsx(st.itemNumber, "font-mono opacity-30")}>{(index + 1).toString().padStart(2, '0')}</span>
+                <span class={clsx(st.itemYear, "font-mono opacity-40")}>{project.year}</span>
              </div>
 
              <!-- Main Info -->
@@ -75,8 +76,8 @@ const { items: projects, sectionTitle } = projectsData.data;
 
     <!-- Floating Preview -->
     <div id="project-preview" class={st.floatingPreview}>
-      <div class={st.previewInner}>
-        <img id="preview-image" src="" alt="Preview" class={st.previewImg} />
+      <div class={clsx(st.previewInner, "w-full h-full bg-[#111]")}>
+        <img id="preview-image" src="" alt="Preview" class={clsx(st.previewImg, "w-full h-full object-cover")} />
       </div>
     </div>
   </div>
