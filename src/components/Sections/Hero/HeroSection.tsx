@@ -8,9 +8,17 @@ import clsx from "clsx";
 
 interface HeroSectionProps {
   lang: Locale;
+  title?: string; // Dùng cho lời chào lớn (ví dụ: "HELLO")
+  showInfo?: boolean;
+  fullName?: string; // Tên đầy đủ để hiện ở info row
 }
 
-export default function HeroSection({ lang }: HeroSectionProps) {
+export default function HeroSection({ 
+  lang, 
+  title, 
+  showInfo = true,
+  fullName 
+}: HeroSectionProps) {
   const t = useTranslations(lang);
   const container = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
@@ -66,8 +74,12 @@ export default function HeroSection({ lang }: HeroSectionProps) {
     { scope: container }
   );
 
-  const name = t("landing.name") || "CUONG";
-  const nameChars = name.split("").map((char, i) => (
+  // Lời chào lớn hoặc mặc định là tên từ i18n
+  const mainText = title || t("landing.name") || "CUONG";
+  // Tên ở hàng info
+  const nameInInfo = fullName || t("landing.name") || "VU TUAN CUONG";
+
+  const mainTextChars = mainText.split("").map((char, i) => (
     <span
       key={i}
       className={clsx(st.nameChar, "inline-block")}
@@ -78,20 +90,28 @@ export default function HeroSection({ lang }: HeroSectionProps) {
 
   return (
     <section className={clsx(st.section, "bg-bg-pure")} ref={container} data-section="Hero" data-theme="light">
-      <div className={clsx(st.infoRow, "w-full")}>
-        <div className={clsx(st.infoItem, "flex flex-col")}>
-          <span className={st.infoLabel}>Role</span>
-          <span className={st.infoValue}>{t("hero.role")}</span>
+      {showInfo && (
+        <div className={clsx(st.infoRow, "w-full")}>
+          {/* New Name Field */}
+          <div className={clsx(st.infoItem, "flex flex-col")}>
+            <span className={st.infoLabel}>Name</span>
+            <span className={st.infoValue}>{nameInInfo}</span>
+          </div>
+          
+          <div className={clsx(st.infoItem, "flex flex-col")}>
+            <span className={st.infoLabel}>Role</span>
+            <span className={st.infoValue}>{t("hero.role")}</span>
+          </div>
+          <div className={clsx(st.infoItem, "flex flex-col")}>
+            <span className={st.infoLabel}>Location</span>
+            <span className={st.infoValue}>{t("landing.location")}</span>
+          </div>
+          <div className={clsx(st.infoItem, "flex flex-col")}>
+            <span className={st.infoLabel}>Status</span>
+            <span className={st.infoValue}>Available</span>
+          </div>
         </div>
-        <div className={clsx(st.infoItem, "flex flex-col")}>
-          <span className={st.infoLabel}>Location</span>
-          <span className={st.infoValue}>{t("landing.location")}</span>
-        </div>
-        <div className={clsx(st.infoItem, "flex flex-col")}>
-          <span className={st.infoLabel}>Status</span>
-          <span className={st.infoValue}>Available</span>
-        </div>
-      </div>
+      )}
 
       <div className={clsx(st.descRow, "w-full")}>
         <p className={st.descCol}>
@@ -104,7 +124,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
 
       <div className={clsx(st.nameWrapper, "w-full overflow-hidden")}>
           <h1 ref={nameRef} className={clsx(st.name, "select-none")}>
-            {nameChars}
+            {mainTextChars}
           </h1>
       </div>
     </section>

@@ -31,7 +31,8 @@ export const ui = {
     'about.card3.content': 'Đến từ Nam Định, Việt Nam. Nền tảng vững chắc về nhiều ngôn ngữ lập trình và framework, luôn sẵn sàng chinh phục những thử thách mới.',
     'about.card3.cta': 'Bắt Đầu Dự Án',
     // LandingHero
-    'landing.name': 'CƯỜNG',
+    'landing.title':'Xin chào mọi người',
+    'landing.name': 'Vũ Tuấn Cường',
     'landing.role': 'là một software engineer đam mê xây dựng những sản phẩm web & app chất lượng cao.',
     'landing.desc': 'Fullstack Developer — tạo ra những trải nghiệm kỹ thuật số từ frontend đến backend',
     'landing.featured': 'DỰ ÁN NỔI BẬT',
@@ -79,7 +80,8 @@ export const ui = {
     'about.card3.content': 'From Nam Dinh, Vietnam. Strong foundation across multiple programming languages and frameworks, always ready to tackle new challenges.',
     'about.card3.cta': 'Start a Project',
     // LandingHero
-    'landing.name': 'CUONG',
+    'landing.title':'Hello everyone',
+    'landing.name': 'Vu Tuan Cuong',
     'landing.role': 'is a software engineer passionate about building high-quality web or app products.',
     'landing.desc': 'Fullstack Developer — crafting digital experiences from frontend to backend',
     'landing.featured': 'FEATURED WORKS',
