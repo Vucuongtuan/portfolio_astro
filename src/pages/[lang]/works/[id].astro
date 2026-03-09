@@ -3,6 +3,7 @@ import { getEntry } from "astro:content";
 import RootLayout from "../../../layouts/RootLayout.astro";
 import { Image } from "astro:assets";
 import { languages } from "@i18n/ui";
+import ProjectTitle from "@components/Sections/ProjectHero/ProjectTitle";
 
 export async function getStaticPaths() {
   const langs = Object.keys(languages);
@@ -32,6 +33,7 @@ const translations = {
     duration: "Duration",
     overview: "Overview",
     features: "Features",
+    tech: "Tech Stack",
     source: "Source Code",
     visit: "Live Demo",
     scroll: "Scroll to explore",
@@ -42,6 +44,7 @@ const translations = {
     duration: "Thời gian",
     overview: "Tổng quan",
     features: "Tính năng",
+    tech: "Công nghệ",
     source: "Mã nguồn",
     visit: "Xem Demo",
     scroll: "Cuộn để khám phá",
@@ -89,36 +92,27 @@ const t = translations[lang as keyof typeof translations] || translations.en;
       class="relative h-[80vh] flex flex-col justify-end px-6 md:px-12 lg:px-24 pb-12 overflow-hidden"
     >
       <div
-        class="reveal-item flex items-center gap-4 text-[10px] font-mono text-white/40 mb-10 uppercase tracking-[0.3em]"
+        class="reveal-item flex items-center gap-4 text-base font-mono text-white/40 mb-10 uppercase tracking-[0.3em]"
       >
         <span>{project.category}</span>
         <span class="w-12 h-[1px] bg-white/20"></span>
         <span>{project.year}</span>
       </div>
-      <div class="overflow-hidden">
-        <h1
-          id="project-title"
-          class="text-[12vw] font-black uppercase tracking-tighter leading-[0.8] mb-4"
-          transition:name={`project-title-${project.id}`}
-        >
-          {project.title}
-        </h1>
+      <div class="overflow-visible">
+        <ProjectTitle title={project.title} id={project.id} client:load />
       </div>
       <div
-        class="reveal-item mt-12 flex justify-between items-end border-t border-white/10 pt-8 font-mono text-[10px] uppercase tracking-widest text-white/40"
+        class="reveal-item mt-12 flex justify-between items-end border-t border-white/10 pt-8 font-mono text-base uppercase tracking-widest text-white/40"
       >
         <div class="flex gap-12">
           <div>
             <p class="mb-2">{t.role}</p>
-            <p class="text-white">{project.role}</p>
+            <p class="text-white text-base font-medium">{project.role}</p>
           </div>
           <div>
             <p class="mb-2">{t.duration}</p>
-            <p class="text-white">{project.duration}</p>
+            <p class="text-white text-base font-medium">{project.duration}</p>
           </div>
-        </div>
-        <div class="hidden md:block animate-bounce">
-          {t.scroll} ↓
         </div>
       </div>
     </header>
@@ -139,7 +133,7 @@ const t = translations[lang as keyof typeof translations] || translations.en;
                 loading={i === 0 ? "eager" : "lazy"}
               />
               <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
-              <div class="absolute top-6 right-6 font-mono text-[10px] opacity-20 uppercase">
+              <div class="absolute top-6 right-6 font-mono text-base opacity-20 uppercase">
                 Ref_{i.toString().padStart(2, "0")}
               </div>
             </div>
@@ -157,7 +151,7 @@ const t = translations[lang as keyof typeof translations] || translations.en;
             <!-- Overview -->
             <section class="reveal-content">
               <h2
-                class="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] mb-8"
+                class="text-base font-mono text-white/30 uppercase tracking-[0.3em] mb-8"
               >
                 // {t.overview}
               </h2>
@@ -168,27 +162,45 @@ const t = translations[lang as keyof typeof translations] || translations.en;
               </p>
               {
                 project.goals && (
-                  <p class="mt-8 text-sm lg:text-base text-white/40 leading-relaxed font-light italic border-l border-white/10 pl-6">
+                  <p class="mt-8 text-base lg:text-lg text-white/40 leading-relaxed font-light italic border-l border-white/10 pl-6">
                     {project.goals}
                   </p>
                 )
               }
             </section>
 
+            <!-- Tech Stack -->
+            {
+              project.tags && project.tags.length > 0 && (
+                <section class="reveal-content">
+                  <h2 class="text-base font-mono text-white/30 uppercase tracking-[0.3em] mb-8">
+                    // {t.tech}
+                  </h2>
+                  <div class="flex flex-wrap gap-2">
+                    {project.tags.map((tag: string) => (
+                      <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-base font-mono text-white/60 hover:text-white hover:border-white/30 transition-colors cursor-default">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              )
+            }
+
             <!-- Features -->
             {
               project.features && project.features.length > 0 && (
                 <section class="reveal-content">
-                  <h2 class="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] mb-8">
+                  <h2 class="text-base font-mono text-white/30 uppercase tracking-[0.3em] mb-8">
                     // {t.features}
                   </h2>
                   <ul class="space-y-4">
                     {project.features.map((feature: string, idx: number) => (
                       <li class="flex items-start gap-3 group">
-                        <span class="text-[9px] font-mono opacity-20 group-hover:opacity-100 transition-opacity mt-1.5">
+                        <span class="text-base font-mono opacity-20 group-hover:opacity-100 transition-opacity mt-1.5">
                           {(idx + 1).toString().padStart(2, "0")}
                         </span>
-                        <span class="text-base lg:text-lg text-white/60 group-hover:text-white transition-colors">
+                        <span class="text-base lg:text-xl text-white/60 group-hover:text-white transition-colors">
                           {feature}
                         </span>
                       </li>
@@ -205,7 +217,7 @@ const t = translations[lang as keyof typeof translations] || translations.en;
                   <a
                     href={project.links.demo}
                     target="_blank"
-                    class="px-8 py-4 bg-white text-black rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
+                    class="px-8 py-4 bg-white text-black rounded-full text-base font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
                   >
                     {t.visit}
                   </a>
@@ -216,7 +228,7 @@ const t = translations[lang as keyof typeof translations] || translations.en;
                   <a
                     href={project.links.github}
                     target="_blank"
-                    class="px-8 py-4 border border-white/20 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all"
+                    class="px-8 py-4 border border-white/20 rounded-full text-base font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all"
                   >
                     {t.source}
                   </a>
@@ -226,7 +238,7 @@ const t = translations[lang as keyof typeof translations] || translations.en;
           </div>
 
           <div
-            class="mt-24 pt-8 border-t border-white/5 font-mono text-[9px] opacity-20 uppercase tracking-[0.2em]"
+            class="mt-24 pt-8 border-t border-white/5 font-mono text-base opacity-20 uppercase tracking-[0.2em]"
           >
             Project Case Study © {project.year}
           </div>
@@ -240,7 +252,7 @@ const t = translations[lang as keyof typeof translations] || translations.en;
     >
       <a href={`/${lang}/#works`} class="group text-center">
         <span
-          class="block text-[10px] font-mono opacity-40 uppercase tracking-[0.5em] mb-4"
+          class="block text-base font-mono opacity-40 uppercase tracking-[0.5em] mb-4"
           >Back to home</span
         >
         <h3
@@ -260,26 +272,6 @@ const t = translations[lang as keyof typeof translations] || translations.en;
   gsap.registerPlugin(ScrollTrigger);
 
   function initAwwwardsDetails() {
-    // 1. Title Split Reveal
-    const title = document.getElementById("project-title");
-    if (title) {
-      const text = title.textContent?.trim() || "";
-      title.innerHTML = text
-        .split("")
-        .map(
-          (char) =>
-            `<span class="inline-block translate-y-[110%]">${char === " " ? "&nbsp;" : char}</span>`
-        )
-        .join("");
-
-      gsap.to(title.querySelectorAll("span"), {
-        y: 0,
-        duration: 1.5,
-        stagger: 0.02,
-        ease: "expo.out",
-      });
-    }
-
     // 2. Initial Reveal Items
     gsap.fromTo(
       ".reveal-item",
