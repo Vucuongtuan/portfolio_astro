@@ -41,7 +41,7 @@ const {
       <slot />
     </main>
     <BottomScreen lang={lang} />
-    {enableFooter && <Footer lang={lang} client:visible />}
+    {enableFooter && <Footer lang={lang} client:load />}
 
     <script>
       import Lenis from "lenis";
