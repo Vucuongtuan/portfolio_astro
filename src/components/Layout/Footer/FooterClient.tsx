@@ -142,8 +142,8 @@ export default function FooterClient({ email }: FooterClientProps) {
           {/* DOWNLOAD CV CTA WITH AURA TRIGGER */}
           <a 
             ref={cvBtnRef}
-            href="/resume.pdf" 
-            target="_blank"
+            href="/images/VuTuanCuong_CV_Web_Developer.pdf" 
+            download="VuTuanCuong_CV_Web_Developer.pdf"
             data-aura="bright"
             className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold uppercase tracking-widest text-xs hover:scale-105 transition-transform duration-300 relative z-10"
           >
