@@ -140,8 +140,8 @@ export default function Contact({ lang }: ContactProps) {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
-          from_name: formData.user_name,
-          from_email: formData.user_email,
+          name: formData.user_name,
+          email: formData.user_email,
           message: formData.message,
           to_name: "Vu Tuan Cuong",
         },
