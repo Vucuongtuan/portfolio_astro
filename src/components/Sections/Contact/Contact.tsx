@@ -2,11 +2,18 @@ import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import emailjs from "@emailjs/browser";
 import type { Locale } from "@i18n/ui";
 import { useTranslations } from "@i18n/utils";
 import st from "./contact.module.scss";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const EMAILJS_SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+
+type FormStatus = "idle" | "sending" | "success" | "error";
 
 interface ContactProps {
   lang: Locale;
@@ -18,7 +25,13 @@ export default function Contact({ lang }: ContactProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Split text for animation
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<FormStatus>("idle");
+
   const titleText = t("contact.title");
   const titleChars = titleText.split("").map((char, index) => (
     <span key={index} className={`char ${st.char}`} data-cursor="chars">
@@ -62,7 +75,6 @@ export default function Contact({ lang }: ContactProps) {
         );
       }
 
-      // Animate Subtitle
       tl.fromTo(
         `.${st.subtitle}`,
         { opacity: 0, x: -30 },
@@ -70,7 +82,6 @@ export default function Contact({ lang }: ContactProps) {
         "-=0.5"
       );
 
-      // Animate Layout Divider
       tl.fromTo(
         `.${st.content}::before`,
         { scaleY: 0 },
@@ -78,7 +89,6 @@ export default function Contact({ lang }: ContactProps) {
         "-=0.6"
       );
 
-      // Animate Left Info Blocks
       tl.fromTo(
         `.${st.infoBlock}`,
         { y: 30, opacity: 0 },
@@ -86,7 +96,6 @@ export default function Contact({ lang }: ContactProps) {
         "-=0.5"
       );
 
-      // Animate Form Elements
       if (formRef.current) {
         const formGroups = formRef.current.querySelectorAll(`.${st.formGroup}`);
         tl.fromTo(
@@ -107,8 +116,13 @@ export default function Contact({ lang }: ContactProps) {
     { scope: sectionRef }
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const btn = sectionRef.current?.querySelector(`.${st.submitBtn}`);
     if (btn) {
       gsap.to(btn, {
@@ -117,6 +131,50 @@ export default function Contact({ lang }: ContactProps) {
         yoyo: true,
         repeat: 1,
       });
+    }
+
+    setStatus("sending");
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.user_name,
+          from_email: formData.user_email,
+          message: formData.message,
+          to_name: "Vu Tuan Cuong",
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus("success");
+      setFormData({ user_name: "", user_email: "", message: "" });
+
+      if (formRef.current) {
+        gsap.fromTo(
+          formRef.current,
+          { opacity: 0.5, y: -5 },
+          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+        );
+      }
+
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
+  const getSubmitText = () => {
+    switch (status) {
+      case "sending":
+        return t("contact.sending");
+      case "success":
+        return t("contact.success");
+      case "error":
+        return t("contact.error");
+      default:
+        return t("contact.submit");
     }
   };
 
@@ -161,8 +219,12 @@ export default function Contact({ lang }: ContactProps) {
               <div className={st.formGroup}>
                 <input 
                   type="text" 
+                  name="user_name"
                   className={st.formInput} 
                   placeholder={t("contact.name") + " *"} 
+                  value={formData.user_name}
+                  onChange={handleChange}
+                  disabled={status === "sending"}
                   required 
                 />
                 <div className={st.line}></div>
@@ -171,8 +233,12 @@ export default function Contact({ lang }: ContactProps) {
               <div className={st.formGroup}>
                 <input 
                   type="email" 
+                  name="user_email"
                   className={st.formInput} 
                   placeholder={t("contact.email") + " *"} 
+                  value={formData.user_email}
+                  onChange={handleChange}
+                  disabled={status === "sending"}
                   required 
                 />
                 <div className={st.line}></div>
@@ -180,24 +246,44 @@ export default function Contact({ lang }: ContactProps) {
 
               <div className={st.formGroup}>
                 <textarea 
+                  name="message"
                   className={st.formInput} 
                   placeholder={t("contact.message") + " *"} 
+                  value={formData.message}
+                  onChange={handleChange}
+                  disabled={status === "sending"}
                   required 
                 ></textarea>
                 <div className={st.line}></div>
               </div>
 
-              <button type="submit" className={`group ${st.submitBtn}`} aria-label={t("contact.submit")}>
+              {status === "success" && (
+                <p className={st.statusSuccess}>{t("contact.success")}</p>
+              )}
+              {status === "error" && (
+                <p className={st.statusError}>{t("contact.error")}</p>
+              )}
+
+              <button 
+                type="submit" 
+                className={`group ${st.submitBtn} ${status === "sending" ? st.disabled : ""}`} 
+                aria-label={t("contact.submit")}
+                disabled={status === "sending"}
+              >
                 <div className="overflow-hidden h-6 relative">
-                  <span className={`block ${st.btnText}`} data-text={t("contact.submit")}>
-                    {t("contact.submit")}
+                  <span className={`block ${st.btnText}`} data-text={getSubmitText()}>
+                    {getSubmitText()}
                   </span>
                 </div>
-                <span className={st.btnArrow}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </span>
+                {status === "sending" ? (
+                  <span className={st.spinner}></span>
+                ) : (
+                  <span className={st.btnArrow}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                )}
               </button>
             </form>
           </div>
