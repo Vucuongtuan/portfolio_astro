@@ -15,6 +15,10 @@ items:
     level: "intermediate"
   - name: "GO / Gin-Gonic / GORM "
     level: "intermediate"
+  - name: "Astro"
+    level: "advanced"
+  - name: "GSAP"
+    level: "advanced"
 ---
 
 ## Frameworks & Libraries
