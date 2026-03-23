@@ -37,6 +37,7 @@ const translations = {
     source: "Source Code",
     visit: "Live Demo",
     scroll: "Scroll to explore",
+    teamSize: "Team Size",
   },
   vi: {
     back: "Quay lại",
@@ -48,6 +49,7 @@ const translations = {
     source: "Mã nguồn",
     visit: "Xem Demo",
     scroll: "Cuộn để khám phá",
+    teamSize: "Thành viên",
   },
 };
 
@@ -113,6 +115,28 @@ const t = translations[lang as keyof typeof translations] || translations.en;
             <p class="mb-2">{t.duration}</p>
             <p class="text-white text-base font-medium">{project.duration}</p>
           </div>
+          {
+            project.teamSize && (
+              <div>
+                <p class="mb-2">{t.teamSize}</p>
+                <p class="text-white text-base font-medium">{project.teamSize}</p>
+              </div>
+            )
+          }
+          {
+            project.links && project.links.demo && (
+              <div>
+                <p class="mb-2">{t.visit}</p>
+                <a
+                  href={project.links.demo}
+                  target="_blank"
+                  class="text-white text-base font-medium underline underline-offset-4 hover:text-white/70 transition-colors"
+                >
+                  {new URL(project.links.demo).hostname}
+                </a>
+              </div>
+            )
+          }
         </div>
       </div>
     </header>

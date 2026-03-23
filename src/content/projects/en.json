@@ -19,8 +19,10 @@
         "Full ISR architecture for SEO optimization",
         "Cloudflare Storage and CDN optimization"
       ],
-      "links": {},
-      "year": "2024"
+      "links": {
+        "demo":"https://wowweekend.vn"
+      },
+      "year": "2025"
     },
     {
       "id": "wowbuilder",
@@ -60,8 +62,10 @@
         "Full ISR for speed and SEO",
         "Unit testing for core functions"
       ],
-      "links": {},
-      "year": "2024"
+      "links": {
+        "demo":"https://jewelry.wowweekend.vn/"
+      },
+      "year": "2025"
     },
     {
       "id": "idm-app",
@@ -70,7 +74,42 @@
       "category": "work",
       "tags": ["Next.js", "React Native", "Expo", "TanStack Query", "OpenAI API"],
       "teamSize": "3",
+      "year": "2026"
+    },
+    {
+      "id": "portfolio-astro",
+      "title": "My Portfolio Website",
+      "description": "The site you are viewing! Built with Astro's Islands Architecture and GSAP animations.",
+      "thumbnail": "../../assets/projects/portfolio.png",
+      "images": ["../../assets/projects/portfolio.png"],
+      "category": "personal",
+      "tags": ["Astro", "React", "TypeScript", "SCSS", "GSAP ScrollTrigger"],
+      "year": "2026"
+    },
+      {
+      "id": "auth-module",
+      "title": "Auth Module (ASP.NET)",
+      "description": "Centralized authentication module reusable for multiple personal side projects, handling user and company permissions.",
+      "category": "personal",
+      "tags": ["ASP.NET Web API", "Entity Framework", "PostgreSQL", "JWT", "Docker"],
+      "role": "Full stack developer",
+      "year": "2023"
+    },
+     {
+      "id": "football-predict",
+      "title": "Football Player Value Predictor",
+      "description": "Machine Learning study project: scraping data from Transfermarkt, cleaning, analyzing, and training a Decision Tree model.",
+      "category": "personal",
+      "tags": ["Python", "Pandas", "Scikit-Learn", "Jupyter", "Machine Learning"],
       "year": "2024"
+    },
+    {
+      "id": "eco-app",
+      "title": "Eco App (Payload v3)",
+      "description": "E-commerce boilerplate integrating Payload CMS v3 with Next.js 15 App Router, Stripe payments, and i18n.",
+      "category": "personal",
+      "tags": ["Next.js 15", "Payload CMS v3", "Stripe", "Radix UI", "Framer Motion", "Tailwind V4"],
+      "year": "2025"
     },
     {
       "id": "laptop-tc-store",
@@ -95,15 +134,6 @@
       "year": "2024"
     },
     {
-      "id": "auth-module",
-      "title": "Auth Module (ASP.NET)",
-      "description": "Centralized authentication module reusable for multiple personal side projects, handling user and company permissions.",
-      "category": "personal",
-      "tags": ["ASP.NET Web API", "Entity Framework", "PostgreSQL", "JWT", "Docker"],
-      "role": "Full stack developer",
-      "year": "2023"
-    },
-    {
       "id": "image-sharing",
       "title": "Image Sharing Platform",
       "description": "Real-time image sharing social network with nested comments, automated image optimization, and socket notifications.",
@@ -112,39 +142,14 @@
       "role": "Full stack developer",
       "year": "2023"
     },
-    {
-      "id": "football-predict",
-      "title": "Football Player Value Predictor",
-      "description": "Machine Learning study project: scraping data from Transfermarkt, cleaning, analyzing, and training a Decision Tree model.",
-      "category": "personal",
-      "tags": ["Python", "Pandas", "Scikit-Learn", "Jupyter", "Machine Learning"],
-      "year": "2024"
-    },
-    {
+   
+        {
       "id": "moon-app",
       "title": "Moon App",
       "description": "Cross-platform mobile app (Expo 54) using file-based routing and offline caching with TanStack Query.",
       "category": "personal",
       "tags": ["React Native", "Expo Router", "Zustand", "NativeWind", "TanStack Query", "Zod"],
       "year": "2024"
-    },
-    {
-      "id": "eco-app",
-      "title": "Eco App (Payload v3)",
-      "description": "E-commerce boilerplate integrating Payload CMS v3 with Next.js 15 App Router, Stripe payments, and i18n.",
-      "category": "personal",
-      "tags": ["Next.js 15", "Payload CMS v3", "Stripe", "Radix UI", "Framer Motion", "Tailwind V4"],
-      "year": "2025"
-    },
-    {
-      "id": "portfolio-astro",
-      "title": "My Portfolio Website",
-      "description": "The site you are viewing! Built with Astro's Islands Architecture and GSAP animations.",
-      "thumbnail": "../../assets/projects/portfolio.png",
-      "images": ["../../assets/projects/portfolio.png"],
-      "category": "personal",
-      "tags": ["Astro", "React", "TypeScript", "SCSS", "GSAP ScrollTrigger"],
-      "year": "2026"
     }
   ]
 }

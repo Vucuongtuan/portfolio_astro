@@ -19,7 +19,7 @@ items:
     level: "advanced"
   - name: "GSAP"
     level: "advanced"
-  - name: "Flutter"
+  - name: "Fluter"
     level: "advanced"
 ---
 

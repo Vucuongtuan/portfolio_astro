@@ -21,8 +21,10 @@
         "Tạo các component có độ tái sử dụng cao, viết unit test",
         "Tối ưu hóa storage cũ sử dụng AWS S3 chuyển qua Cloudflare Storage và cdn"
       ],
-      "links": {},
-      "year": "2024"
+      "links": {
+        "demo":"https://wowweekend.vn"
+      },
+      "year": "2025"
     },
     {
       "id": "wowbuilder",
@@ -65,8 +67,10 @@
         "Sử dụng unstable_cache để cache các function fetch api",
         "Viết các unit test cho các function và component"
       ],
-      "links": {},
-      "year": "2024"
+      "links": {
+        "demo":"https://jewelry.wowweekend.vn/"
+      },
+      "year": "2025"
     },
     {
       "id": "idm-app",
@@ -82,7 +86,90 @@
         "Tích hợp RAG AI chatbot tư vấn nội dung"
       ],
       "links": {},
+      "year": "2026"
+    },
+    {
+      "id": "portfolio-astro",
+      "title": "Website Portfolio Của Tôi",
+      "description": "Đúng vậy, chính là trang web hiện tại! Trang portfolio được xây dựng siêu tối ưu với Astro Islands Architecture kết hợp GSAP Animations cuốn hút.",
+      "thumbnail": "../../assets/projects/portfolio.png",
+      "images": ["../../assets/projects/portfolio.png"],
+      "category": "personal",
+      "tags": ["Astro", "React", "TypeScript", "SCSS", "GSAP ScrollTrigger"],
+      "role": "Frontend Developer / Designer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Xây dựng trang thiết kế portfolio hiện đại giới thiệu kỹ năng đạt chuẩn Awwwards thông qua GSAP.\nÁp dụng triết lý Islands Architecture của Astro tối ưu hiệu năng tối đa.",
+      "features": [
+        "Routing kết hợp View Transitions mượt mà như SPA",
+        "Quản lý dự án type-safe bằng Astro Content Collections",
+        "Mix React component quản lý filter state phức tạp",
+        "Hiệu ứng GSAP ScrollTrigger và hook @gsap/react",
+        "System UI Dark/Light mode, CSS Modules styling"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/portfolio_astro"
+      },
+      "year": "2026"
+    },
+    {
+      "id": "auth-module",
+      "title": "Auth Module (ASP.NET)",
+      "description": "Module xác thực tập trung, tái sử dụng cho nhiều dự án cá nhân để xử lý Login, quản lý phân quyền người dùng và công ty.",
+      "category": "personal",
+      "tags": ["ASP.NET Web API", "Entity Framework", "PostgreSQL", "JWT", "Docker"],
+      "role": "Full stack developer",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Tạo ra 1 module Auth tập trung quản lý người dùng, vai trò, quyền hạn, công ty để tái sử dụng toàn bộ cho các side projects cá nhân.",
+      "features": [
+        "UI đăng nhập/đăng ký sử dụng Razor Page",
+        "Backend sử dụng ASP.NET Web API và JWT",
+        "Sử dụng Entity Framework quản lý database phân quyền",
+        "Đóng gói module qua Docker deploy lên Docker Hub"
+      ],
+      "links": {},
+      "year": "2023"
+    },
+    {
+      "id": "football-predict",
+      "title": "Dự Đoán Giá Trị Cầu Thủ Bóng Đá",
+      "description": "Dự án học tập Machine Learning: cào dữ liệu từ Transfermarkt, làm sạch, phân tích và huấn luyện một mô hình Cây Quyết Định (Decision Tree) để dự đoán giá trị thị trường.",
+      "category": "personal",
+      "tags": ["Python", "Pandas", "Scikit-Learn", "Jupyter", "Machine Learning"],
+      "role": "Data Analyst / Machine Learning Learner",
+      "duration": "1 month",
+      "teamSize": "1",
+      "goals": "Học cách thu thập dữ liệu (crawl data) bằng Python thông qua API của Transfermarkt.\nThực hành làm sạch dữ liệu, EDA và xây dựng mô hình Cây Quyết Định (Decision Tree) dự đoán phân khúc giá trị thị trường của các cầu thủ bóng đá.",
+      "features": [
+        "Script tự động cào dữ liệu API lưu vào file csv",
+        "Jupyter Notebook chứa toàn bộ quá trình: Xử lý, Làm sạch, Biểu đồ (Matplotlib, Seaborn)",
+        "Train mô hình Decision Tree với Scikit-learn và đánh giá tối ưu mô hình"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/football_dec_tree"
+      },
       "year": "2024"
+    },
+    {
+      "id": "eco-app",
+      "title": "Eco App (Payload v3)",
+      "description": "Website mẫu thương mại điện tử mượt mà tích hợp trực tiếp Payload CMS v3 trên nền Next.js 15 App Router, thanh toán Stripe và tính năng đa ngôn ngữ.",
+      "category": "personal",
+      "tags": ["Next.js 15", "Payload CMS v3", "Stripe", "Radix UI", "Framer Motion", "Tailwind V4"],
+      "role": "Full stack developer",
+      "teamSize": "1",
+      "goals": "Xây dựng một boilerplate thương mại điện tử hoàn chỉnh với phiên bản Payload CMS thế hệ mới (v3) chạy trực tiếp trên Next.js 15+.\nTích hợp hệ thống Stripe xử lý thanh toán.",
+      "features": [
+        "Quản trị nội dung và sản phẩm trực tiếp bằng Dashboard của Payload CMS v3",
+        "Xử lý Checkout thông qua webhook Stripe",
+        "Tối ưu UI/UX với Radix UI Primitives và hiệu ứng mượt mà từ Framer Motion",
+        "Cấu trúc hỗ trợ đa ngôn ngữ (i18n) bằng Next-Intl"
+      ],
+      "links": {
+        "github": "https://github.com/Vucuongtuan/eco_app"
+      },
+      "year": "2025"
     },
     {
       "id": "laptop-tc-store",
@@ -122,25 +209,6 @@
       "year": "2024"
     },
     {
-      "id": "auth-module",
-      "title": "Auth Module (ASP.NET)",
-      "description": "Module xác thực tập trung, tái sử dụng cho nhiều dự án cá nhân để xử lý Login, quản lý phân quyền người dùng và công ty.",
-      "category": "personal",
-      "tags": ["ASP.NET Web API", "Entity Framework", "PostgreSQL", "JWT", "Docker"],
-      "role": "Full stack developer",
-      "duration": "1 month",
-      "teamSize": "1",
-      "goals": "Tạo ra 1 module Auth tập trung quản lý người dùng, vai trò, quyền hạn, công ty để tái sử dụng toàn bộ cho các side projects cá nhân.",
-      "features": [
-        "UI đăng nhập/đăng ký sử dụng Razor Page",
-        "Backend sử dụng ASP.NET Web API và JWT",
-        "Sử dụng Entity Framework quản lý database phân quyền",
-        "Đóng gói module qua Docker deploy lên Docker Hub"
-      ],
-      "links": {},
-      "year": "2023"
-    },
-    {
       "id": "image-sharing",
       "title": "Nền tảng Chia sẻ Hình Ảnh",
       "description": "Mạng xã hội chia sẻ hình ảnh thời gian thực, có bình luận đa cấp, tự động tối ưu hóa ảnh và thông báo Socket.",
@@ -158,26 +226,6 @@
       ],
       "links": {},
       "year": "2023"
-    },
-    {
-      "id": "football-predict",
-      "title": "Dự Đoán Giá Trị Cầu Thủ Bóng Đá",
-      "description": "Dự án học tập Machine Learning: cào dữ liệu từ Transfermarkt, làm sạch, phân tích và huấn luyện một mô hình Cây Quyết Định (Decision Tree) để dự đoán giá trị thị trường.",
-      "category": "personal",
-      "tags": ["Python", "Pandas", "Scikit-Learn", "Jupyter", "Machine Learning"],
-      "role": "Data Analyst / Machine Learning Learner",
-      "duration": "1 month",
-      "teamSize": "1",
-      "goals": "Học cách thu thập dữ liệu (crawl data) bằng Python thông qua API của Transfermarkt.\nThực hành làm sạch dữ liệu, EDA và xây dựng mô hình Cây Quyết Định (Decision Tree) dự đoán phân khúc giá trị thị trường của các cầu thủ bóng đá.",
-      "features": [
-        "Script tự động cào dữ liệu API lưu vào file csv",
-        "Jupyter Notebook chứa toàn bộ quá trình: Xử lý, Làm sạch, Biểu đồ (Matplotlib, Seaborn)",
-        "Train mô hình Decision Tree với Scikit-learn và đánh giá tối ưu mô hình"
-      ],
-      "links": {
-        "github": "https://github.com/Vucuongtuan/football_dec_tree"
-      },
-      "year": "2024"
     },
     {
       "id": "moon-app",
@@ -199,50 +247,6 @@
         "github": "https://github.com/Vucuongtuan/moon-app"
       },
       "year": "2024"
-    },
-    {
-      "id": "eco-app",
-      "title": "Eco App (Payload v3)",
-      "description": "Website mẫu thương mại điện tử mượt mà tích hợp trực tiếp Payload CMS v3 trên nền Next.js 15 App Router, thanh toán Stripe và tính năng đa ngôn ngữ.",
-      "category": "personal",
-      "tags": ["Next.js 15", "Payload CMS v3", "Stripe", "Radix UI", "Framer Motion", "Tailwind V4"],
-      "role": "Full stack developer",
-      "teamSize": "1",
-      "goals": "Xây dựng một boilerplate thương mại điện tử hoàn chỉnh với phiên bản Payload CMS thế hệ mới (v3) chạy trực tiếp trên Next.js 15+.\nTích hợp hệ thống Stripe xử lý thanh toán.",
-      "features": [
-        "Quản trị nội dung và sản phẩm trực tiếp bằng Dashboard của Payload CMS v3",
-        "Xử lý Checkout thông qua webhook Stripe",
-        "Tối ưu UI/UX với Radix UI Primitives và hiệu ứng mượt mà từ Framer Motion",
-        "Cấu trúc hỗ trợ đa ngôn ngữ (i18n) bằng Next-Intl"
-      ],
-      "links": {
-        "github": "https://github.com/Vucuongtuan/eco_app"
-      },
-      "year": "2025"
-    },
-    {
-      "id": "portfolio-astro",
-      "title": "Website Portfolio Của Tôi",
-      "description": "Đúng vậy, chính là trang web hiện tại! Trang portfolio được xây dựng siêu tối ưu với Astro Islands Architecture kết hợp GSAP Animations cuốn hút.",
-      "thumbnail": "../../assets/projects/portfolio.png",
-      "images": ["../../assets/projects/portfolio.png"],
-      "category": "personal",
-      "tags": ["Astro", "React", "TypeScript", "SCSS", "GSAP ScrollTrigger"],
-      "role": "Frontend Developer / Designer",
-      "duration": "1 month",
-      "teamSize": "1",
-      "goals": "Xây dựng trang thiết kế portfolio hiện đại giới thiệu kỹ năng đạt chuẩn Awwwards thông qua GSAP.\nÁp dụng triết lý Islands Architecture của Astro tối ưu hiệu năng tối đa.",
-      "features": [
-        "Routing kết hợp View Transitions mượt mà như SPA",
-        "Quản lý dự án type-safe bằng Astro Content Collections",
-        "Mix React component quản lý filter state phức tạp",
-        "Hiệu ứng GSAP ScrollTrigger và hook @gsap/react",
-        "System UI Dark/Light mode, CSS Modules styling"
-      ],
-      "links": {
-        "github": "https://github.com/Vucuongtuan/portfolio_astro"
-      },
-      "year": "2026"
     }
   ]
 }
