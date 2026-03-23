@@ -17,6 +17,8 @@ items:
     level: "advanced"
   - name: "HTML5 / CSS3"
     level: "expert"
+  - name: "Python"
+    level: "expert"
 ---
 
 ## Languages
