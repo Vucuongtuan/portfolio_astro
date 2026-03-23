@@ -11,6 +11,10 @@ items:
     level: "intermediate"
   - name: "Figma"
     level: "advanced"
+  - name: "Codex"
+    level: "advanced"
+  - name: "Postman"
+    level: "advanced"
 ---
 
 ## Tools & Development

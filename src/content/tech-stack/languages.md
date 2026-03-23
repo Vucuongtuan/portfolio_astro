@@ -19,6 +19,8 @@ items:
     level: "expert"
   - name: "Python"
     level: "expert"
+  - name: "Dart"
+    level: "expert"
 ---
 
 ## Languages
