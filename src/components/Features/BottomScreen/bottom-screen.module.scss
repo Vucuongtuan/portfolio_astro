@@ -1,6 +1,6 @@
 // ========== BOTTOM SCREEN (mix-blend-mode: difference) ==========
 .bottomScreen {
-    @apply fixed bottom-8 left-8 right-8 flex items-center justify-between;
+    @apply fixed bottom-8 left-8 right-8 z-[10000] flex items-center justify-between;
     @apply font-mono text-sm font-semibold tracking-wide;
     color: white;
     mix-blend-mode: difference;
@@ -9,7 +9,7 @@
 
 // ========== LEFT: Language Switcher ==========
 .leftSide {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-2 z-50;
 }
 
 .langLink {
@@ -31,7 +31,7 @@
     opacity: 0.25;
 }
 
-// ========== RIGHT: Clock ==========
+// ========== RIGHT: Theme settings ==========
 .rightSide {
     @apply flex items-center;
 }

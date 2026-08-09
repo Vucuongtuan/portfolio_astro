@@ -1,0 +1,76 @@
+---
+import type { Locale } from "@i18n/ui";
+import { getRoute, useTranslations } from "@i18n/utils";
+import BasicLayout from "./BasicLayout.astro";
+import st from "./basic-portfolio.module.scss";
+
+interface Props {
+  lang: Locale;
+  project: any;
+}
+
+const { lang, project } = Astro.props;
+const t = useTranslations(lang);
+const meta = [
+  [t("basic.role"), project.role],
+  [t("basic.duration"), project.duration],
+  [t("basic.team"), project.teamSize],
+  [t("basic.category"), project.category],
+].filter(([, value]) => Boolean(value));
+---
+
+<BasicLayout lang={lang}>
+  <article slot="desktop" class={st.detailView} data-basic-desktop-reveal>
+    <a class={st.backLink} href={getRoute(lang, "/basic")}>← {t("basic.back")}</a>
+    <header class={st.detailHeader}>
+      <span>{project.year} · {project.category}</span>
+      <h1 transition:name={`basic-project-title-${project.id}`}>{project.title}</h1>
+      <p transition:name={`basic-project-description-${project.id}`}>{project.description}</p>
+    </header>
+
+    <div class={st.detailGrid}>
+      <section class={st.detailSection} aria-labelledby="detail-overview">
+        <h2 id="detail-overview">{t("basic.overview")}</h2>
+        <p>{project.goals ?? project.description}</p>
+      </section>
+      {project.tags?.length > 0 && (
+        <section class={st.detailSection} aria-labelledby="detail-stack">
+          <h2 id="detail-stack">{t("basic.stack")}</h2>
+          <div class={st.projectTags}>{project.tags.map((tag: string) => <span>{tag}</span>)}</div>
+        </section>
+      )}
+      {meta.length > 0 && (
+        <section class={st.detailSection} aria-labelledby="detail-info">
+          <h2 id="detail-info">{t("basic.projectInfo")}</h2>
+          <dl class={st.detailMeta}>{meta.map(([label, value]) => <><dt>{label}</dt><dd>{value}</dd></>)}</dl>
+        </section>
+      )}
+      {project.features?.length > 0 && (
+        <section class={st.detailSection} aria-labelledby="detail-features">
+          <h2 id="detail-features">{t("basic.features")}</h2>
+          <ol class={st.featureList}>{project.features.map((feature: string) => <li>{feature}</li>)}</ol>
+        </section>
+      )}
+    </div>
+    {(project.links?.demo || project.links?.github) && (
+      <footer class={st.detailActions}>
+        {project.links.demo && <a href={project.links.demo} target="_blank" rel="noreferrer">{t("basic.liveDemo")} ↗</a>}
+        {project.links.github && <a href={project.links.github} target="_blank" rel="noreferrer">{t("basic.sourceCode")} ↗</a>}
+      </footer>
+    )}
+  </article>
+
+  <article slot="mobile" class={st.mobileDetailView} data-basic-mobile-reveal>
+    <a class={st.backLink} href={getRoute(lang, "/basic")}>← {t("basic.back")}</a>
+    <header class={st.detailHeader}>
+      <span>{project.year} · {project.category}</span>
+      <h1>{project.title}</h1>
+      <p>{project.description}</p>
+    </header>
+    <div class={st.detailGrid}>
+      <section class={st.detailSection}><h2>{t("basic.overview")}</h2><p>{project.goals ?? project.description}</p></section>
+      {project.tags?.length > 0 && <section class={st.detailSection}><h2>{t("basic.stack")}</h2><div class={st.projectTags}>{project.tags.map((tag: string) => <span>{tag}</span>)}</div></section>}
+      {project.features?.length > 0 && <section class={st.detailSection}><h2>{t("basic.features")}</h2><ol class={st.featureList}>{project.features.map((feature: string) => <li>{feature}</li>)}</ol></section>}
+    </div>
+  </article>
+</BasicLayout>

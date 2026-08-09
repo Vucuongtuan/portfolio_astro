@@ -10,6 +10,7 @@ import Footer from "@components/Layout/Footer/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 import CustomCursor from "@components/Commons/CustomCursor.astro";
 import BackgroundAura from "@components/Commons/BackgroundAura.astro";
+import MasterEffects from "@components/Layout/MasterEffects.astro";
 
 const lang = getLangFromUrl(Astro.url);
 // props
@@ -17,79 +18,54 @@ interface Props {
   title?: string;
   enableHeader?: boolean;
   enableFooter?: boolean;
+  mode?: "basic" | "master";
 }
 const {
   title,
   enableHeader = false,
   enableFooter = false,
+  mode = "master",
 } = Astro.props as Props;
 ---
 
-<html lang={lang}>
+<html lang={lang} class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <HeadMeta title={title} />
+    <script is:inline>
+      const savedTheme = localStorage.getItem("theme");
+      const theme = savedTheme === "light" ? "light" : "dark";
+      document.documentElement.classList.remove("light", "dark");
+      document.documentElement.classList.add(theme);
+    </script>
     <ClientRouter />
   </head>
-  <body>
-    <BackgroundAura />
-    <CustomCursor />
-    {enableHeader && <Header lang={lang} client:load />}
+  <body data-render-mode={mode}>
+    {mode === "master" && <BackgroundAura />}
+    {mode === "master" && <CustomCursor />}
+    {mode === "master" && enableHeader && <Header lang={lang} client:load />}
     <main>
       {title && <h1 class="sr-only">{title}</h1>}
       <slot />
     </main>
-    <BottomScreen lang={lang} />
-    {enableFooter && <Footer lang={lang} client:load />}
-
-    <script>
-      import Lenis from "lenis";
-      import { gsap } from "gsap";
-      import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-      gsap.registerPlugin(ScrollTrigger);
-
-      let lenis: Lenis | null = null;
-
-      const initLenis = () => {
-        if (lenis) {
-          lenis.destroy();
-        }
-
-        lenis = new Lenis({
-          duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          smoothWheel: true,
-        });
-
-        lenis.on("scroll", ScrollTrigger.update);
-
-        gsap.ticker.add((time) => {
-          lenis?.raf(time * 1000);
-        });
-
-        gsap.ticker.lagSmoothing(0);
-      };
-
-      // Khởi tạo lần đầu
-      initLenis();
-
-      // Xử lý sau khi chuyển trang
-      document.addEventListener("astro:after-swap", () => {
-        window.scrollTo(0, 0);
-        initLenis();
-        ScrollTrigger.refresh();
-      });
-
-      // Đảm bảo hoạt động với View Transitions
-      document.addEventListener("astro:page-load", () => {
-        ScrollTrigger.refresh();
-      });
-    </script>
+    {mode === "master" && <BottomScreen lang={lang} />}
+    {mode === "master" && enableFooter && <Footer lang={lang} />}
+    {mode === "master" && <MasterEffects />}
   </body>
 </html>
 <style is:global>
+  @media (pointer: fine) {
+    body[data-render-mode="basic"] {
+      cursor: default !important;
+    }
+
+    body[data-render-mode="basic"] a,
+    body[data-render-mode="basic"] button {
+      cursor: pointer !important;
+    }
+  }
+
   @keyframes bump {
     0% {
       opacity: 0;

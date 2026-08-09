@@ -1,7 +1,7 @@
 import type { Locale } from "@i18n/ui";
+import ThemeToggle from "@components/Commons/ThemeToggle";
 import st from "./bottom-screen.module.scss";
 import clsx from "clsx";
-import LiveClock from "../LiveClock/LiveClock";
 
 interface Props {
   lang: Locale;
@@ -16,7 +16,7 @@ export default function BottomScreenClient({ lang }: Props) {
         <a href="/en" className={clsx(st.langLink, lang === "en" && st.active)}>EN</a>
       </div>
       <div className={st.rightSide}>
-        <LiveClock />
+        <ThemeToggle />
       </div>
     </div>
   );

@@ -10,13 +10,23 @@
       "period": "OCT 2024 — PRESENT",
       "company": "IDM Vietnam",
       "role": "Fullstack Web Developer",
-      "location": "Ho Chi Minh City"
+      "location": "Ho Chi Minh City",
+      "highlights": [
+        "Develop web platforms with Next.js and Payload CMS.",
+        "Build reusable templates and UI components.",
+        "Integrate a RAG AI chatbot and optimize product performance and SEO."
+      ]
     },
     {
       "period": "AUG 2022 — SEP 2022",
       "company": "KASOFT TECHNOLOGY",
       "role": "Frontend (Intern)",
-      "location": "HCMC (Remote)"
+      "location": "HCMC (Remote)",
+      "highlights": [
+        "Contributed to web interface development in a remote team.",
+        "Turned design requirements into responsive UI components.",
+        "Strengthened frontend foundations through product-team workflows."
+      ]
     }
   ],
   "cta": {

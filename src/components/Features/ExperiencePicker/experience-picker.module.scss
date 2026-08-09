@@ -1,0 +1,136 @@
+// ========== EXPERIENCE PICKER ==========
+.section {
+  --picker-bg: #11110f;
+  --picker-surface: #181817;
+  --picker-ink: #f5f5f0;
+  --picker-muted: rgba(245, 245, 240, 0.54);
+  --picker-line: rgba(245, 245, 240, 0.16);
+  --picker-lime: #c7ff59;
+  @apply relative flex min-h-[100svh] overflow-hidden px-5 py-6 sm:px-8 sm:py-8 md:px-12;
+  background-color: var(--picker-bg);
+  color: var(--picker-ink);
+}
+
+:global(html.light) .section {
+  --picker-bg: #f7f7f2;
+  --picker-surface: #ecece5;
+  --picker-ink: #171716;
+  --picker-muted: rgba(23, 23, 22, 0.62);
+  --picker-line: rgba(23, 23, 22, 0.18);
+  --picker-lime: #a9df42;
+}
+
+.backgroundGrid {
+  @apply pointer-events-none absolute inset-0 opacity-30;
+  background-image: linear-gradient(var(--picker-line) 1px, transparent 1px), linear-gradient(90deg, var(--picker-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+.content {
+  @apply relative z-10 flex w-full flex-col;
+}
+
+.header {
+  @apply flex items-center justify-between gap-5 border-b pb-4 text-[9px] uppercase tracking-[0.14em] sm:text-[10px];
+  border-color: var(--picker-line);
+  color: var(--picker-muted);
+}
+
+.eyebrow { @apply m-0; }
+.status { @apply flex items-center gap-2; }
+.status i { @apply h-1.5 w-1.5 rounded-full; background-color: var(--picker-lime); box-shadow: 0 0 0 4px color-mix(in srgb, var(--picker-lime) 14%, transparent); }
+.introBlock { @apply grid flex-1 content-center gap-8 py-14 md:grid-cols-[1.7fr_0.6fr] md:items-end md:gap-16; }
+.title {
+  @apply max-w-5xl font-sans text-[clamp(4.25rem,11vw,11rem)] font-bold uppercase leading-[0.76] tracking-[-0.085em];
+}
+
+.intro {
+  @apply max-w-sm text-sm leading-relaxed md:pb-2 md:text-base;
+  color: var(--picker-muted);
+}
+
+.modeChoices {
+  @apply border-t;
+  border-color: var(--picker-line);
+}
+
+.modeCard {
+  @apply grid min-h-32 grid-cols-[2.25rem_minmax(0,1fr)_auto] items-center gap-4 border-b py-5 no-underline transition-colors duration-300 sm:min-h-36 sm:grid-cols-[4rem_minmax(0,1fr)_auto] sm:gap-7 sm:py-6;
+  border-color: var(--picker-line);
+
+  &:hover {
+    @apply px-4 text-black sm:px-6;
+    background-color: var(--picker-lime);
+  }
+}
+
+.number {
+  @apply self-start pt-1 text-[9px] tracking-[0.12em];
+  color: var(--picker-muted);
+}
+
+.choiceContent {
+  @apply grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(12rem,0.55fr)] md:items-end;
+
+  strong {
+    @apply font-sans text-[clamp(2.5rem,6vw,6.5rem)] font-bold uppercase leading-[0.8] tracking-[-0.07em];
+  }
+
+  small {
+    @apply max-w-xs text-[10px] leading-relaxed sm:text-xs;
+    color: var(--picker-muted);
+  }
+}
+
+.arrow {
+  @apply text-2xl transition-transform duration-300 sm:text-4xl;
+}
+
+.modeCard:hover .number, .modeCard:hover small { color: rgba(0, 0, 0, 0.62); }
+.modeCard:hover .arrow {
+  @apply translate-x-2;
+}
+
+.footer { @apply mt-5 flex items-center justify-between gap-5 text-[8px] uppercase tracking-[0.14em] sm:text-[9px]; color: var(--picker-muted); }
+.footer span:last-child { @apply text-right; }
+
+// ========== EXPERIENCE LOADER ==========
+.loader {
+  @apply fixed inset-0 z-[10000] grid place-items-center;
+  background-color: var(--bg-pure);
+  color: var(--text-stark);
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.loader[data-state="ready"] {
+  clip-path: inset(0 0 100% 0);
+}
+
+.loaderContent {
+  @apply flex w-48 flex-col gap-3;
+}
+
+.loaderMark {
+  @apply text-3xl font-black tracking-[-0.08em];
+}
+
+.loaderLabel {
+  @apply text-[10px] uppercase tracking-[0.16em] opacity-60;
+}
+
+.loaderBar {
+  @apply h-px w-full origin-left;
+  background-color: var(--text-stark);
+  animation: loader-progress 0.7s ease-out both;
+}
+
+.loaderPercent {
+  @apply absolute bottom-5 right-6 text-6xl font-black leading-none tracking-[-0.08em] sm:bottom-8 sm:right-10 sm:text-8xl;
+}
+
+@keyframes loader-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}

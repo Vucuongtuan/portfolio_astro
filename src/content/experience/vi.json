@@ -10,13 +10,23 @@
       "period": "10/2024 — HIỆN TẠI",
       "company": "IDM Vietnam",
       "role": "Fullstack Web Developer",
-      "location": "TP. Hồ Chí Minh"
+      "location": "TP. Hồ Chí Minh",
+      "highlights": [
+        "Phát triển nền tảng web với Next.js và Payload CMS.",
+        "Xây dựng các template và component có khả năng tái sử dụng cao.",
+        "Tích hợp AI chatbot RAG và tối ưu hiệu năng, SEO cho sản phẩm."
+      ]
     },
     {
       "period": "08/2022 — 09/2022",
       "company": "KASOFT TECHNOLOGY",
       "role": "Frontend (Intern)",
-      "location": "TP. HCM (Remote)"
+      "location": "TP. HCM (Remote)",
+      "highlights": [
+        "Tham gia phát triển giao diện web trong môi trường làm việc từ xa.",
+        "Chuyển hóa yêu cầu thiết kế thành các thành phần giao diện responsive.",
+        "Củng cố nền tảng frontend qua quy trình làm việc cùng đội ngũ sản phẩm."
+      ]
     }
   ],
   "cta": {

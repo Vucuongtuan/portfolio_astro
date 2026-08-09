@@ -66,6 +66,7 @@ const experienceCollection = defineCollection({
         company: z.string(),
         role: z.string(),
         location: z.string(),
+        highlights: z.array(z.string()).min(1),
       })
     ),
     cta: z.object({

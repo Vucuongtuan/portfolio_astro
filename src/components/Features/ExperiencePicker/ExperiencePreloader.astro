@@ -1,0 +1,21 @@
+---
+import type { Locale } from "@i18n/ui";
+import { useTranslations } from "@i18n/utils";
+import st from "./experience-picker.module.scss";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class={st.loader} data-experience-loader role="status" aria-live="polite">
+  <div class={st.loaderContent}>
+    <span class={st.loaderMark}>VTC.</span>
+    <span class={st.loaderLabel}>{t("modePicker.loading")}</span>
+    <span class={st.loaderBar} aria-hidden="true"></span>
+  </div>
+  <span class={st.loaderPercent} data-experience-percent>0%</span>
+</div>

@@ -1,5 +1,5 @@
 ---
-import ExperiencePicker from "@components/Features/ExperiencePicker/ExperiencePicker.astro";
+import BasicPortfolio from "@components/Features/BasicPortfolio/BasicPortfolio.astro";
 import RootLayout from "@layouts/RootLayout.astro";
 import { languages, type Locale } from "@i18n/ui";
 
@@ -8,11 +8,8 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: Locale };
-const title = lang === "vi"
-  ? "Chọn trải nghiệm | Vũ Tuấn Cường"
-  : "Choose your view | Vu Tuan Cuong";
 ---
 
-<RootLayout title={title} mode="basic">
-  <ExperiencePicker lang={lang} />
+<RootLayout title="Vũ Tuấn Cường | Basic" mode="basic">
+  <BasicPortfolio lang={lang} />
 </RootLayout>

@@ -1,0 +1,328 @@
+// ========== BASIC PORTFOLIO / GIT-INSPIRED ==========
+.section {
+  @apply bg-[#0d1117] text-[#c9d1d9];
+}
+
+.desktopPortfolio {
+  @apply relative mx-auto hidden min-h-[100dvh] max-w-[1800px] grid-rows-[auto_auto] px-8 py-6 lg:grid xl:px-12;
+}
+
+.footer {
+  @apply flex items-center border-[#30363d] text-xs;
+}
+
+.footer {
+  @apply justify-between border-t pt-3 text-[#8b949e];
+}
+
+.brand {
+  @apply mb-8 flex w-fit items-center gap-2 text-lg font-bold text-[#f0f6fc] no-underline;
+}
+
+.workspace {
+  @apply grid min-h-0 grid-cols-[250px_1fr] gap-8 py-5 xl:grid-cols-[280px_1fr];
+}
+
+.mainContent {
+  @apply min-w-0;
+}
+
+.overviewContent {
+  @apply grid grid-rows-[auto_auto_auto] gap-4;
+}
+
+.profileSidebar {
+  @apply sticky top-6 self-start border-r border-[#30363d] pr-7;
+
+  h1 {
+    @apply mt-3 text-2xl font-semibold tracking-tight text-[#f0f6fc];
+  }
+}
+
+.avatar {
+  @apply grid h-24 w-24 place-items-center rounded-full border border-[#30363d] bg-[#161b22] text-2xl font-bold text-[#58a6ff] shadow-[0_0_0_1px_#0d1117,0_0_0_2px_#30363d];
+}
+
+.handle {
+  @apply mt-1 text-base text-[#8b949e];
+}
+
+.bio {
+  @apply mt-5 text-sm leading-relaxed text-[#c9d1d9];
+}
+
+.profileMeta {
+  @apply mt-5 space-y-2 text-xs text-[#8b949e];
+
+  a {
+    @apply text-[#58a6ff] no-underline hover:underline;
+  }
+}
+
+.profileStats {
+  @apply mt-5 flex gap-4 border-t border-[#30363d] pt-4 text-xs text-[#8b949e];
+
+  strong {
+    @apply text-[#f0f6fc];
+  }
+}
+
+.panelHeading {
+  @apply mb-4 flex items-center justify-between text-xs;
+
+  h2 {
+    @apply font-medium text-[#f0f6fc];
+  }
+
+  a {
+    @apply text-[#58a6ff] no-underline hover:underline;
+  }
+}
+
+.workPanel {
+  @apply rounded-md border border-[#30363d] bg-[#0d1117] p-5;
+}
+
+.workGrid {
+  @apply grid grid-cols-3 gap-3;
+}
+
+.workCard {
+  @apply relative flex min-h-36 flex-col rounded-md border border-[#30363d] bg-[#161b22] p-4 no-underline transition-colors hover:border-[#58a6ff] hover:bg-[#1c2128];
+
+  strong {
+    @apply mt-2 text-sm font-semibold text-[#58a6ff];
+  }
+
+  p {
+    @apply mt-2 line-clamp-2 text-xs leading-relaxed text-[#8b949e];
+  }
+
+  footer {
+    @apply mt-auto flex items-center gap-1.5 pt-3 text-[10px] text-[#8b949e];
+
+    span:last-child {
+      @apply ml-auto;
+    }
+  }
+}
+
+.workIndex {
+  @apply text-[10px] tracking-[0.16em] text-[#8b949e];
+}
+
+.languageDot {
+  @apply h-2.5 w-2.5 rounded-full;
+}
+
+.dotGreen { @apply bg-[#3fb950]; }
+.dotBlue { @apply bg-[#58a6ff]; }
+
+.projectTags {
+  @apply mt-3 flex flex-wrap gap-1.5;
+
+  span {
+    @apply rounded-full border border-[#30363d] px-1.5 py-0.5 text-[9px] leading-none text-[#8b949e];
+  }
+}
+
+.techPanel,
+.mobileTechSection,
+.introPanel,
+.mobileIntroSection,
+.experiencePanel,
+.mobileExperienceSection {
+  @apply rounded-md border border-[#30363d] bg-[#0d1117] p-4;
+}
+
+.techPanel .panelHeading,
+.mobileTechSection .panelHeading,
+.introPanel .panelHeading,
+.mobileIntroSection .panelHeading,
+.experiencePanel .panelHeading,
+.mobileExperienceSection .panelHeading {
+  @apply mb-3;
+}
+
+.introPanel p,
+.mobileIntroSection p {
+  @apply text-xs leading-relaxed text-[#8b949e];
+}
+
+.techList {
+  @apply flex flex-wrap gap-2;
+
+  li {
+    @apply grid h-11 w-11 place-items-center rounded-md border border-[#30363d] bg-[#161b22] p-1.5 transition-colors hover:border-[#58a6ff] hover:bg-[#1c2128];
+  }
+
+  img {
+    @apply h-7 w-7 object-contain;
+  }
+}
+
+.footer a {
+  @apply text-[#58a6ff] no-underline hover:underline;
+}
+
+.mobilePortfolio {
+  @apply mx-auto w-full max-w-xl px-6 py-8 lg:hidden;
+}
+
+.mobileProfile {
+  @apply border-b border-[#30363d] pb-8;
+
+  h1 {
+    @apply mt-3 text-3xl font-semibold tracking-tight text-[#f0f6fc];
+  }
+}
+
+.mobileWorkSection {
+  @apply py-8;
+}
+
+.mobileTechSection {
+  @apply mb-8;
+}
+
+.mobileIntroSection {
+  @apply mt-8;
+}
+
+.experienceList {
+  @apply divide-y divide-[#30363d];
+
+  li {
+    @apply grid grid-cols-[minmax(7rem,0.8fr)_1fr] gap-x-4 py-3 text-xs;
+  }
+
+  span {
+    @apply text-[#8b949e];
+  }
+
+  strong {
+    @apply text-[#f0f6fc];
+  }
+
+  p {
+    @apply col-start-2 mt-1 text-[#8b949e];
+  }
+}
+
+.mobileExperienceSection {
+  @apply mb-8;
+
+  .experienceList li {
+    @apply grid-cols-1 gap-y-1;
+  }
+
+  .experienceList p {
+    @apply col-auto mt-0;
+  }
+}
+
+.mobileWorkList {
+  @apply space-y-3;
+}
+
+.mobileWorkCard {
+  @apply flex flex-col rounded-md border border-[#30363d] bg-[#161b22] p-4 no-underline transition-colors hover:border-[#58a6ff];
+
+  strong {
+    @apply mt-2 text-sm font-semibold text-[#58a6ff];
+  }
+
+  p {
+    @apply mt-2 text-xs leading-relaxed text-[#8b949e];
+  }
+
+  .projectYear {
+    @apply mt-3 text-[10px] text-[#8b949e];
+  }
+}
+
+.mobileFooter {
+  @apply flex flex-col gap-4 border-t border-[#30363d] pt-5 text-xs text-[#8b949e];
+
+  a {
+    @apply w-fit text-[#58a6ff] no-underline hover:underline;
+  }
+}
+
+// ========== PROJECT DETAIL ==========
+.detailView {
+  @apply pb-6;
+}
+
+.mobileDetailView {
+  @apply mt-8;
+}
+
+.backLink {
+  @apply mb-6 inline-flex text-xs text-[#58a6ff] no-underline hover:underline;
+}
+
+.detailHeader {
+  @apply border-b border-[#30363d] pb-6;
+
+  > span {
+    @apply text-xs uppercase tracking-[0.14em] text-[#8b949e];
+  }
+
+  h1 {
+    @apply mt-3 text-4xl font-semibold tracking-tight text-[#f0f6fc] lg:text-5xl;
+  }
+
+  p {
+    @apply mt-4 max-w-3xl text-sm leading-relaxed text-[#8b949e];
+  }
+}
+
+.detailGrid {
+  @apply mt-6 grid gap-4 lg:grid-cols-2;
+}
+
+.detailSection {
+  @apply rounded-md border border-[#30363d] bg-[#0d1117] p-4;
+
+  h2 {
+    @apply mb-3 text-xs font-medium text-[#f0f6fc];
+  }
+
+  > p {
+    @apply whitespace-pre-line text-xs leading-relaxed text-[#8b949e];
+  }
+}
+
+.detailMeta {
+  @apply grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-xs;
+
+  dt {
+    @apply text-[#8b949e];
+  }
+
+  dd {
+    @apply text-[#c9d1d9];
+  }
+}
+
+.featureList {
+  @apply space-y-2 text-xs leading-relaxed text-[#8b949e];
+
+  li {
+    @apply flex gap-2;
+  }
+
+  li::before {
+    content: "•";
+    @apply text-[#58a6ff];
+  }
+}
+
+.detailActions {
+  @apply mt-4 flex gap-3;
+
+  a {
+    @apply rounded-md border border-[#30363d] px-3 py-2 text-xs text-[#58a6ff] no-underline hover:border-[#58a6ff];
+  }
+}

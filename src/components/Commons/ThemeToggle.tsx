@@ -1,37 +1,56 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
+
+type Theme = "light" | "dark";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<string | null>(null);
+  const [theme, setTheme] = useState<Theme | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const themeTimer = useRef<number | null>(null);
+  const chatTimer = useRef<number | null>(null);
 
   useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark');
-    setTheme(isDark ? 'dark' : 'light');
+    const isLight = document.documentElement.classList.contains("light");
+    setTheme(isLight ? "light" : "dark");
   }, []);
 
-  useEffect(() => {
-    if (theme) {
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      localStorage.setItem('theme', theme);
-    }
-  }, [theme]);
+  useEffect(() => () => {
+    if (themeTimer.current !== null) window.clearTimeout(themeTimer.current);
+    if (chatTimer.current !== null) window.clearTimeout(chatTimer.current);
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+    if (!theme || isTransitioning) return;
+
+    const nextTheme: Theme = theme === "light" ? "dark" : "light";
+    setIsTransitioning(true);
+    window.dispatchEvent(new CustomEvent("theme-transition-start", { detail: { theme: nextTheme } }));
+
+    themeTimer.current = window.setTimeout(() => {
+      document.documentElement.classList.remove("light", "dark");
+      document.documentElement.classList.add(nextTheme);
+      localStorage.setItem("theme", nextTheme);
+      setTheme(nextTheme);
+      themeTimer.current = null;
+    }, 2000);
+
+    chatTimer.current = window.setTimeout(() => {
+      setIsTransitioning(false);
+      chatTimer.current = null;
+      window.dispatchEvent(new CustomEvent("theme-transition-end", { detail: { theme: nextTheme } }));
+    }, 5000);
   };
 
-  if (theme === null) return <div className="w-8 h-8" />; 
+  if (theme === null) return <div className="h-8 w-8" />;
 
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200"
-      aria-label="Toggle Theme"
+      disabled={isTransitioning}
+      className="rounded-full p-2 transition-colors duration-200 hover:bg-black/5 disabled:cursor-wait disabled:opacity-50 dark:hover:bg-white/5"
+      aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
+      aria-pressed={theme === "dark"}
     >
-      {theme === 'light' ? (
+      {theme === "light" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

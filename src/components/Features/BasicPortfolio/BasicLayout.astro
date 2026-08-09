@@ -1,0 +1,67 @@
+---
+import type { Locale } from "@i18n/ui";
+import { getRoute, useTranslations } from "@i18n/utils";
+import { getBasicPortfolioData } from "./basic-data";
+import st from "./basic-portfolio.module.scss";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { projects, skills } = await getBasicPortfolioData(lang);
+---
+
+<div class={st.section}>
+  <div class={st.desktopPortfolio}>
+    <div class={st.workspace}>
+      <aside class={st.profileSidebar} data-basic-desktop-reveal transition:animate="none">
+        <a href={getRoute(lang, "/")} class={st.brand}><span aria-hidden="true">◈</span> VTC</a>
+        <div class={st.avatar} aria-hidden="true">VC</div>
+        <h1>{t("landing.name")}</h1>
+        <p class={st.handle}>@vutuancuong</p>
+        <p class={st.bio}>{t("landing.role")}</p>
+        <ul class={st.profileMeta}>
+          <li>● {t("hero.role")}</li>
+          <li>⌖ {t("landing.location")}</li>
+          <li>✉ <a href={`mailto:${t("landing.email")}`}>{t("landing.email")}</a></li>
+        </ul>
+        <div class={st.profileStats}>
+          <span><strong>{projects.length}</strong> {t("basic.repositories")}</span>
+          <span><strong>{skills.length}</strong> {t("basic.skills")}</span>
+        </div>
+      </aside>
+
+      <div class={st.mainContent}>
+        <slot name="desktop" />
+      </div>
+    </div>
+
+    <footer class={st.footer} data-basic-desktop-reveal transition:animate="none">
+      <span>© {t("landing.year")} Vũ Tuấn Cường</span>
+      <span>{skills.slice(0, 3).map((skill) => skill.name).join(" · ")}</span>
+      <a href={getRoute(lang, "/")}>{t("basic.changeMode")}</a>
+    </footer>
+  </div>
+
+  <div class={st.mobilePortfolio}>
+    <div class={st.mobileProfile} data-basic-mobile-reveal transition:animate="none">
+      <a href={getRoute(lang, "/")} class={st.brand}><span aria-hidden="true">◈</span> VTC</a>
+      <div class={st.avatar} aria-hidden="true">VC</div>
+      <h1>{t("landing.name")}</h1>
+      <p class={st.handle}>@vutuancuong</p>
+      <p class={st.bio}>{t("landing.role")}</p>
+      <ul class={st.profileMeta}>
+        <li>● {t("hero.role")}</li>
+        <li>⌖ {t("landing.location")}</li>
+        <li>✉ <a href={`mailto:${t("landing.email")}`}>{t("landing.email")}</a></li>
+      </ul>
+    </div>
+    <slot name="mobile" />
+    <footer class={st.mobileFooter} data-basic-mobile-reveal transition:animate="none">
+      <span>{skills.slice(0, 4).map((skill) => skill.name).join(" · ")}</span>
+      <a href={getRoute(lang, "/")}>{t("basic.changeMode")}</a>
+    </footer>
+  </div>
+</div>

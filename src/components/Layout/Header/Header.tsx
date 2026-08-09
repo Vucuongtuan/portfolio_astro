@@ -9,7 +9,7 @@ import { useTranslations, getRoute } from "../../../i18n/utils";
 const SECTION_ORDER = ["Hero", "About", "TechStack", "Experience", "Works", "Contact"];
 
 const NAV_LINKS = [
-  { key: "nav.home" as const, href: "/" },
+  { key: "nav.home" as const, href: "#top" },
   { key: "nav.about" as const, href: "#about" },
   { key: "nav.projects" as const, href: "#works" },
   { key: "nav.contact" as const, href: "#contact" },
@@ -95,7 +95,7 @@ export default function Header({ lang }: HeaderProps) {
                 <span key={link.href} className={st.navItem}>
                   {idx > 0 && <span className={st.navComma}>,</span>}
                   <a
-                    href={getRoute(lang, link.href)}
+                    href={link.href.startsWith("#") ? link.href : getRoute(lang, link.href)}
                     className={st.navLink}
                   >
                     {t(link.key)}

@@ -1,0 +1,24 @@
+---
+import { getEntry } from "astro:content";
+import BasicProjectDetail from "@components/Features/BasicPortfolio/BasicProjectDetail.astro";
+import RootLayout from "@layouts/RootLayout.astro";
+import { languages, type Locale } from "@i18n/ui";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of Object.keys(languages) as Locale[]) {
+    const projectsEntry = await getEntry("projects", lang);
+    for (const project of projectsEntry?.data.items ?? []) {
+      paths.push({ params: { lang, id: project.id }, props: { project } });
+    }
+  }
+  return paths;
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const { project } = Astro.props;
+---
+
+<RootLayout title={`${project.title} | Vũ Tuấn Cường`} mode="basic">
+  <BasicProjectDetail lang={lang} project={project} />
+</RootLayout>

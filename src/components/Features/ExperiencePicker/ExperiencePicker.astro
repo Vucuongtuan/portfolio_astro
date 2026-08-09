@@ -1,0 +1,111 @@
+---
+import type { Locale } from "@i18n/ui";
+import { getRoute, useTranslations } from "@i18n/utils";
+import ExperiencePreloader from "./ExperiencePreloader.astro";
+import st from "./experience-picker.module.scss";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class={st.section} aria-label={t("modePicker.title")}>
+  <ExperiencePreloader lang={lang} />
+  <div class={st.backgroundGrid} aria-hidden="true"></div>
+  <div class={st.content}>
+    <header class={st.header}>
+      <p class={st.eyebrow}>VTC / PORTFOLIO / 2026</p>
+      <p class={st.status}><i></i> SELECT A VIEW</p>
+    </header>
+    <div class={st.introBlock}>
+      <h1 class={st.title}>{t("modePicker.title")}</h1>
+      <p class={st.intro}>{t("modePicker.intro")}</p>
+    </div>
+
+    <nav class={st.modeChoices} aria-label={t("modePicker.title")}>
+      <a class={st.modeCard} data-mode="basic" href={getRoute(lang, "/basic")}>
+        <span class={st.number}>01</span>
+        <span class={st.choiceContent}>
+          <strong>{t("modePicker.basic.title")}</strong>
+          <small>{t("modePicker.basic.desc")}</small>
+        </span>
+        <span class={st.arrow} aria-hidden="true">→</span>
+      </a>
+      <a class={st.modeCard} data-mode="full" href={getRoute(lang, "/portfolio")}>
+        <span class={st.number}>02</span>
+        <span class={st.choiceContent}>
+          <strong>{t("modePicker.full.title")}</strong>
+          <small>{t("modePicker.full.desc")}</small>
+        </span>
+        <span class={st.arrow} aria-hidden="true">→</span>
+      </a>
+    </nav>
+    <footer class={st.footer}>
+      <span>VIETNAM / GMT+7</span>
+      <span>DESIGN · DEVELOPMENT · MOTION</span>
+    </footer>
+  </div>
+</section>
+
+<script data-astro-rerun>
+  const loader = document.querySelector("[data-experience-loader]");
+  const percent = document.querySelector("[data-experience-percent]");
+  let animationFrame;
+
+  const runLoader = (onComplete) => {
+    if (!loader || !percent) {
+      onComplete();
+      return;
+    }
+
+    if (animationFrame) cancelAnimationFrame(animationFrame);
+    const wasReady = loader.dataset.state === "ready";
+    loader.dataset.state = "loading";
+    loader.setAttribute("aria-busy", "true");
+    percent.textContent = "0%";
+
+    const startProgress = () => {
+      const startTime = performance.now();
+      const duration = 1000;
+
+      const updateProgress = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        percent.textContent = `${Math.round(progress * 100)}%`;
+
+        if (progress < 1) {
+          animationFrame = requestAnimationFrame(updateProgress);
+          return;
+        }
+
+        loader.removeAttribute("aria-busy");
+        onComplete();
+      };
+
+      animationFrame = requestAnimationFrame(updateProgress);
+    };
+
+    window.setTimeout(startProgress, wasReady ? 700 : 0);
+  };
+
+  runLoader(() => {
+    if (loader) loader.dataset.state = "ready";
+  });
+
+  window.addEventListener("pageshow", (event) => {
+    if (!event.persisted) return;
+    runLoader(() => {
+      if (loader) loader.dataset.state = "ready";
+    });
+  });
+
+  document.querySelectorAll("[data-mode]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.setItem("portfolio-render-mode", link.dataset.mode || "full");
+      runLoader(() => window.location.href = link.href);
+    });
+  });
+</script>

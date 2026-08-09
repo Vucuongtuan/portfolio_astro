@@ -1,0 +1,510 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import type { Locale } from "@i18n/ui";
+import { getRoute, useTranslations } from "@i18n/utils";
+import PrismaHero from "@components/ui/prisma-hero";
+import st from "./master-portfolio.module.scss";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const [projectsEntry, experience, techEntries] = await Promise.all([
+  getEntry("projects", lang),
+  getEntry("experience", lang),
+  getCollection("tech-stack"),
+]);
+
+if (!projectsEntry || !experience) {
+  throw new Error(`Master portfolio content is missing for ${lang}.`);
+}
+
+const projects = projectsEntry.data.items;
+const carouselProjects = [...projects].sort((a, b) => (a.category === "work" ? -1 : 1) - (b.category === "work" ? -1 : 1));
+const techGroups = techEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({
+    title: entry.data.category[lang],
+    items: entry.data.items,
+  }));
+---
+
+<div class={st.page} data-master-portfolio>
+  <PrismaHero
+    title="VTC"
+    roleLabel={t("master.hero.role")}
+    description={t("master.hero.description")}
+    location={t("landing.location")}
+    imageSrc="/images/hero.png"
+    lightImageSrc="/images/hero_light.png"
+    navItems={[
+      { label: "About", href: "#about" },
+      { label: "Work", href: "#works" },
+      { label: "Stack", href: "#stack" },
+      { label: "Experience", href: "#experience" },
+      { label: "Contact", href: "#contact" },
+    ]}
+    ctaLabel="Explore work"
+    ctaHref="#works"
+    client:load
+  />
+
+  <section class={st.about} id="about" data-section="About" data-master-reveal>
+    <div class={st.aboutImageWrap}>
+      <img src="/images/about.png" alt="Vu Tuan Cuong at night" class={st.aboutImage} loading="lazy" />
+      <span class={st.aboutImageLabel}>VTC / 2026</span>
+    </div>
+    <div class={st.aboutContent}>
+      <p class={st.sectionNumber}>02 / ABOUT</p>
+      <h2>{t("about.heading")}</h2>
+      <p class={st.aboutCopy}>{t("about.card1.content")}</p>
+      <dl class={st.aboutFacts}>
+        <div>
+          <dt>{t("master.about.role")}</dt>
+          <dd>{t("master.hero.role")}</dd>
+        </div>
+        <div>
+          <dt>{t("master.about.based")}</dt>
+          <dd>{t("landing.location")}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+ 
+  <section class={st.featured} id="works" data-section="Works">
+    <div class={st.featuredHeader} data-master-reveal>
+      <div class={st.sectionHeading}>
+        <p class={st.sectionNumber}>03 / SELECTED WORK</p>
+        <h2 data-carousel-title data-work-title={t("master.projects.work")} data-personal-title={t("master.projects.personal")}>{t("master.projects.work")}</h2>
+      </div>
+      <div class={st.carouselControls} aria-label={t("master.projects.controls")}>
+        <p><span data-carousel-current>01</span> / {String(carouselProjects.length).padStart(2, "0")}</p>
+        <div>
+          <button type="button" data-carousel-prev aria-label={t("master.projects.previous")}>←</button>
+          <button type="button" data-carousel-next aria-label={t("master.projects.next")}>→</button>
+        </div>
+      </div>
+    </div>
+    <div class={st.featuredViewport} data-featured-carousel tabindex="0" aria-label={t("master.projects.controls")}>
+      <div class={st.featuredList} data-carousel-track>
+      {carouselProjects.map((project, index) => (
+        <article class={st.featuredProject} data-master-project data-carousel-slide data-project-group={project.category} aria-label={`${index + 1} of ${carouselProjects.length}`}>
+          <a href={getRoute(lang, `works/${project.id}`)} class={st.projectLink}>
+            <div class={st.projectVisual}>
+              {project.thumbnail ? (
+                <img src={project.thumbnail.src} alt="" loading={index === 0 ? "eager" : "lazy"} />
+              ) : (
+                <div class={st.projectFallback} aria-hidden="true">
+                  <span>{project.title.split(/\s+/).map((word) => word[0]).join("").slice(0, 3)}</span>
+                  <small>NO IMAGE / {project.year}</small>
+                </div>
+              )}
+              <span class={st.projectArrow} aria-hidden="true">↗</span>
+            </div>
+            <div class={st.projectInfo}>
+              <p class={st.projectEyebrow}>[{String(index + 1).padStart(2, "0")}] &nbsp; {project.category} / {project.role || "development"}</p>
+              <h3 transition:name={`project-title-${project.id}`}>{project.title}</h3>
+              <dl class={st.projectSpecs}>
+                <div>
+                  <dt>{t("master.projects.type")}</dt>
+                  <dd>{project.category}</dd>
+                </div>
+                <div>
+                  <dt>{t("master.projects.stack")}</dt>
+                  <dd>{project.tags?.slice(0, 3).join(" · ") || "—"}</dd>
+                </div>
+                <div>
+                  <dt>{t("master.projects.year")}</dt>
+                  <dd>/ {project.year}</dd>
+                </div>
+              </dl>
+            </div>
+          </a>
+        </article>
+      ))}
+      </div>
+    </div>
+  </section>
+
+
+  <section class={st.stack} id="stack" data-section="TechStack" data-master-stack>
+    <div class={st.stackStage} data-stack-stage>
+      <div class={st.stackHeader} data-stack-heading>
+        <div class={st.sectionHeading}>
+          <p class={st.sectionNumber}>02 / TOOLKIT</p>
+          <h2>Built across the stack.</h2>
+        </div>
+        <div class={st.stackStatus} aria-live="polite">
+          <span data-stack-current>01</span>
+          <i></i>
+          <span>{String(techGroups.length).padStart(2, "0")}</span>
+        </div>
+      </div>
+      <div class={st.stackViewport} data-stack-viewport tabindex="0" aria-label="Technology groups">
+        <div class={st.stackRail} data-stack-rail>
+          {techGroups.map((group, groupIndex) => (
+            <article class={st.stackPanel} data-stack-panel>
+              <p class={st.stackPanelGhost} aria-hidden="true">{String(groupIndex + 1).padStart(2, "0")}</p>
+              <div class={st.stackPanelHeader}>
+                <span>{String(groupIndex + 1).padStart(2, "0")} / {String(techGroups.length).padStart(2, "0")}</span>
+                <span>{String(group.items.length).padStart(2, "0")} TECHNOLOGIES</span>
+              </div>
+              <div class={st.stackPanelTitle}>
+                <h3>{group.title}</h3>
+                <span aria-hidden="true">↗</span>
+              </div>
+              <ol class={st.stackTools}>
+                {group.items.map((item) => (
+                  <li data-stack-tool>
+                    <span>{item.name}</span>
+                    <small>{item.level || "TOOL"}</small>
+                  </li>
+                ))}
+              </ol>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div class={st.stackFooter}>
+        <span>SCROLL TO EXPLORE</span>
+        <div aria-hidden="true"><i data-stack-progress-fill></i></div>
+        <span>HORIZONTAL INDEX</span>
+      </div>
+    </div>
+  </section>
+
+  <section class={st.experience} id="experience" data-section="Experience" data-master-timeline>
+    <div class={st.experienceHeader}>
+      <div class={st.sectionHeading}>
+        <p class={st.sectionNumber}>04 / EXPERIENCE</p>
+        <h2>{experience.data.title}</h2>
+      </div>
+      <p class={st.experienceManifesto} aria-hidden="true">BUILD · SHIP · IMPROVE</p>
+    </div>
+    <div class={st.experienceTimeline}>
+      <div class={st.timelineTrack} aria-hidden="true"><span data-timeline-fill></span></div>
+      <div class={st.experienceList}>
+        {experience.data.items.map((item) => (
+          <article class={st.experienceItem} data-timeline-step>
+            <span class={st.timelineMarker} aria-hidden="true"><i></i></span>
+            <div class={st.experienceMeta}>
+              <p>{item.period}</p>
+              <p>{item.location}</p>
+            </div>
+            <div class={st.experienceContent}>
+            <h3>{item.company}</h3>
+              <p class={st.experienceRole}>{item.role}</p>
+            <ul>
+              {item.highlights.map((highlight, highlightIndex) => <li><span>{String(highlightIndex + 1).padStart(2, "0")}</span>{highlight}</li>)}
+            </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class={st.contact} id="contact" data-section="Contact" data-master-reveal>
+    <div class={st.contactHeader}>
+      <p class={st.sectionNumber}>05 / CONTACT</p>
+      <p>AVAILABLE FOR SELECT PROJECTS · 2026</p>
+    </div>
+    <h2>LET'S COLLAB</h2>
+    <div class={st.contactBody}>
+      <div class={st.contactIntro}>
+        <p>Have an idea, a product, or a difficult problem? Tell me what you are building.</p>
+        <a href="mailto:vucuongtuan00@gmail.com">vucuongtuan00@gmail.com <span>↗</span></a>
+      </div>
+      <form class={st.contactForm} data-contact-form>
+        <label>
+          <span>01 / YOUR NAME</span>
+          <input type="text" name="name" autocomplete="name" placeholder="Name" required />
+        </label>
+        <label>
+          <span>02 / YOUR EMAIL</span>
+          <input type="email" name="email" autocomplete="email" placeholder="Email address" required />
+        </label>
+        <label class={st.contactMessage}>
+          <span>03 / PROJECT BRIEF</span>
+          <textarea name="message" rows="4" placeholder="Tell me about the project, timeline and goals" required></textarea>
+        </label>
+        <button type="submit">SEND INQUIRY <span aria-hidden="true">↗</span></button>
+      </form>
+    </div>
+    <div class={st.contactActions}>
+      <span>VTC / VIETNAM</span>
+      <a href="https://github.com/Vucuongtuan" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
+      <a href="https://www.linkedin.com/in/vtc-b450b9313" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+    </div>
+  </section>
+</div>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let context: gsap.Context | undefined;
+  let stackMedia: ReturnType<typeof gsap.matchMedia> | undefined;
+  let interactionController: AbortController | undefined;
+
+  function initMasterPortfolio() {
+    stackMedia?.revert();
+    stackMedia = undefined;
+    context?.revert();
+    interactionController?.abort();
+    interactionController = new AbortController();
+    const root = document.querySelector("[data-master-portfolio]");
+    if (!root) return;
+
+    const contactForm = root.querySelector<HTMLFormElement>("[data-contact-form]");
+    contactForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!contactForm.reportValidity()) return;
+      const formData = new FormData(contactForm);
+      const name = String(formData.get("name") || "");
+      const email = String(formData.get("email") || "");
+      const message = String(formData.get("message") || "");
+      const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nProject brief:\n${message}`);
+      window.location.href = `mailto:vucuongtuan00@gmail.com?subject=${subject}&body=${body}`;
+    }, { signal: interactionController.signal });
+
+    context = gsap.context(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) return;
+
+      gsap.from(root.querySelectorAll("[data-master-hero]"), {
+        y: 36,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        delay: 0.15,
+      });
+
+      root.querySelectorAll("[data-master-reveal]").forEach((section) => {
+        gsap.from(section.children, {
+          y: 48,
+          duration: 0.9,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: { trigger: section, start: "top 76%", once: true },
+        });
+      });
+
+      const stack = root.querySelector<HTMLElement>("[data-master-stack]");
+      if (stack) {
+        const stackStage = stack.querySelector<HTMLElement>("[data-stack-stage]");
+        const stackHeading = stack.querySelector<HTMLElement>("[data-stack-heading]");
+        const stackViewport = stack.querySelector<HTMLElement>("[data-stack-viewport]");
+        const stackRail = stack.querySelector<HTMLElement>("[data-stack-rail]");
+        const stackPanels = gsap.utils.toArray<HTMLElement>(stack.querySelectorAll("[data-stack-panel]"));
+        const stackCurrent = stack.querySelector<HTMLElement>("[data-stack-current]");
+        const stackProgressFill = stack.querySelector<HTMLElement>("[data-stack-progress-fill]");
+
+        if (stackStage && stackViewport && stackRail && stackPanels.length) {
+          const setActivePanel = (activeIndex: number, progress: number) => {
+            stackPanels.forEach((panel, index) => {
+              if (index === activeIndex) panel.dataset.active = "true";
+              else delete panel.dataset.active;
+            });
+            if (stackCurrent) stackCurrent.textContent = String(activeIndex + 1).padStart(2, "0");
+            if (stackProgressFill) gsap.set(stackProgressFill, { scaleX: progress });
+          };
+          setActivePanel(0, 0);
+
+          const media = gsap.matchMedia();
+          stackMedia = media;
+
+          media.add("(min-width: 0px)", () => {
+            const getDistance = () => Math.max(0, stackRail.scrollWidth - stackViewport.clientWidth);
+            const horizontalTween = gsap.to(stackRail, {
+              x: () => -getDistance(),
+              ease: "none",
+              scrollTrigger: {
+                trigger: stack,
+                start: "top top",
+                end: () => `+=${Math.max(window.innerHeight * 1.8, getDistance() * 1.08)}`,
+                pin: stackStage,
+                scrub: 0.8,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                onUpdate: (self) => {
+                  const activeIndex = Math.min(stackPanels.length - 1, Math.round(self.progress * (stackPanels.length - 1)));
+                  setActivePanel(activeIndex, self.progress);
+                },
+              },
+            });
+
+            if (stackHeading) {
+              const heading = stackHeading.querySelector("h2");
+              if (heading) {
+                gsap.to(heading, {
+                  xPercent: -4,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: stack,
+                    start: "top top",
+                    end: () => `+=${Math.max(window.innerHeight * 1.8, getDistance() * 1.08)}`,
+                    scrub: 0.8,
+                    invalidateOnRefresh: true,
+                  },
+                });
+              }
+            }
+
+            stackPanels.forEach((panel) => {
+              const tools = panel.querySelectorAll("[data-stack-tool]");
+              gsap.fromTo(panel, { scale: 0.93 }, {
+                scale: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: panel,
+                  containerAnimation: horizontalTween,
+                  start: "left 92%",
+                  end: "center center",
+                  scrub: true,
+                },
+              });
+              gsap.from(tools, {
+                x: 36,
+                stagger: 0.035,
+                duration: 0.55,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: panel,
+                  containerAnimation: horizontalTween,
+                  start: "left 72%",
+                  once: true,
+                },
+              });
+            });
+
+            return () => {
+              gsap.set(stackRail, { clearProps: "transform" });
+              gsap.set(stackPanels, { clearProps: "transform" });
+              setActivePanel(0, 0);
+            };
+          });
+
+        }
+      }
+
+      const experienceTimeline = root.querySelector<HTMLElement>("[data-master-timeline]");
+      if (experienceTimeline) {
+        const heading = experienceTimeline.querySelector<HTMLElement>(`.${st.experienceHeader}`);
+        const fill = experienceTimeline.querySelector<HTMLElement>("[data-timeline-fill]");
+        const steps = gsap.utils.toArray<HTMLElement>(experienceTimeline.querySelectorAll("[data-timeline-step]"));
+
+        if (heading) {
+          gsap.from(heading.children, {
+            y: 32,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: { trigger: experienceTimeline, start: "top 76%", once: true },
+          });
+        }
+        if (fill) {
+          gsap.fromTo(fill, { scaleY: 0 }, {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: experienceTimeline,
+              start: "top 68%",
+              end: "bottom 55%",
+              scrub: 0.45,
+            },
+          });
+        }
+        steps.forEach((step) => {
+          const marker = step.querySelector(`.${st.timelineMarker}`);
+          const content = step.querySelector(`.${st.experienceContent}`);
+          gsap.fromTo([marker, content], { y: 30 }, {
+            y: 0,
+            duration: 0.75,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: step,
+              start: "top 76%",
+              onEnter: () => step.dataset.active = "true",
+              onLeaveBack: () => delete step.dataset.active,
+            },
+          });
+        });
+      }
+
+      root.querySelectorAll("[data-master-project]").forEach((project) => {
+        const image = project.querySelector("img");
+        gsap.from(project, {
+          yPercent: 12,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: project, start: "top 82%", once: true },
+        });
+        if (image) {
+          gsap.to(image, {
+            yPercent: -8,
+            ease: "none",
+            scrollTrigger: { trigger: project, start: "top bottom", end: "bottom top", scrub: 0.7 },
+          });
+        }
+      });
+
+      const carousel = root.querySelector<HTMLElement>("[data-featured-carousel]");
+      if (carousel) {
+        const track = carousel.querySelector<HTMLElement>("[data-carousel-track]");
+        const slides = Array.from(carousel.querySelectorAll<HTMLElement>("[data-carousel-slide]"));
+        const previous = root.querySelector<HTMLButtonElement>("[data-carousel-prev]");
+        const next = root.querySelector<HTMLButtonElement>("[data-carousel-next]");
+        const current = root.querySelector<HTMLElement>("[data-carousel-current]");
+        const title = root.querySelector<HTMLElement>("[data-carousel-title]");
+
+        const updateCarousel = () => {
+          if (!track || !slides.length) return;
+          const first = slides[0];
+          const step = first.offsetWidth + Number.parseFloat(getComputedStyle(track).gap || "0");
+          const activeIndex = Math.min(slides.length - 1, Math.max(0, Math.round(carousel.scrollLeft / step)));
+          current && (current.textContent = String(activeIndex + 1).padStart(2, "0"));
+          if (title) {
+            title.textContent = slides[activeIndex].dataset.projectGroup === "personal"
+              ? title.dataset.personalTitle || "Personal projects"
+              : title.dataset.workTitle || "Work projects";
+          }
+          previous && (previous.disabled = activeIndex === 0);
+          next && (next.disabled = activeIndex === slides.length - 1);
+        };
+
+        const moveCarousel = (direction: 1 | -1) => {
+          const first = slides[0];
+          if (!first) return;
+          carousel.scrollBy({ left: direction * (first.offsetWidth + Number.parseFloat(getComputedStyle(track).gap || "0")), behavior: "smooth" });
+        };
+
+        previous?.addEventListener("click", () => moveCarousel(-1));
+        next?.addEventListener("click", () => moveCarousel(1));
+        carousel.addEventListener("scroll", updateCarousel, { passive: true });
+        carousel.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            moveCarousel(event.key === "ArrowRight" ? 1 : -1);
+          }
+        });
+        updateCarousel();
+      }
+    }, root);
+  }
+
+  document.addEventListener("astro:page-load", initMasterPortfolio);
+  document.addEventListener("astro:before-swap", () => {
+    stackMedia?.revert();
+    stackMedia = undefined;
+    interactionController?.abort();
+    context?.revert();
+  });
+  initMasterPortfolio();
+</script>
